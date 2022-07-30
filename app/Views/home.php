@@ -1,3 +1,3 @@
 <script>
-	window.location.assign("http://localhost/bloodbank/login");
+	window.location.assign("http://localhost/blood-bank/login");
 </script>
