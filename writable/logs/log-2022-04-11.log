@@ -1,0 +1,58 @@
+CRITICAL - 2022-04-11 00:01:39 --> Call to undefined function open_form()
+#0 C:\wamp64\www\bloodbank\system\View\View.php(210): include()
+#1 C:\wamp64\www\bloodbank\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#2 C:\wamp64\www\bloodbank\system\Common.php(1089): CodeIgniter\View\View->render('adddonors', Array, true)
+#3 C:\wamp64\www\bloodbank\app\Controllers\Adddonors.php(31): view('adddonors', Array)
+#4 C:\wamp64\www\bloodbank\system\CodeIgniter.php(832): App\Controllers\Adddonors->index()
+#5 C:\wamp64\www\bloodbank\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Adddonors))
+#6 C:\wamp64\www\bloodbank\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\wamp64\www\bloodbank\index.php(37): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2022-04-11 01:04:53 --> Too few arguments to function set_value(), 0 passed in C:\wamp64\www\bloodbank\app\Views\adddonors.php on line 82 and at least 1 expected
+#0 C:\wamp64\www\bloodbank\app\Views\adddonors.php(82): set_value()
+#1 C:\wamp64\www\bloodbank\system\View\View.php(210): include('C:\\wamp64\\www\\b...')
+#2 C:\wamp64\www\bloodbank\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\wamp64\www\bloodbank\system\Common.php(1089): CodeIgniter\View\View->render('adddonors', Array, true)
+#4 C:\wamp64\www\bloodbank\app\Controllers\Adddonors.php(31): view('adddonors', Array)
+#5 C:\wamp64\www\bloodbank\system\CodeIgniter.php(832): App\Controllers\Adddonors->index()
+#6 C:\wamp64\www\bloodbank\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Adddonors))
+#7 C:\wamp64\www\bloodbank\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\wamp64\www\bloodbank\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-04-11 01:05:37 --> Too few arguments to function set_value(), 0 passed in C:\wamp64\www\bloodbank\app\Views\adddonors.php on line 82 and at least 1 expected
+#0 C:\wamp64\www\bloodbank\app\Views\adddonors.php(82): set_value()
+#1 C:\wamp64\www\bloodbank\system\View\View.php(210): include('C:\\wamp64\\www\\b...')
+#2 C:\wamp64\www\bloodbank\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\wamp64\www\bloodbank\system\Common.php(1089): CodeIgniter\View\View->render('adddonors', Array, true)
+#4 C:\wamp64\www\bloodbank\app\Controllers\Adddonors.php(31): view('adddonors', Array)
+#5 C:\wamp64\www\bloodbank\system\CodeIgniter.php(832): App\Controllers\Adddonors->index()
+#6 C:\wamp64\www\bloodbank\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Adddonors))
+#7 C:\wamp64\www\bloodbank\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\wamp64\www\bloodbank\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-04-11 01:29:43 --> syntax error, unexpected 'class' (T_CLASS), expecting identifier (T_STRING) or '{'
+#0 C:\wamp64\www\bloodbank\system\Router\Router.php(175): CodeIgniter\Router\Router->autoRoute('/adddonors')
+#1 C:\wamp64\www\bloodbank\system\CodeIgniter.php(726): CodeIgniter\Router\Router->handle('/adddonors')
+#2 C:\wamp64\www\bloodbank\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+#3 C:\wamp64\www\bloodbank\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\wamp64\www\bloodbank\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-04-11 01:31:08 --> Cannot use isset() on the result of an expression (you can use "null !== expression" instead)
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+ERROR - 2022-04-11 01:32:13 --> Operand should contain 1 column(s)
+ERROR - 2022-04-11 01:33:17 --> Operand should contain 1 column(s)
+ERROR - 2022-04-11 01:34:01 --> Operand should contain 1 column(s)
+ERROR - 2022-04-11 01:35:06 --> Operand should contain 1 column(s)
+ERROR - 2022-04-11 01:36:03 --> Operand should contain 1 column(s)
+CRITICAL - 2022-04-11 01:57:18 --> Call to a member function affectedRows() on bool
+#0 C:\wamp64\www\bloodbank\app\Controllers\Adddonors.php(42): App\Models\AddDonorsModel->saveDonors(Array, Array, Array, Array, Array, Array, Array, '2022-04-13', '2022-04-13')
+#1 C:\wamp64\www\bloodbank\system\CodeIgniter.php(832): App\Controllers\Adddonors->index()
+#2 C:\wamp64\www\bloodbank\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Adddonors))
+#3 C:\wamp64\www\bloodbank\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\wamp64\www\bloodbank\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+ERROR - 2022-04-11 15:21:57 --> Column count doesn't match value count at row 1
+ERROR - 2022-04-11 15:21:57 --> Column count doesn't match value count at row 1
+ERROR - 2022-04-11 15:21:57 --> Column count doesn't match value count at row 1
+ERROR - 2022-04-11 15:21:57 --> Column count doesn't match value count at row 1
