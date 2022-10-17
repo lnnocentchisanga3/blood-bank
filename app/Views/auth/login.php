@@ -6,7 +6,7 @@
 			<div class="account-center">
                 
 				<div class="account-box shadow-sm rounded">   
-                        <?= form_open();?>	
+            <form action="<?=base_url()?>/login/index" method="POST">	
 			<div class="account-logo row p-2 rounded shadow-sm">
                 <a href="<?= base_url();?>" class="col-md-2"><img src="<?= base_url();?>/public/assets/img/logo-dark.png" alt=""></a>
                  <h3 class="col-md-10"> Zambia National Blood Transfusion Service</h3>
@@ -14,6 +14,13 @@
                 <?php if (session()->getTempdata('error')): ?>
                     <h5 class="text-center bg-danger text-white py-2 rounded col-md-12"><?=session()->getTempdata('error');?></h5>
                 <?php endif ?>
+
+                 <?php if ($info != null): ?>
+                <div class="alert alert-danger">
+                  <button type="button" class="close" data-dismiss="alert">&times;</button>
+                 <strong>Warning!</strong> <?=$info?>
+                </div>
+                 <?php endif ?>
 
             </div>
                     <div>

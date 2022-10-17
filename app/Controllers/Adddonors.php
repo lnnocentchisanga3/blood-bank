@@ -3,6 +3,7 @@ namespace App\Controllers;
 use CodeIgniter\Controller;
 use App\Models\GetAllDonors;
 use App\Models\AddDonorsModel;
+use App\Models\DonationSitesModel;
 
 
 /**
@@ -12,62 +13,26 @@ class Adddonors extends Controller
 {
 	public $saveDonorsModel;
 	public $session;
+	public $sites;
 	
 	function __construct()
 	{
 		helper('form');
-		/*$this->$alldonors = new GetAllDonors();*/
+		$this->$alldonors = new GetAllDonors();
 		$this->saveDonorsModel = new AddDonorsModel();
 		$this->session = session();
+		$this->sites = new DonationSitesModel();
 	}
 
-	public function index()
+	public function index($hospital_id)
 	{
-		
+		if (!session()->has('logged_in')) {
+			return redirect()->to(base_url());
+		}
+
 		$data = [];
+		$getuser = session('logged_in', $user);
 		$rules = [
-			/*'sampleid[]' => [
-				'rules'=>'required',
-				'errors'=>[
-					'required'=>'Sample id fields are required to be filled in'
-				],
-			],
-			'names[]' => [
-				'rules'=>'required',
-				'errors'=>[
-					'required'=>'Donor Names are required to be filled in'
-				],
-			],
-			'hiv[]' => [
-				'rules'=>'required',
-				'errors'=>[
-					'required'=>'HIV fields are required to be filled in'
-				],
-			],
-			'hbv[]' => [
-				'rules'=>'required',
-				'errors'=>[
-					'required'=>'HBV fields are required to be filled in'
-				],
-			],
-			'hcv[]' => [
-				'rules'=>'required',
-				'errors'=>[
-					'required'=>'HCV fields are required to be filled in'
-				],
-			],
-			'syphilis[]' => [
-				'rules'=>'required',
-				'errors'=>[
-					'required'=>'Syphilis fields are required to be filled in'
-				],
-			],
-			'comment[]' =>[
-				'rules'=>'required',
-				'errors'=>[
-					'required'=>'Comment fields are required to be filled in'
-				],
-			],*/
 			'dod' => 'required',
 			'donextd' => 'required',
 			'site' => 'required'
@@ -78,26 +43,10 @@ class Adddonors extends Controller
 
 				if ($this->validate($rules)) {
 
-				/*$data = [
-					'sampleid' => $this->request->getVar('sampleid'),
-					'names' => $this->request->getVar('names'),
-					'hiv' => $this->request->getVar('hiv'),
-					'hbv' => $this->request->getVar('hbv'),
-					'hcv' => $this->request->getVar('hcv'),
-					'syphilis' => $this->request->getVar('syphilis'),
-					'comment' => $this->request->getVar('comment'),
-					'dod' => $this->request->getVar('dod'),
-					'donextd' => $this->request->getVar('donextd'),
-					'site' => $this->request->getVar('site')
-				];
-
-				if ($this->saveDonorsModel->save($data) === true) {
-					session()->setTempdata('Success','Donors are added successfully', 3);
-					return redirect()->to(current_url());
-				}*/
-
 					$sample_id = $this->request->getVar('sampleid');
-					$donor_name = $this->request->getVar('names');
+					$donor_fname = $this->request->getVar('fnames');
+					$donor_mname = $this->request->getVar('mnames');
+					$donor_lname = $this->request->getVar('lnames');
 					$hiv = $this->request->getVar('hiv');
 					$hbv = $this->request->getVar('hbv');
 					$hcv = $this->request->getVar('hcv');
@@ -106,10 +55,13 @@ class Adddonors extends Controller
 					$date_of_donation = $this->request->getVar('dod');
 					$date_of_next_donation = $this->request->getVar('donextd');
 					$site = $this->request->getVar('site');
+					$group = $this->request->getVar('group');
+					$district_id = $this->request->getVar('district');
+					$province_id = $this->request->getVar('province');
 						
 				
 
-			if ($this->saveDonorsModel->saveDonors($sample_id,$donor_name,$hiv,$hbv,$hcv,$syphilis,$comment,$date_of_donation,$date_of_next_donation,$site) === true) {
+			if ($this->saveDonorsModel->saveDonors($sample_id,$donor_fname,$donor_mname,$donor_lname,$hiv,$hbv,$hcv,$syphilis,$group,$comment,$date_of_donation,$date_of_next_donation,$site,$hospital_id,$province_id,$district_id) === true) {
 				session()->setTempdata('Success','Donors are added successfully', 3);
 					return redirect()->to(current_url());
 			}
@@ -120,8 +72,120 @@ class Adddonors extends Controller
 		}
 
 		}
-		
+		$data['title'] = 'Adding a Donors';
+		$data['sites'] = $this->sites->getAllSites($hospital_id);
+		$data['userdata'] = session('logged_in', $user);
 		return view('adddonors',$data);
+	}
+
+
+	public function dataentry($hospital_id)
+	{
+		if (!session()->has('logged_in')) {
+			return redirect()->to(base_url());
+		}
+		
+		$data = [];
+		$getuser = session('logged_in', $user);
+		$rules = [
+			'dod' => 'required',
+			'donextd' => 'required',
+			'site' => 'required'
+			  ];
+		
+
+			if ($this->request->getMethod() == "post") {
+
+				if ($this->validate($rules)) {
+
+					$sample_id = $this->request->getVar('sampleid');
+					$donor_fname = $this->request->getVar('fnames');
+					$donor_mname = $this->request->getVar('mnames');
+					$donor_lname = $this->request->getVar('lnames');
+					$hiv = $this->request->getVar('hiv');
+					$hbv = $this->request->getVar('hbv');
+					$hcv = $this->request->getVar('hcv');
+					$syphilis = $this->request->getVar('syphilis');
+					$comment = $this->request->getVar('comment');
+					$date_of_donation = $this->request->getVar('dod');
+					$date_of_next_donation = $this->request->getVar('donextd');
+					$site = $this->request->getVar('site');
+					$group = $this->request->getVar('group');
+					$district_id = $this->request->getVar('district');
+					$province_id = $this->request->getVar('province');
+						
+				
+
+			if ($this->saveDonorsModel->saveDonors($sample_id,$donor_fname,$donor_mname,$donor_lname,$hiv,$hbv,$hcv,$syphilis,$group,$comment,$date_of_donation,$date_of_next_donation,$site,$hospital_id,$province_id,$district_id) === true) {
+				session()->setTempdata('Success','Donors are added successfully', 3);
+					return redirect()->to(base_url().'/dataentry/'.$hospital_id);
+			}
+			/*var_dump($status);*/
+
+			}else{
+			$data['validation'] = $this->validator;
+		}
+
+		}
+		$data['title'] = 'Adding a Donors';
+		$data['sites'] = $this->sites->getAllSites($hospital_id);
+		$data['userdata'] = session('logged_in', $user);
+		return view('donordataclerk/adddonors',$data);
+	}
+
+
+	public function oneAdddonor($hospital_id)
+	{
+		if (!session()->has('logged_in')) {
+			return redirect()->to(base_url());
+		}
+
+		$data = [];
+		$getuser = session('logged_in', $user);
+		$rules = [
+			'dod' => 'required',
+			'donextd' => 'required',
+			'site' => 'required'
+			  ];
+		
+
+			if ($this->request->getMethod() == "post") {
+
+				if ($this->validate($rules)) {
+
+					$sample_id = $this->request->getVar('sampleid');
+					$donor_fname = $this->request->getVar('fnames');
+					$donor_mname = $this->request->getVar('mnames');
+					$donor_lname = $this->request->getVar('lnames');
+					$hiv = $this->request->getVar('hiv');
+					$hbv = $this->request->getVar('hbv');
+					$hcv = $this->request->getVar('hcv');
+					$syphilis = $this->request->getVar('syphilis');
+					$comment = $this->request->getVar('comment');
+					$date_of_donation = $this->request->getVar('dod');
+					$date_of_next_donation = $this->request->getVar('donextd');
+					$site = $this->request->getVar('site');
+					$group = $this->request->getVar('group');
+					$district_id = $this->request->getVar('district');
+					$province_id = $this->request->getVar('province');
+						
+				
+
+			if ($this->saveDonorsModel->saveDonors($sample_id,$donor_fname,$donor_mname,$donor_lname,$hiv,$hbv,$hcv,$syphilis,$group,$comment,$date_of_donation,$date_of_next_donation,$site,$hospital_id,$province_id,$district_id) === true) {
+				session()->setTempdata('Success','Donors are added successfully', 3);
+					return redirect()->to(current_url());
+			}
+			/*var_dump($status);*/
+
+			}else{
+			$data['validation'] = $this->validator;
+		}
+
+		}
+		$data['title'] = 'Adding a Donors';
+		$data['sites'] = $this->sites->getAllSites($hospital_id);
+		$data['userdata'] = session('logged_in', $user);
+		return view('oneDonorAdd',$data);
 	}
 }
 

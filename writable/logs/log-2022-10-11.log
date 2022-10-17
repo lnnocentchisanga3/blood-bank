@@ -1,0 +1,11 @@
+CRITICAL - 2022-10-11 00:41:06 --> Invalid argument supplied for foreach()
+#0 C:\wamp64\www\blood-bank\app\Views\donordataclerk\index.php(130): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Invalid argumen...', 'C:\\wamp64\\www\\b...', 130, Array)
+#1 C:\wamp64\www\blood-bank\system\View\View.php(210): include('C:\\wamp64\\www\\b...')
+#2 C:\wamp64\www\blood-bank\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\wamp64\www\blood-bank\system\Common.php(1089): CodeIgniter\View\View->render('donordataclerk/...', Array, true)
+#4 C:\wamp64\www\blood-bank\app\Controllers\DonorDataClerk.php(53): view('donordataclerk/...', Array)
+#5 C:\wamp64\www\blood-bank\system\CodeIgniter.php(832): App\Controllers\DonorDataClerk->index('index', '1')
+#6 C:\wamp64\www\blood-bank\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DonorDataClerk))
+#7 C:\wamp64\www\blood-bank\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\wamp64\www\blood-bank\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}

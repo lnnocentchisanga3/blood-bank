@@ -15,11 +15,12 @@ class AdminModels extends Model
 	}
 
 
-	public function hivNum()
+	public function hivNum($hospital_id)
 	{
 		$builder = $this->$db->table('donors');
 
 		$builder->select("hiv");
+		$builder->where('hospital_id',$hospital_id);
 		$builder->where('hiv',22);
 
 		$result = $builder->get();
@@ -35,11 +36,12 @@ class AdminModels extends Model
 		}
 	}
 
-	public function hbvNum()
+	public function hbvNum($hospital_id)
 	{
 		$builder = $this->$db->table('donors');
 
 		$builder->select("hbv");
+		$builder->where('hospital_id',$hospital_id);
 		$builder->where('hbv',22);
 
 		$result = $builder->get();
@@ -55,11 +57,12 @@ class AdminModels extends Model
 		}
 	}
 
-	public function hcvNum()
+	public function hcvNum($hospital_id)
 	{
 		$builder = $this->$db->table('donors');
 
 		$builder->select("hcv");
+		$builder->where('hospital_id',$hospital_id);
 		$builder->where('hcv',22);
 
 		$result = $builder->get();
@@ -75,11 +78,12 @@ class AdminModels extends Model
 		}
 	}
 
-	public function syphilisNum()
+	public function syphilisNum($hospital_id)
 	{
 		$builder = $this->$db->table('donors');
 
 		$builder->select("syphilis");
+		$builder->where('hospital_id',$hospital_id);
 		$builder->where('syphilis',22);
 
 		$result = $builder->get();
@@ -95,15 +99,15 @@ class AdminModels extends Model
 		}
 	}
 
-	public function getDonors()
+	public function getDonors($hospital_id)
 	{
 	
-	$query = $this->$db->query("SELECT * FROM `donors` GROUP BY date_of_next_donation ORDER BY date_of_next_donation ASC");
+	$query = $this->$db->query("SELECT * FROM `donors` INNER JOIN donation_sites ON donors.site_id=donation_sites.site_id WHERE donors.hospital_id='$hospital_id' GROUP BY donation_site_name ORDER BY date_of_next_donation ASC");
 
 	$result = $query->getResult();
 
 	if (count($result) == null) {
-		return false;
+		return $hospital_id;
 	}else{
 		return $result;
 	}

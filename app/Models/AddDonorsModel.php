@@ -8,32 +8,7 @@ use CodeIgniter\Model;
  */
 class AddDonorsModel extends Model
 {
-	/*protected $table = 'donors';
-	protected $primaryKey = 'serial_number';
-	protected $returnType = 'array';
-
-	protected $allowedFields = ['sample_id','donor_name','hiv','hbv','hcv','syphilis','comment','date_of_donation','date_of_next_donation','site'];
-
-	protected $useTimestamps = true;
-	protected $createdField = 'added_on';
-	protected $updatedField = 'updated_at';
-	protected $deletedField = 'deleted_at';*/
-
-	/*protected $validationRules = [
-			'sampleid' => 'required',
-			'names' => 'required',
-			'hiv' => 'required',
-			'hbv' => 'required',
-			'hcv' => 'required',
-			'syphilis' => 'required',
-			'comment' =>'required',
-			'dod' => 'required',
-			'donextd' => 'required',
-			'site' => 'required'
-	];*/
-	
-
-	public function saveDonors($sample_id,$donor,$hiv,$hbv,$hcv,$syphilis,$comment,$dod,$donextd,$site)
+	public function saveDonors($sample_id,$donorfname,$donormname,$donorlname,$hiv,$hbv,$hcv,$syphilis,$group,$comment,$dod,$donextd,$site,$hospital_id,$province_id,$district_id)
 	{
 		$db = \Config\Database::connect();
 
@@ -42,7 +17,7 @@ class AddDonorsModel extends Model
 		$query = "";
 
 			while ($i < $length) {
-				$query = $db->query("INSERT INTO donors(sample_id,donor_name,hiv,hbv,hcv,syphilis,comment,date_of_donation,date_of_next_donation,site) VALUES('$sample_id[$i]','$donor[$i]','$hiv[$i]','$hbv[$i]','$hcv[$i]','$syphilis[$i]','$comment[$i]','$dod','$donextd','$site')");
+				$query = $db->query("INSERT INTO donors(sample_id,donor_fname,donor_mname,donor_lname,hiv,hbv,hcv,syphilis,blood_group,comment,date_of_donation,date_of_next_donation,site_id,hospital_id,district_id,province_id) VALUES('$sample_id[$i]','$donorfname[$i]','$donormname[$i]','$donorlname[$i]','$hiv[$i]','$hbv[$i]','$hcv[$i]','$syphilis[$i]','$group','$comment[$i]','$dod','$donextd','$site','$hospital_id','$district_id','$province_id')");
 				$i++;
 			}
 

@@ -1,0 +1,369 @@
+CRITICAL - 2022-09-19 04:00:55 --> Invalid file: donordatadlerk/index.php
+#0 C:\wamp64\www\blood-bank\system\View\View.php(198): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('donordatadlerk/...')
+#1 C:\wamp64\www\blood-bank\system\Common.php(1089): CodeIgniter\View\View->render('donordatadlerk/...', Array, true)
+#2 C:\wamp64\www\blood-bank\app\Controllers\DonorDataClerk.php(39): view('donordatadlerk/...', Array)
+#3 C:\wamp64\www\blood-bank\system\CodeIgniter.php(832): App\Controllers\DonorDataClerk->index()
+#4 C:\wamp64\www\blood-bank\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DonorDataClerk))
+#5 C:\wamp64\www\blood-bank\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\wamp64\www\blood-bank\index.php(37): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2022-09-19 05:39:07 --> Invalid argument supplied for foreach()
+#0 C:\wamp64\www\blood-bank\app\Views\donorsection\index.php(130): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Invalid argumen...', 'C:\\wamp64\\www\\b...', 130, Array)
+#1 C:\wamp64\www\blood-bank\system\View\View.php(210): include('C:\\wamp64\\www\\b...')
+#2 C:\wamp64\www\blood-bank\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\wamp64\www\blood-bank\system\Common.php(1089): CodeIgniter\View\View->render('donorsection/in...', Array, true)
+#4 C:\wamp64\www\blood-bank\app\Controllers\DonorSection.php(39): view('donorsection/in...', Array)
+#5 C:\wamp64\www\blood-bank\system\CodeIgniter.php(832): App\Controllers\DonorSection->index()
+#6 C:\wamp64\www\blood-bank\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DonorSection))
+#7 C:\wamp64\www\blood-bank\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\wamp64\www\blood-bank\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-09-19 06:22:43 --> syntax error, unexpected '==' (T_IS_EQUAL), expecting ')'
+#0 C:\wamp64\www\blood-bank\system\Router\Router.php(175): CodeIgniter\Router\Router->autoRoute('/donorsection/i...')
+#1 C:\wamp64\www\blood-bank\system\CodeIgniter.php(726): CodeIgniter\Router\Router->handle('/donorsection/i...')
+#2 C:\wamp64\www\blood-bank\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+#3 C:\wamp64\www\blood-bank\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\wamp64\www\blood-bank\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-09-19 06:25:22 --> syntax error, unexpected '==' (T_IS_EQUAL), expecting ')'
+#0 C:\wamp64\www\blood-bank\system\Router\Router.php(175): CodeIgniter\Router\Router->autoRoute('/donorsection/i...')
+#1 C:\wamp64\www\blood-bank\system\CodeIgniter.php(726): CodeIgniter\Router\Router->handle('/donorsection/i...')
+#2 C:\wamp64\www\blood-bank\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+#3 C:\wamp64\www\blood-bank\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\wamp64\www\blood-bank\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-09-19 06:25:54 --> syntax error, unexpected '==' (T_IS_EQUAL), expecting ')'
+#0 C:\wamp64\www\blood-bank\system\Router\Router.php(175): CodeIgniter\Router\Router->autoRoute('/donorsection/i...')
+#1 C:\wamp64\www\blood-bank\system\CodeIgniter.php(726): CodeIgniter\Router\Router->handle('/donorsection/i...')
+#2 C:\wamp64\www\blood-bank\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+#3 C:\wamp64\www\blood-bank\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\wamp64\www\blood-bank\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-09-19 06:29:12 --> You must set the database table to be used with your query.
+#0 C:\wamp64\www\blood-bank\system\Model.php(545): CodeIgniter\Database\BaseConnection->table(NULL)
+#1 C:\wamp64\www\blood-bank\system\Model.php(722): CodeIgniter\Model->builder()
+#2 C:\wamp64\www\blood-bank\app\Controllers\DonorSection.php(34): CodeIgniter\Model->__call('where', Array)
+#3 C:\wamp64\www\blood-bank\system\CodeIgniter.php(832): App\Controllers\DonorSection->index('1')
+#4 C:\wamp64\www\blood-bank\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DonorSection))
+#5 C:\wamp64\www\blood-bank\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\wamp64\www\blood-bank\index.php(37): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2022-09-19 06:35:16 --> Invalid file: donorsection/viewdonors/.php
+#0 C:\wamp64\www\blood-bank\system\View\View.php(198): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('donorsection/vi...')
+#1 C:\wamp64\www\blood-bank\system\Common.php(1089): CodeIgniter\View\View->render('donorsection/vi...', Array, true)
+#2 C:\wamp64\www\blood-bank\app\Controllers\DonorSection.php(50): view('donorsection/vi...', Array)
+#3 C:\wamp64\www\blood-bank\system\CodeIgniter.php(832): App\Controllers\DonorSection->listdonors()
+#4 C:\wamp64\www\blood-bank\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DonorSection))
+#5 C:\wamp64\www\blood-bank\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\wamp64\www\blood-bank\index.php(37): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2022-09-19 06:37:58 --> syntax error, unexpected 'return' (T_RETURN)
+#0 C:\wamp64\www\blood-bank\system\Router\Router.php(175): CodeIgniter\Router\Router->autoRoute('/donorsection/l...')
+#1 C:\wamp64\www\blood-bank\system\CodeIgniter.php(726): CodeIgniter\Router\Router->handle('/donorsection/l...')
+#2 C:\wamp64\www\blood-bank\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+#3 C:\wamp64\www\blood-bank\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\wamp64\www\blood-bank\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-09-19 06:46:54 --> Call to undefined method App\Models\GetAllDonors::getAllSites
+#0 C:\wamp64\www\blood-bank\app\Controllers\DonorSection.php(67): CodeIgniter\Model->__call('getAllSites', Array)
+#1 C:\wamp64\www\blood-bank\system\CodeIgniter.php(832): App\Controllers\DonorSection->donationsites()
+#2 C:\wamp64\www\blood-bank\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DonorSection))
+#3 C:\wamp64\www\blood-bank\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\wamp64\www\blood-bank\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-09-19 06:52:13 --> Too few arguments to function App\Models\AdminModels::hivNum(), 0 passed in C:\wamp64\www\blood-bank\app\Controllers\Dashboard.php on line 29 and exactly 1 expected
+#0 C:\wamp64\www\blood-bank\app\Controllers\Dashboard.php(29): App\Models\AdminModels->hivNum()
+#1 C:\wamp64\www\blood-bank\system\CodeIgniter.php(832): App\Controllers\Dashboard->index('1')
+#2 C:\wamp64\www\blood-bank\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+#3 C:\wamp64\www\blood-bank\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\wamp64\www\blood-bank\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-09-19 06:54:28 --> Invalid argument supplied for foreach()
+#0 C:\wamp64\www\blood-bank\app\Views\admin\dashboard.php(130): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Invalid argumen...', 'C:\\wamp64\\www\\b...', 130, Array)
+#1 C:\wamp64\www\blood-bank\system\View\View.php(210): include('C:\\wamp64\\www\\b...')
+#2 C:\wamp64\www\blood-bank\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\wamp64\www\blood-bank\system\Common.php(1089): CodeIgniter\View\View->render('admin/dashboard', Array, true)
+#4 C:\wamp64\www\blood-bank\app\Controllers\Dashboard.php(39): view('admin/dashboard', Array)
+#5 C:\wamp64\www\blood-bank\system\CodeIgniter.php(832): App\Controllers\Dashboard->index('1')
+#6 C:\wamp64\www\blood-bank\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+#7 C:\wamp64\www\blood-bank\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\wamp64\www\blood-bank\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-09-19 09:19:49 --> Invalid file: adddonationsites.php
+#0 C:\wamp64\www\blood-bank\system\View\View.php(198): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('adddonationsite...')
+#1 C:\wamp64\www\blood-bank\system\Common.php(1089): CodeIgniter\View\View->render('adddonationsite...', Array, true)
+#2 C:\wamp64\www\blood-bank\app\Controllers\Dashboard.php(45): view('adddonationsite...')
+#3 C:\wamp64\www\blood-bank\system\CodeIgniter.php(832): App\Controllers\Dashboard->addsites('1')
+#4 C:\wamp64\www\blood-bank\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+#5 C:\wamp64\www\blood-bank\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\wamp64\www\blood-bank\index.php(37): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2022-09-19 09:52:49 --> Call to a member function where() on null
+#0 C:\wamp64\www\blood-bank\system\CodeIgniter.php(832): App\Controllers\Dashboard->addsites('1')
+#1 C:\wamp64\www\blood-bank\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+#2 C:\wamp64\www\blood-bank\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\wamp64\www\blood-bank\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2022-09-19 12:55:49 --> Call to a member function saveDonors() on null
+#0 C:\wamp64\www\blood-bank\system\CodeIgniter.php(832): App\Controllers\Dashboard->addsites('1')
+#1 C:\wamp64\www\blood-bank\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+#2 C:\wamp64\www\blood-bank\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\wamp64\www\blood-bank\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2022-09-19 12:56:59 --> Call to a member function saveDonors() on null
+#0 C:\wamp64\www\blood-bank\system\CodeIgniter.php(832): App\Controllers\Dashboard->addsites('1')
+#1 C:\wamp64\www\blood-bank\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+#2 C:\wamp64\www\blood-bank\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\wamp64\www\blood-bank\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2022-09-19 13:00:49 --> Call to a member function saveDonors() on null
+#0 C:\wamp64\www\blood-bank\system\CodeIgniter.php(832): App\Controllers\Dashboard->addsites('1')
+#1 C:\wamp64\www\blood-bank\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+#2 C:\wamp64\www\blood-bank\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\wamp64\www\blood-bank\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+ERROR - 2022-09-19 13:21:34 --> You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1) VALUES('Ntumpa Primary School','1')' at line 1
+ERROR - 2022-09-19 13:21:34 --> You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1) VALUES('Kasenda Primary School','1')' at line 1
+ERROR - 2022-09-19 13:21:34 --> You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1) VALUES('Chifwani Primary School','1')' at line 1
+ERROR - 2022-09-19 13:21:34 --> You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1) VALUES('Kateshi Primary School','1')' at line 1
+ERROR - 2022-09-19 13:21:34 --> You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1) VALUES('Milundu Primary School','1')' at line 1
+ERROR - 2022-09-19 13:22:46 --> You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1) VALUES('Ntumpa Primary School','1')' at line 1
+ERROR - 2022-09-19 13:22:46 --> You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1) VALUES('Ntumpa Primary School','1')' at line 1
+ERROR - 2022-09-19 13:22:46 --> You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1) VALUES('Ntumpa Primary School','1')' at line 1
+ERROR - 2022-09-19 13:22:46 --> You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1) VALUES('Ntumpa Primary School','1')' at line 1
+ERROR - 2022-09-19 13:22:46 --> You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1) VALUES('Ntumpa Primary School','1')' at line 1
+CRITICAL - 2022-09-19 14:12:24 --> Too few arguments to function App\Models\AddDonorsModel::saveDonors(), 11 passed in C:\wamp64\www\blood-bank\app\Controllers\Adddonors.php on line 55 and exactly 13 expected
+#0 C:\wamp64\www\blood-bank\app\Controllers\Adddonors.php(55): App\Models\AddDonorsModel->saveDonors(Array, NULL, Array, Array, Array, Array, Array, '2022-09-16', '2022-11-16', '1', '1')
+#1 C:\wamp64\www\blood-bank\system\CodeIgniter.php(832): App\Controllers\Adddonors->index('1')
+#2 C:\wamp64\www\blood-bank\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Adddonors))
+#3 C:\wamp64\www\blood-bank\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\wamp64\www\blood-bank\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+ERROR - 2022-09-19 14:16:15 --> Column count doesn't match value count at row 1
+ERROR - 2022-09-19 14:16:15 --> Column count doesn't match value count at row 1
+ERROR - 2022-09-19 14:16:15 --> Column count doesn't match value count at row 1
+ERROR - 2022-09-19 14:16:15 --> Column count doesn't match value count at row 1
+ERROR - 2022-09-19 14:16:15 --> Column count doesn't match value count at row 1
+ERROR - 2022-09-19 14:26:29 --> Column count doesn't match value count at row 1
+ERROR - 2022-09-19 14:26:29 --> Column count doesn't match value count at row 1
+ERROR - 2022-09-19 14:26:29 --> Column count doesn't match value count at row 1
+ERROR - 2022-09-19 14:26:29 --> Column count doesn't match value count at row 1
+ERROR - 2022-09-19 14:26:29 --> Column count doesn't match value count at row 1
+CRITICAL - 2022-09-19 16:04:59 --> Call to a member function where() on null
+#0 C:\wamp64\www\blood-bank\system\CodeIgniter.php(832): App\Controllers\Dashboard->index()
+#1 C:\wamp64\www\blood-bank\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+#2 C:\wamp64\www\blood-bank\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\wamp64\www\blood-bank\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2022-09-19 16:05:18 --> Call to a member function where() on null
+#0 C:\wamp64\www\blood-bank\system\CodeIgniter.php(832): App\Controllers\Dashboard->index()
+#1 C:\wamp64\www\blood-bank\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+#2 C:\wamp64\www\blood-bank\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\wamp64\www\blood-bank\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2022-09-19 16:05:34 --> Call to a member function where() on null
+#0 C:\wamp64\www\blood-bank\system\CodeIgniter.php(832): App\Controllers\Dashboard->index()
+#1 C:\wamp64\www\blood-bank\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+#2 C:\wamp64\www\blood-bank\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\wamp64\www\blood-bank\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2022-09-19 16:06:50 --> Call to a member function getDonors() on null
+#0 C:\wamp64\www\blood-bank\system\CodeIgniter.php(832): App\Controllers\Dashboard->index()
+#1 C:\wamp64\www\blood-bank\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+#2 C:\wamp64\www\blood-bank\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\wamp64\www\blood-bank\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+ERROR - 2022-09-19 16:21:22 --> Table 'bloodbankdata.sites' doesn't exist
+CRITICAL - 2022-09-19 16:21:22 --> Call to a member function getResult() on bool
+#0 C:\wamp64\www\blood-bank\app\Controllers\Dashboard.php(40): App\Models\Statistics->getStatistics1('1')
+#1 C:\wamp64\www\blood-bank\system\CodeIgniter.php(832): App\Controllers\Dashboard->index('1')
+#2 C:\wamp64\www\blood-bank\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+#3 C:\wamp64\www\blood-bank\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\wamp64\www\blood-bank\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+ERROR - 2022-09-19 16:22:19 --> Table 'bloodbankdata.sites' doesn't exist
+CRITICAL - 2022-09-19 16:22:19 --> Call to a member function getResult() on bool
+#0 C:\wamp64\www\blood-bank\app\Controllers\Dashboard.php(40): App\Models\Statistics->getStatistics1('1')
+#1 C:\wamp64\www\blood-bank\system\CodeIgniter.php(832): App\Controllers\Dashboard->index('1')
+#2 C:\wamp64\www\blood-bank\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+#3 C:\wamp64\www\blood-bank\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\wamp64\www\blood-bank\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-09-19 16:24:26 --> Call to a member function table() on null
+#0 C:\wamp64\www\blood-bank\app\Controllers\Dashboard.php(40): App\Models\Statistics->getStatistics1('1')
+#1 C:\wamp64\www\blood-bank\system\CodeIgniter.php(832): App\Controllers\Dashboard->index('1')
+#2 C:\wamp64\www\blood-bank\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+#3 C:\wamp64\www\blood-bank\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\wamp64\www\blood-bank\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+ERROR - 2022-09-19 16:24:49 --> Table 'bloodbankdata.sites' doesn't exist
+CRITICAL - 2022-09-19 16:24:49 --> Invalid argument supplied for foreach()
+#0 C:\wamp64\www\blood-bank\app\Views\admin\dashboard.php(137): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Invalid argumen...', 'C:\\wamp64\\www\\b...', 137, Array)
+#1 C:\wamp64\www\blood-bank\system\View\View.php(210): include('C:\\wamp64\\www\\b...')
+#2 C:\wamp64\www\blood-bank\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\wamp64\www\blood-bank\system\Common.php(1089): CodeIgniter\View\View->render('admin/dashboard', Array, true)
+#4 C:\wamp64\www\blood-bank\app\Controllers\Dashboard.php(46): view('admin/dashboard', Array)
+#5 C:\wamp64\www\blood-bank\system\CodeIgniter.php(832): App\Controllers\Dashboard->index('1')
+#6 C:\wamp64\www\blood-bank\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+#7 C:\wamp64\www\blood-bank\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\wamp64\www\blood-bank\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+ERROR - 2022-09-19 16:25:13 --> Table 'bloodbankdata.sites' doesn't exist
+CRITICAL - 2022-09-19 16:25:13 --> Invalid argument supplied for foreach()
+#0 C:\wamp64\www\blood-bank\app\Views\admin\dashboard.php(137): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Invalid argumen...', 'C:\\wamp64\\www\\b...', 137, Array)
+#1 C:\wamp64\www\blood-bank\system\View\View.php(210): include('C:\\wamp64\\www\\b...')
+#2 C:\wamp64\www\blood-bank\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\wamp64\www\blood-bank\system\Common.php(1089): CodeIgniter\View\View->render('admin/dashboard', Array, true)
+#4 C:\wamp64\www\blood-bank\app\Controllers\Dashboard.php(46): view('admin/dashboard', Array)
+#5 C:\wamp64\www\blood-bank\system\CodeIgniter.php(832): App\Controllers\Dashboard->index('1')
+#6 C:\wamp64\www\blood-bank\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+#7 C:\wamp64\www\blood-bank\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\wamp64\www\blood-bank\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+ERROR - 2022-09-19 16:25:48 --> Table 'bloodbankdata.sites' doesn't exist
+CRITICAL - 2022-09-19 16:25:48 --> Invalid argument supplied for foreach()
+#0 C:\wamp64\www\blood-bank\app\Views\admin\dashboard.php(137): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Invalid argumen...', 'C:\\wamp64\\www\\b...', 137, Array)
+#1 C:\wamp64\www\blood-bank\system\View\View.php(210): include('C:\\wamp64\\www\\b...')
+#2 C:\wamp64\www\blood-bank\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\wamp64\www\blood-bank\system\Common.php(1089): CodeIgniter\View\View->render('admin/dashboard', Array, true)
+#4 C:\wamp64\www\blood-bank\app\Controllers\Dashboard.php(46): view('admin/dashboard', Array)
+#5 C:\wamp64\www\blood-bank\system\CodeIgniter.php(832): App\Controllers\Dashboard->index('1')
+#6 C:\wamp64\www\blood-bank\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+#7 C:\wamp64\www\blood-bank\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\wamp64\www\blood-bank\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+ERROR - 2022-09-19 16:26:10 --> Table 'bloodbankdata.sites' doesn't exist
+CRITICAL - 2022-09-19 16:26:10 --> Invalid argument supplied for foreach()
+#0 C:\wamp64\www\blood-bank\app\Views\admin\dashboard.php(137): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Invalid argumen...', 'C:\\wamp64\\www\\b...', 137, Array)
+#1 C:\wamp64\www\blood-bank\system\View\View.php(210): include('C:\\wamp64\\www\\b...')
+#2 C:\wamp64\www\blood-bank\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\wamp64\www\blood-bank\system\Common.php(1089): CodeIgniter\View\View->render('admin/dashboard', Array, true)
+#4 C:\wamp64\www\blood-bank\app\Controllers\Dashboard.php(46): view('admin/dashboard', Array)
+#5 C:\wamp64\www\blood-bank\system\CodeIgniter.php(832): App\Controllers\Dashboard->index('1')
+#6 C:\wamp64\www\blood-bank\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+#7 C:\wamp64\www\blood-bank\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\wamp64\www\blood-bank\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+ERROR - 2022-09-19 16:26:45 --> Table 'bloodbankdata.sites' doesn't exist
+ERROR - 2022-09-19 16:27:02 --> Table 'bloodbankdata.sites' doesn't exist
+ERROR - 2022-09-19 16:27:11 --> Table 'bloodbankdata.sites' doesn't exist
+ERROR - 2022-09-19 16:28:26 --> Table 'bloodbankdata.sites' doesn't exist
+ERROR - 2022-09-19 16:28:54 --> Table 'bloodbankdata.sites' doesn't exist
+ERROR - 2022-09-19 16:29:20 --> Table 'bloodbankdata.sites' doesn't exist
+ERROR - 2022-09-19 16:30:16 --> Table 'bloodbankdata.sites' doesn't exist
+ERROR - 2022-09-19 16:30:55 --> Table 'bloodbankdata.sites' doesn't exist
+ERROR - 2022-09-19 16:31:39 --> Unknown column 'site_id' in 'from clause'
+ERROR - 2022-09-19 16:32:15 --> Unknown column 'site_id' in 'from clause'
+ERROR - 2022-09-19 16:32:28 --> Unknown column 'site_id' in 'from clause'
+ERROR - 2022-09-19 16:33:22 --> Unknown column 'site_id' in 'from clause'
+ERROR - 2022-09-19 16:34:21 --> Column 'hospital_id' in where clause is ambiguous
+ERROR - 2022-09-19 16:34:21 --> Unknown column 'site' in 'group statement'
+CRITICAL - 2022-09-19 16:34:21 --> Call to a member function getResult() on bool
+#0 C:\wamp64\www\blood-bank\app\Controllers\Dashboard.php(41): App\Models\Statistics->getStatistics('1')
+#1 C:\wamp64\www\blood-bank\system\CodeIgniter.php(832): App\Controllers\Dashboard->index('1')
+#2 C:\wamp64\www\blood-bank\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+#3 C:\wamp64\www\blood-bank\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\wamp64\www\blood-bank\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+ERROR - 2022-09-19 16:34:46 --> Column 'hospital_id' in where clause is ambiguous
+ERROR - 2022-09-19 16:37:01 --> Column 'hospital_id' in where clause is ambiguous
+CRITICAL - 2022-09-19 16:39:16 --> count(): Parameter must be an array or an object that implements Countable
+#0 C:\wamp64\www\blood-bank\app\Views\admin\dashboard.php(152): CodeIgniter\Debug\Exceptions->errorHandler(2, 'count(): Parame...', 'C:\\wamp64\\www\\b...', 152, Array)
+#1 C:\wamp64\www\blood-bank\system\View\View.php(210): include('C:\\wamp64\\www\\b...')
+#2 C:\wamp64\www\blood-bank\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\wamp64\www\blood-bank\system\Common.php(1089): CodeIgniter\View\View->render('admin/dashboard', Array, true)
+#4 C:\wamp64\www\blood-bank\app\Controllers\Dashboard.php(46): view('admin/dashboard', Array)
+#5 C:\wamp64\www\blood-bank\system\CodeIgniter.php(832): App\Controllers\Dashboard->index('1')
+#6 C:\wamp64\www\blood-bank\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+#7 C:\wamp64\www\blood-bank\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\wamp64\www\blood-bank\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+ERROR - 2022-09-19 16:44:27 --> Column 'hospital_id' in where clause is ambiguous
+CRITICAL - 2022-09-19 16:44:27 --> Call to a member function getResult() on bool
+#0 C:\wamp64\www\blood-bank\app\Controllers\Dashboard.php(41): App\Models\Statistics->getStatistics('1')
+#1 C:\wamp64\www\blood-bank\system\CodeIgniter.php(832): App\Controllers\Dashboard->index('1')
+#2 C:\wamp64\www\blood-bank\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+#3 C:\wamp64\www\blood-bank\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\wamp64\www\blood-bank\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+ERROR - 2022-09-19 16:45:50 --> Column 'hospital_id' in where clause is ambiguous
+CRITICAL - 2022-09-19 16:45:50 --> Call to a member function getResult() on bool
+#0 C:\wamp64\www\blood-bank\app\Controllers\Dashboard.php(41): App\Models\Statistics->getStatistics('1')
+#1 C:\wamp64\www\blood-bank\system\CodeIgniter.php(832): App\Controllers\Dashboard->index('1')
+#2 C:\wamp64\www\blood-bank\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+#3 C:\wamp64\www\blood-bank\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\wamp64\www\blood-bank\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+ERROR - 2022-09-19 16:49:42 --> Column 'hospital_id' in where clause is ambiguous
+CRITICAL - 2022-09-19 16:49:42 --> Call to a member function getResult() on bool
+#0 C:\wamp64\www\blood-bank\app\Controllers\Dashboard.php(41): App\Models\Statistics->getStatistics('1')
+#1 C:\wamp64\www\blood-bank\system\CodeIgniter.php(832): App\Controllers\Dashboard->index('1')
+#2 C:\wamp64\www\blood-bank\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+#3 C:\wamp64\www\blood-bank\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\wamp64\www\blood-bank\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+ERROR - 2022-09-19 16:52:14 --> Operand should contain 1 column(s)
+ERROR - 2022-09-19 16:52:14 --> Column 'hospital_id' in where clause is ambiguous
+CRITICAL - 2022-09-19 16:52:14 --> Call to a member function getResult() on bool
+#0 C:\wamp64\www\blood-bank\app\Controllers\Dashboard.php(41): App\Models\Statistics->getStatistics('1')
+#1 C:\wamp64\www\blood-bank\system\CodeIgniter.php(832): App\Controllers\Dashboard->index('1')
+#2 C:\wamp64\www\blood-bank\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+#3 C:\wamp64\www\blood-bank\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\wamp64\www\blood-bank\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+ERROR - 2022-09-19 16:53:02 --> Operand should contain 1 column(s)
+ERROR - 2022-09-19 16:53:02 --> Column 'hospital_id' in where clause is ambiguous
+CRITICAL - 2022-09-19 16:53:02 --> Call to a member function getResult() on bool
+#0 C:\wamp64\www\blood-bank\app\Controllers\Dashboard.php(41): App\Models\Statistics->getStatistics('1')
+#1 C:\wamp64\www\blood-bank\system\CodeIgniter.php(832): App\Controllers\Dashboard->index('1')
+#2 C:\wamp64\www\blood-bank\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+#3 C:\wamp64\www\blood-bank\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\wamp64\www\blood-bank\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+ERROR - 2022-09-19 16:53:25 --> Operand should contain 1 column(s)
+ERROR - 2022-09-19 16:53:52 --> Operand should contain 1 column(s)
+ERROR - 2022-09-19 16:54:54 --> Operand should contain 1 column(s)
+ERROR - 2022-09-19 16:55:17 --> Operand should contain 1 column(s)
+CRITICAL - 2022-09-19 16:55:17 --> Invalid argument supplied for foreach()
+#0 C:\wamp64\www\blood-bank\app\Views\admin\dashboard.php(140): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Invalid argumen...', 'C:\\wamp64\\www\\b...', 140, Array)
+#1 C:\wamp64\www\blood-bank\system\View\View.php(210): include('C:\\wamp64\\www\\b...')
+#2 C:\wamp64\www\blood-bank\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\wamp64\www\blood-bank\system\Common.php(1089): CodeIgniter\View\View->render('admin/dashboard', Array, true)
+#4 C:\wamp64\www\blood-bank\app\Controllers\Dashboard.php(46): view('admin/dashboard', Array)
+#5 C:\wamp64\www\blood-bank\system\CodeIgniter.php(832): App\Controllers\Dashboard->index('1')
+#6 C:\wamp64\www\blood-bank\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+#7 C:\wamp64\www\blood-bank\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\wamp64\www\blood-bank\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+ERROR - 2022-09-19 16:55:47 --> Operand should contain 1 column(s)
+CRITICAL - 2022-09-19 16:55:47 --> Invalid argument supplied for foreach()
+#0 C:\wamp64\www\blood-bank\app\Views\admin\dashboard.php(140): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Invalid argumen...', 'C:\\wamp64\\www\\b...', 140, Array)
+#1 C:\wamp64\www\blood-bank\system\View\View.php(210): include('C:\\wamp64\\www\\b...')
+#2 C:\wamp64\www\blood-bank\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\wamp64\www\blood-bank\system\Common.php(1089): CodeIgniter\View\View->render('admin/dashboard', Array, true)
+#4 C:\wamp64\www\blood-bank\app\Controllers\Dashboard.php(46): view('admin/dashboard', Array)
+#5 C:\wamp64\www\blood-bank\system\CodeIgniter.php(832): App\Controllers\Dashboard->index('1')
+#6 C:\wamp64\www\blood-bank\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+#7 C:\wamp64\www\blood-bank\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\wamp64\www\blood-bank\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+ERROR - 2022-09-19 16:56:00 --> Operand should contain 1 column(s)
+CRITICAL - 2022-09-19 16:58:31 --> Invalid argument supplied for foreach()
+#0 C:\wamp64\www\blood-bank\app\Views\admin\dashboard.php(140): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Invalid argumen...', 'C:\\wamp64\\www\\b...', 140, Array)
+#1 C:\wamp64\www\blood-bank\system\View\View.php(210): include('C:\\wamp64\\www\\b...')
+#2 C:\wamp64\www\blood-bank\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\wamp64\www\blood-bank\system\Common.php(1089): CodeIgniter\View\View->render('admin/dashboard', Array, true)
+#4 C:\wamp64\www\blood-bank\app\Controllers\Dashboard.php(46): view('admin/dashboard', Array)
+#5 C:\wamp64\www\blood-bank\system\CodeIgniter.php(832): App\Controllers\Dashboard->index('1')
+#6 C:\wamp64\www\blood-bank\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+#7 C:\wamp64\www\blood-bank\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\wamp64\www\blood-bank\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+ERROR - 2022-09-19 17:00:16 --> Not unique table/alias: 'donors'
+ERROR - 2022-09-19 17:06:06 --> Column 'site_id' in group statement is ambiguous
+ERROR - 2022-09-19 17:06:24 --> Column 'site_id' in group statement is ambiguous
+ERROR - 2022-09-19 17:10:38 --> Unknown column 'site' in 'field list'
+ERROR - 2022-09-19 17:10:38 --> Unknown column 'site' in 'field list'
+ERROR - 2022-09-19 17:10:38 --> Unknown column 'site' in 'field list'
+ERROR - 2022-09-19 17:10:38 --> Unknown column 'site' in 'field list'
+ERROR - 2022-09-19 17:10:38 --> Unknown column 'site' in 'field list'
