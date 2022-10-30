@@ -150,8 +150,8 @@
 
                         <div class="col-sm-6">
                         	<div class="form-group">
-                        	<label>Postal Address</label>
-                        	<input type="text" class="form-control" placeholder="Postal Address" name="postaladdress" <?=set_value('')?>>
+                        	<label>Residential Address</label>
+                        	<input type="text" class="form-control" placeholder="Residential Address" name="postaladdress" <?=set_value('')?>>
                         </div>
                         </div>
 
@@ -174,13 +174,14 @@
                         	<label>Blood Group</label>
                         	<select class="form-control" name="group">
                         		<option>0</option>
-                        		<option>A</option>
-                        		<option>B</option>
-                        		<option>O</option>
                         		<option>A+</option>
-                        		<option>A-</option>
+                                <option>A-</option>
+                                <option>AB+</option>
+                                <option>AB-</option>
+                        		<option>B+</option>
+                                <option>B-</option>
                         		<option>O+</option>
-                        		<option>O-</option>
+                                <option>O-</option>
                         	</select>
                         </div>
                         </div>
