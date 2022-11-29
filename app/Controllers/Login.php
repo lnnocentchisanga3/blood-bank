@@ -45,25 +45,29 @@ class Login extends BaseController
 
 					if ($allowed) {
 						if ($userdata) {
-						switch ($userdata['user_role']) {
-							case 'admin':
-								$this->session->set('logged_in',$userdata);
-								return redirect()->to(base_url()."/dashboard/".$userdata['hospital_id']);
-								break;
-							case 'donor_section':
-								$this->session->set('logged_in',$userdata);
-								return redirect()->to(base_url()."/donorsection/".$userdata['hospital_id']);
-								break;
-							case 'donor_data_clerk':
-								$this->session->set('logged_in',$userdata);
-								return redirect()->to(base_url()."/donordataclerk/".$userdata['hospital_id']);
-								break;
+
+							$this->session->set('logged_in',$userdata);
+							return redirect()->to(base_url()."/dashboard/".$userdata['hospital_id']);
 							
-							default:
-								$this->session->setTempdata('error','Sorry You have not been assigned any Role on a system Contact the administrator to assign you',3);
-								return redirect()->to(current_url());
-								break;
-						}
+						// switch ($userdata['user_role']) {
+						// 	case 'admin':
+						// 		$this->session->set('logged_in',$userdata);
+						// 		return redirect()->to(base_url()."/dashboard/".$userdata['hospital_id']);
+						// 		break;
+						// 	case 'donor_section':
+						// 		$this->session->set('logged_in',$userdata);
+						// 		return redirect()->to(base_url()."/donorsection/".$userdata['hospital_id']);
+						// 		break;
+						// 	case 'donor_data_clerk':
+						// 		$this->session->set('logged_in',$userdata);
+						// 		return redirect()->to(base_url()."/donordataclerk/".$userdata['hospital_id']);
+						// 		break;
+							
+						// 	default:
+						// 		$this->session->setTempdata('error','Sorry You have not been assigned any Role on a system Contact the administrator to assign you',3);
+						// 		return redirect()->to(current_url());
+						// 		break;
+						// }
 					}else{
 
 						$this->session->setTempdata('error','Sorry your credentials are Invalid',3);

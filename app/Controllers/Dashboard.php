@@ -40,6 +40,7 @@ class Dashboard extends BaseController
 		$data['hbv'] = $this->adminModel->hbvNum($hospital_id);
 		$data['hcv'] = $this->adminModel->hcvNum($hospital_id);
 		$data['syphilis'] = $this->adminModel->syphilisNum($hospital_id);
+		$data['hospital'] = $this->sites->getAHospital($hospital_id);
 		$data['alldonors'] = $this->adminModel->getDonors($hospital_id);
 		$data['statistics1'] = $this->statistics1->getStatistics1($hospital_id);
 		$data['statistics'] = $this->statistics1->getStatistics($hospital_id);

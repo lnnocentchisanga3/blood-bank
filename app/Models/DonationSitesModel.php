@@ -32,6 +32,24 @@ class DonationSitesModel extends Model
 		}
 	}
 
+	public function getAHospital($hospital_id)
+	{
+		$builder = $this->db->table('hospital');
+		$builder->where('hospital_id',$hospital_id);
+		$builder->select("*");
+		$result = $builder->get();
+
+		if ($result) {
+			if (count($result->getResultArray()) == null) {
+				return 0;
+			}else{
+				return $result->getResultArray();
+			}
+		}else{
+			return false;
+		}
+	}
+
 	public function getSite($id)
 	{
 		$builder = $this->db->table('donation_sites');

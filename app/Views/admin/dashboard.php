@@ -1,156 +1,200 @@
-<?= $this->extend('layouts/base2'); ?>
+<?= $this->extend('layouts/base3'); ?>
 <?=$this->section('content');?>
-<div class="page-wrapper">
-            <div class="content">
+<div class="page-wrapper-base-3">
+            <div class="content container">
                 <div class="row">
-                    <div class="col-md-12 py-2 my-3 bg-white">
-                        <a href="#" data-toggle="modal" data-target="#LookForBlood" class="btn btn-primary btn-rounded"><i class="fa fa-search"></i> <span>Search for a Donor</span></a>
-                    </div>
-                    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
-                         <div class="card">
-                            <div class="card-header">
-                                <div class="row">
-                                    <h4 class="col-md-6">Donation Sites <i class="fa fa-map-marker"></i></h4>
-                                <div class="col-md-6 text-right">
-                                    <a href="<?=base_url()?>/addsites/<?=$userdata['hospital_id']?>" class="btn btn-primary btn-rounded">+ Add A Donation Site</a>
-                               </div>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                               
-                                <div class="table-responsive" style="height: 50vh">
-                                    <table class="table table-stripped " id="dataTable3">
-                                            <thead>
-                                                <tr>
-                                                  <th>No#</th>
-                                                    <th>Donation Site</th>
-                                                    <th class="noExport">Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                               <?php if ($sites == null): ?>
-                                                <tr>
-                                                  <td>No data is available here</td>
-                                                </tr>
-                                                <?php else: ?>
-                                                  <?php foreach ($sites as $row): ?>
-                                                <tr>
-                                                  <td><?=$num = $num + 1?></td>
-                                                    <td><?=$row['donation_site_name']?></td>
-                                                    <td class="noExport">
-                                                        <a href="<?=base_url()?>/viewdonationsite/<?=$row['site_id']?>/<?=$row['hospital_id']?>" class="badge badge-warning py-2 px-3 my-2"><i class="fa fa-eye"></i></a>
+                    <h3 class="col-md-11 my-4 mx-4 text-uppercase text-dark"> Welcome to <?=$hospital[0]['hospital_name']?> Blood bank Database </h3>
 
-                                                        <a href="<?=base_url()?>/editSites/<?=$row['site_id']?>/<?=$row['hospital_id']?>" class="badge badge-success py-2 px-3 my-2"><i class="fa fa-edit"></i></a>
-
-                                                        <!-- <a href="<?=base_url()?>/deleteSite/<?=$row['site_id']?>/<?=$row['hospital_id']?>" class="badge badge-danger py-2 px-3 my-2"><i class="fa fa-trash"></i></a> -->
-
-                                                        <!-- <button value="<?=$row['site_id']?>" class="btn btn-danger py-1 px-2 my-1" onclick="getval(this.value)" data-toggle="modal" data-target="#delete_employee"><i class="fa fa-trash-o "></i></button> -->
-                                                    </td>
-                                                </tr>
-                                                  <?php endforeach ?>
-                                               <?php endif ?>
-                                            </tbody>
-                                        </table>
-                                  </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
-                         <div class="card">
-                            <div class="card-body">
-                                <div class="chart-title">
-                                    <h4>Blood Collected in the passed months</h4>
-                                    <div class="float-right">
-                                        <ul class="chat-user-total">
-                                            <!-- <li><i class="fa fa-circle current-users" aria-hidden="true"></i>Okay</li>
-                                            <li><i class="fa fa-circle old-users" aria-hidden="true"></i> Discards</li> -->
-                                        </ul>
+                    <?php
+                    if ($userdata['user_role'] == 'admin') {
+                        ?>
+                   <a href=" " class="nav-link col-md-4">
+                        <div class="dash-widget">
+                           <div class="container-fluid py-3">
+                               <div class="row">
+                                    <div class="col-md-12">
+                                        <img src="<?=base_url()?>/public/assets/img/users1.png" height="80px" class="mx-auto d-block">
                                     </div>
-                                </div>  
-                                <canvas id="bargraph" style="height: 30vh">
-                                    Thers is nop data to show
-                                </canvas>
-                            </div>
+                                    <div class="col-md-12">
+                                        <h4 class="col-md-12 text-center py-2">Manage Users<h4>
+                                    </div>
+                               </div>
+                           </div>
                         </div>
-                    </div>
+                    </a>
+                        <?php
 
-                    </div>
-                </div>
-                <div class="row">
-                    <!-- <div class="col-12 col-md-6 col-lg-6 col-xl-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="chart-title">
-                                    <h4>Patient Total</h4>
-                                    <span class="float-right"><i class="fa fa-caret-up" aria-hidden="true"></i> 15% Higher than Last Month</span>
-                                </div>  
-                                <canvas id="linegraph"></canvas>
+                    }?>
+
+                    <a href=" " class="nav-link col-md-4">
+                        <div class="dash-widget">
+                            <div class="container-fluid py-3">
+                               <div class="row">
+                                    <div class="col-md-12">
+                                        <img src="<?=base_url()?>/public/assets/img/pin.png" height="80px" class="mx-auto d-block">
+                                    </div>
+                                    <div class="col-md-12">
+                                        <h4 class="col-md-12 text-center py-2">Donation Sites<h4>
+                                    </div>
+                               </div>
+                           </div>
+                        </div>
+                    </a>
+
+                    <a href=" " data-toggle="modal" data-target="#LookForBlood" class="nav-link col-md-4">
+                        <div class="dash-widget">
+                            <div class="container-fluid py-3">
+                               <div class="row">
+                                    <div class="col-md-12">
+                                        <img src="<?=base_url()?>/public/assets/img/database.png" height="80px" class="mx-auto d-block">
+                                    </div>
+                                    <div class="col-md-12">
+                                        <h4 class="col-md-12 text-center py-2">Search Local database<h4>
+                                    </div>
+                               </div>
+                           </div>
+                        </div>
+                    </a>
+
+                    <a href=" " class="nav-link col-md-4">
+                        <div class="dash-widget">
+                            <div class="contain py-3er-fluid">
+                                <div class="row">
+                            <div class="col-md-12">
+                                <img src="<?=base_url()?>/public/assets/img/dbsearch.png" height="80px" class="mx-auto d-block">
+                            </div>
+                            <div class="col-md-12">
+                                <h4 class="col-md-12 text-center py-2">Search Blood Bank Database<h4>
                             </div>
                         </div>
-                    </div> -->
-                    <!-- Graph here -->
-                    <!-- Ends here -->
+                    </div>
+                        </div>
+                    </a>
+
+                    <a href="<?=base_url()?>/oneAdddonor/<?=$userdata['hospital_id']?>" class="nav-link col-md-4">
+                        <div class="dash-widget">
+                            <div class="contain py-3er-fluid">
+                                <div class="row">
+                            <div class="col-md-12">
+                                <img src="<?=base_url()?>/public/assets/img/users.png" height="80px" class="mx-auto d-block">
+                            </div>
+                            <div class="col-md-12">
+                                <h4 class="col-md-12 text-center py-2">Add A Donor<h4>
+                            </div>
+                        </div>
+                    </div>
+                        </div>
+                    </a>
+
+                    <?php
+                    if ($userdata['user_role'] == 'admin' || $userdata['user_role'] == 'donor_data_clerk') {
+                        ?>
+                        <a href="<?=base_url()?>/oneAdddonor/<?=$userdata['hospital_id']?>" class="nav-link col-md-4">
+                        <div class="dash-widget">
+                            <div class="contain py-3er-fluid">
+                                <div class="row">
+                            <div class="col-md-12">
+                                <img src="<?=base_url()?>/public/assets/img/users2.png" height="80px" class="mx-auto d-block">
+                            </div>
+                            <div class="col-md-12">
+                                <h4 class="col-md-12 text-center py-2">Add Multiple Donors<h4>
+                            </div>
+                        </div>
+                    </div>
+                        </div>
+                    </a>
+                    <?php
+
+                    }?>
+
+                    <a href=" " class="nav-link col-md-4">
+                        <div class="dash-widget">
+                            <div class="contain py-3er-fluid">
+                                <div class="row">
+                            <div class="col-md-12">
+                                <img src="<?=base_url()?>/public/assets/img/inve.png" height="80px" class="mx-auto d-block">
+                            </div>
+                            <div class="col-md-12">
+                                <h4 class="col-md-12 text-center py-2">Local Blood Bank Inventory<h4>
+                            </div>
+                        </div>
+                    </div>
+                        </div>
+                    </a>
+
+                    <a href=" " class="nav-link col-md-4">
+                        <div class="dash-widget">
+                            <div class="contain py-3er-fluid">
+                                <div class="row">
+                            <div class="col-md-12">
+                                <img src="<?=base_url()?>/public/assets/img/invet1.png" height="80px" class="mx-auto d-block">
+                            </div>
+                            <div class="col-md-12">
+                                <h4 class="col-md-12 text-center py-2">Blood Bank Inventory<h4>
+                            </div>
+                        </div>
+                    </div>
+                        </div>
+                    </a>
+
+                    <a href=" " class="nav-link col-md-4">
+                        <div class="dash-widget">
+                            <div class="contain py-3er-fluid">
+                                <div class="row">
+                            <div class="col-md-12">
+                                <img src="<?=base_url()?>/public/assets/img/stats1.png" height="80px" class="mx-auto d-block">
+                            </div>
+                            <div class="col-md-12">
+                                <h4 class="col-md-12 text-center py-2">Statistics<h4>
+                            </div>
+                        </div>
+                    </div>
+                        </div>
+                    </a>
+
+                    <a href=" " class="nav-link col-md-4">
+                        <div class="dash-widget">
+                            <div class="contain py-3er-fluid">
+                                <div class="row">
+                            <div class="col-md-12">
+                                <img src="<?=base_url()?>/public/assets/img/dates.jpeg" height="80px" class="mx-auto d-block">
+                            </div>
+                            <div class="col-md-12">
+                                <h4 class="col-md-12 text-center py-2">Upcoming dates<h4>
+                            </div>
+                        </div>
+                    </div>
+                        </div>
+                    </a>
+
+                    <a href=" " class="nav-link col-md-4">
+                        <div class="dash-widget">
+                            <div class="contain py-3er-fluid">
+                                <div class="row">
+                            <div class="col-md-12">
+                                <img src="<?=base_url()?>/public/assets/img/reports.jpeg" height="80px" class="mx-auto d-block">
+                            </div>
+                            <div class="col-md-12">
+                                <h4 class="col-md-12 text-center py-2">Blood Collection Reports<h4>
+                            </div>
+                        </div>
+                    </div>
+                        </div>
+                    </a>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="row">
                     
-                </div>
+                    
+            </div>
                 
-                <!-- <div class="row"> -->
-                    <div class="col-12 col-md-12 col-lg-12 col-xl-12 ">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title d-inline-block">Upcoming Dates</h4> <a href="<?=base_url()?>/addsites/<?=$userdata['hospital_id']?>" class="btn btn-primary float-right btn-rounded">View all Donation Sites <i class="fa fa-map-marker"></i></a>
-                            </div>
-                            <div class="card-body">
-                                <!-- <button type="button" class="btn btn-primary" >Open modal</button> -->
-                                <div class="table-responsive" style="height: 55vh;">
-                                    <table class="table mb-0 table-hover table-striped" id="dataTable">
-                                        <thead class="">
-                                            <tr>
-                                                <th>Visted</th>
-                                                <th>Site</th>
-                                                <th>Next Visit</th>
-                                                <th class="text-right noExport">Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php if ($alldonors == null || $alldonors == '' || $alldonors == 0 || $alldonors == false || is_numeric($alldonors)): ?>
-                                            <!-- <tr>
-                                                <td>
-                                                  No data available
-                                                </td>
-                                            </tr> -->
-                                                <?php else: ?>
-                                                    <?php foreach ($alldonors as $row): ?>
-                                            <tr>
-                                                <td>
-                                                    <h2><?=$row->date_of_donation?></h2>
-                                                </td>                 
-                                                <td>
-                                                    <h5 class="time-title p-0"><i class="fa fa-map-marker"></i> <?=$row->donation_site_name?></h5>
-                                                </td>
-                                                <td>
-                                                    <h5 class="time-title p-0"><?=$row->date_of_next_donation?></h5>
-                                                </td>
-                                                <td class="text-right noExport">
-                                                    <a href="<?=base_url()?>/sitedataprint/<?=$row->site_id;?>/<?=$row->hospital_id?>" class="btn btn-outline-primary btn-rounded">View and Print <i class="fa fa-print"></i></a>
-                                                </td>
-                                            </tr>
-                                                    <?php endforeach ?>
-                                            <?php endif ?>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                <div class="col-12 col-md-12 col-lg-12 col-xl-12" style="margin-bottom: 10rem;">
-                    <div class="card">
-                        <div class="card-body">
-                            
-                        </div>
-                    </div>       
-                </div>
                 
 
                <?php
@@ -203,9 +247,9 @@
 
 
         <!-- The Modal -->
-                    <div class="modal fade" id="LookForBlood">
-                      <div class="modal-dialog modal-dialog-scrollable modal-xl">
-                        <div class="modal-content" style="width: 100%;">
+                    <div class="modal fade" id="LookForBlood" >
+                      <div class="modal-dialog modal-dialog-scrollable modal-xl" style="width: 100%;">
+                        <div class="modal-content" >
 
                           <!-- Modal Header -->
                           <div class="modal-header">
