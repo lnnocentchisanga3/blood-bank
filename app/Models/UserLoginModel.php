@@ -18,14 +18,9 @@ class UserLoginModel extends Model {
 
 	public function verifyEmail($email,$password)
 	{
-		$builder = $this->$db->table('tbl_users');
-
 		$hash_password = md5($password);
 
-		$builder->select("*");
-		$builder->where('email',$email);
-		$builder->where('password',$hash_password);
-		$result = $builder->get();
+		$result = $this->$db->query("SELECT * FROM tbl_users WHERE email='$email' OR username='$email' ");
 
 		if (count($result->getResultArray()) == 1) {
 			return $result->getRowArray();

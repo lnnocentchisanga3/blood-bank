@@ -1,7 +1,7 @@
-<?= $this->extend('layouts/base2'); ?>
+<?= $this->extend('layouts/base3'); ?>
 <?=$this->section('content');?>
 
-<div class="page-wrapper">
+<div class="page-wrapper-base-3">
             <div class="content">
                 <div class="row">
 
@@ -20,10 +20,10 @@
                       <?php endif ?>
 
                     <div class="col-sm-4 col-3">
-                        <h4 class="page-title"><i class="fa fa-users"></i> Staff Member</h4>
+                        <h4 class="page-title">LOCAL STAFF MEMBERS</h4>
                     </div>
                     <div class="col-sm-8 col-9 text-right m-b-20">
-                        <a href="<?=base_url()?>/addstaff/<?=$userdata['hospital_id']?>" class="btn btn-primary float-right btn-rounded"><i class="fa fa-plus"></i> Add A Staff Member</a>
+                        <a href="<?=base_url()?>/addstaff/<?=$userdata['hospital_id']?>" class="btn btn-primary float-right btn-rounded">CREATE A STAFF MEMBER</a>
                     </div>
                 </div>
                 
@@ -58,13 +58,12 @@
                                                 <span class="custom-badge status-green"><?=strtoupper($row['user_role'])?></span>
                                                 </td>
                                                 <td class="text-right">
-                                                    <div class="dropdown dropdown-action">
-                                                        <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
-                                                        <div class="dropdown-menu dropdown-menu-right">
-                                                            <a class="dropdown-item" href="<?=base_url()?>/editStaff/<?=$row['user_id']?>/<?=$userdata['hospital_id']?>"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                                            <button class="dropdown-item" value="<?=$row['user_id']?>" onclick="getval(this.value)" data-toggle="modal" data-target="#delete_employee"><i class="fa fa-trash-o m-r-5"></i> Delete</button>
-                                                        </div>
-                                                    </div>
+                                                    <a class="my-2 nav-item btn btn-success btn-sm" href="<?=base_url()?>/editStaff/<?=$row['user_id']?>/<?=$userdata['hospital_id']?>"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+                                                   <?php if ($userdata['user_role'] == $row['user_role']): ?>
+                                                     <button class="my-2 btn btn-danger btn-sm" value="<?=$row['user_id']?>" onclick="getval(this.value)" data-toggle="modal" data-target="#delete_employee" disabled><i class="fa fa-trash-o m-r-5"></i> Delete</button>
+                                                       <?php else: ?>
+                                                         <button class="my-2 btn btn-danger btn-sm" value="<?=$row['user_id']?>" onclick="getval(this.value)" data-toggle="modal" data-target="#delete_employee"><i class="fa fa-trash-o m-r-5"></i> Delete</button>
+                                                   <?php endif ?>
                                                 </td>
                                             </tr>
                                             <?php endforeach ?>

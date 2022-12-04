@@ -42,13 +42,42 @@ class Donationsites extends Controller
 		if (!session()->has('logged_in')) {
 			return redirect()->to(base_url());
 		}
-		$data['title']= "ZNBTS DONOR'S DATA";
+		$data['title']= "Blood Donation Report on Donation Site _____________________________";
 		$data['sitedata'] = $this->alldonors->join('donation_sites','site_id')
 											  ->where('donors.site_id',$site)->findAll();
+		$data['siteview'] = $this->alldonors->join('donation_sites','site_id')
+											  ->where('donors.site_id',$site)->groupBy('date_of_donation','DESC')->findAll();
+
 		$data['userdata'] = session('logged_in', $user);
 		$data['sites'] = $this->sites->getAllSites($hospital_id);
 
 		return view('viewsite',$data);
+	}
+
+	public function viewsitedate($site=null,$date1=null,$date2=null,$date3=null)
+	{
+		if (!session()->has('logged_in')) {
+			return redirect()->to(base_url());
+		}
+		$dateod = $date1."/".$date2."/".$date3;
+		$dat = $date1."-".$date2."-".$date3;
+		$dateod1 = str_replace("--","",$dat);
+
+		$user = session('logged_in', $user);
+		$data['title']= "Blood Donation Report On ".str_replace("//", "",$dateod)." Donation Site _____________________________";
+		$data['sitedata'] = $this->alldonors->where('site_id',$site)
+											  ->where('date_of_donation',$dateod)->findAll();
+		$data['siteview'] = $this->alldonors->join('donation_sites','site_id')
+											  ->where('donors.site_id',$site)->groupBy('date_of_donation','DESC')->findAll();
+		$data['sitedata1'] = $this->alldonors->where('site_id',$site)
+											  ->where('date_of_donation',$dateod1)->findAll();
+
+		$data['userdata'] = session('logged_in', $user);
+		$data['para'] = $dateod;
+		$data['para1'] = $dateod1;
+		$data['sites'] = $this->sites->getAllSites($user['hospital_id']);
+
+		return view('viewdatesite',$data);
 	}
 
 	public function viewdata($site=null,$hospital_id=null)
@@ -56,7 +85,7 @@ class Donationsites extends Controller
 		if (!session()->has('logged_in')) {
 			return redirect()->to(base_url());
 		}
-		$data['title']= "ZNBTS DONOR'S DATA";
+		$data['title']= "Blood Donation Report on Donation Site _____________________________";
 		$data['sitedata'] = $this->alldonors->join('donation_sites','site_id')
 											  ->where('donors.site_id',$site)->findAll();
 		$data['sites'] = $this->sites->getAllSites($hospital_id);
@@ -161,7 +190,7 @@ class Donationsites extends Controller
 			return redirect()->to(base_url());
 		}
 
-		$data['title']= "ZNBTS DONOR'S DATA";
+		$data['title']= "Blood Donation Report on Donation Site _____________________________";
 		$data['sitedata'] = $this->alldonors->join('donation_sites','site_id')
 											  ->where('donors.site_id',$site)->findAll();
 		$data['userdata'] = session('logged_in', $user);
@@ -178,7 +207,7 @@ class Donationsites extends Controller
 			return redirect()->to(base_url());
 		}
 
-		$data['title']= "ZNBTS DONOR'S DATA";
+		$data['title']= "Blood Donation Report on Donation Site _____________________________";
 		$data['sites'] = $this->sites->getAllSites($hospital_id);
 		
 		$data['sitedata'] = $this->alldonors->join('donation_sites','site_id')

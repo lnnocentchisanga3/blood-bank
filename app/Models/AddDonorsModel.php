@@ -28,6 +28,21 @@ class AddDonorsModel extends Model
 			return $query;
 		}
 	}
+
+	public function saveDonorOne($sample_id,$donorfname,$donormname,$donorlname,$hiv,$hbv,$hcv,$syphilis,$group,$comment,$dateod,$donextd,$site,$hospital_id,$province_id,$district_id,$dob,$gender,$occupation,$doldon,$sod,$postaladdress,$email,$phone,$numofdonation)
+	{
+		$db = \Config\Database::connect();
+
+
+	$query = $db->query("INSERT INTO donors(sample_id,donor_fname,donor_mname,donor_lname,hiv,hbv,hcv,syphilis,blood_group,datebirth,gender,occupation,doldon,siteoflastdonation,residentialAddress,email,phone,numofdonation,comment,date_of_donation,date_of_next_donation,site_id,hospital_id,district_id,province_id) VALUES('$sample_id','$donorfname','$donormname','$donorlname','$hiv','$hbv','$hcv','$syphilis','$group','$dob','$gender','$occupation','$doldon','$sod','$postaladdress','$email','$phone','$numofdonation','$comment','$dateod','$donextd','$site','$hospital_id','$district_id','$province_id')");
+
+
+		if (!$query) {
+			return false;
+		}else{
+			return $query;
+		}
+	}
 }
 
 

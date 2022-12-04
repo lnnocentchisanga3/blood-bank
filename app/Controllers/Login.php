@@ -26,7 +26,7 @@ class Login extends BaseController
 
 		
 		$rules = [
-			'email' => 'required|valid_email',
+			'email' => 'required',
 			'password' => 'required'
 			  ];
 		$data['title'] = "ZNBTS | Login";

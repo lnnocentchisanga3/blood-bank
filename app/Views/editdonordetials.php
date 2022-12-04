@@ -1,7 +1,7 @@
-<?= $this->extend('layouts/base2'); ?>
+<?= $this->extend('layouts/base3'); ?>
 <?=$this->section('content');?>
 
-<div class="page-wrapper">
+<div class="page-wrapper-base-3">
 <div class="content">
 <div class="row">
 <div class="col-sm-12">
@@ -45,21 +45,22 @@
           <div class="row">
             <label class="px-2 my-2 col-md-2">Date of Donation</label>
          <div class="col-md-10">
-          <div class="cal-icon">
-          <input type="text" name="dod" class="form-control datetimepicker" value="<?=$donor->date_of_donation?>">
-        </div>
+          <!-- <div class="cal-icon"> -->
+          <input type="date" name="dod" class="form-control" value="<?=$donor->date_of_donation?>">
+        <!-- </div> -->
         </div><br><br><br>
           <label class="px-2 my-2 col-md-2">Date of Next Donation</label>
           <div class="col-md-10">
-          <div class="cal-icon">
-          <input type="text" name="donextd" class="form-control datetimepicker" value="<?=$donor->date_of_next_donation?>">
-        </div>
+          <!-- <div class="cal-icon"> -->
+          <input type="date" name="donextd" class="form-control" value="<?=$donor->date_of_next_donation?>">
+        <!-- </div> -->
         </div>
           <input type="text" name="province" value="<?=$userdata['province_id']?>" hidden>
           <input type="text" name="district" value="<?=$userdata['district_id']?>" hidden>
 
           <label class="px-2 my-2 col-md-2">Donation Site</label>
-           <select name="site" class="form-control">
+           <div class="col-md-10">
+              <select name="site" class="form-control">
             <?php if ($donor == null || $donor == ''): ?>
               <option>0 Sites Found</option>
             <?php else: ?>
@@ -72,77 +73,83 @@
                <?php endif ?>
               <?php endforeach ?>
             <?php endif ?>
-          </select><br>
+          </select>  
+           </div>
+
           </div>
          </div>
-        <table class="table table-bordered table-hover table-striped  mt-5 col-md-12" >
-        <thead style="width:100%">
-        <tr>
-          <!-- <th>No#</th> -->
-        <th>Sample_ID</th>
-        <th>Firstnames</th>
-        <th>Middlenames</th>
-        <th>Lastnames</th>
-        <th>HIV<small>(1,2,22,R)</small></th>
-        <th>HBV<small>(1,2,22,R)</small></th>
-        <th>HCV<small>(1,2,22,R)</small></th>
-        <th>Syphilis<small>(1,2,22,R)</small></th>
-        <th>Blood_Group</th>
-        <th>Status_Comment</th>
-        </tr>
+        
+         <div class="input-group col-md-12 my-4 container">
+          <div class="row">
 
-        </thead>
-        <tbody>
-        <td>
+        <label class="px-2 my-2 col-md-2">Sample_ID</label>
+        <div class="col-md-10">
           <input type="text" class="form-control" placeholder="Sample ID" name="sampleid" value="<?=$donor->sample_id;?>" >
-        </td>
-          <td>
-            <input type="text" class="form-control" placeholder="Donor Names" name="fnames" value="<?=$donor->donor_fname;?>">
-          </td>
-          <td>
-            <input type="text" class="form-control" placeholder="Donor Names" name="mnames" value="<?=$donor->donor_mname;?>">
-          </td>
-          <td>
-            <input type="text" class="form-control" placeholder="Donor Names" name="lnames" value="<?=$donor->donor_lname;?>">
-          </td>
-          <td>
-            <select class="form-control" name="hiv" >
+        </div><br><br><br>
+
+        <label class="px-2 my-2 col-md-2">Firstnames</label>
+         <div class="col-md-10">
+           <input type="text" class="form-control" placeholder="Donor Names" name="fnames" value="<?=$donor->donor_fname;?>">
+         </div><br><br><br>
+
+        <label class="px-2 my-2 col-md-2">Middlenames</label>
+        <div class="col-md-10">
+          <input type="text" class="form-control" placeholder="Donor Names" name="mnames" value="<?=$donor->donor_mname;?>">
+        </div><br><br><br>
+
+        <label class="px-2 my-2 col-md-2">Lastnames</label>
+        <div class="col-md-10">
+          <input type="text" class="form-control" placeholder="Donor Names" name="lnames" value="<?=$donor->donor_lname;?>">
+        </div><br><br><br>
+
+        <label class="px-2 my-2 col-md-2">HIV<small>(1,2,22,R)</small></label>
+        <div class="col-md-10">
+          <select class="form-control" name="hiv" >
               <option><?=$donor->hiv;?></option>
               <option>1</option>
               <option>2</option>
               <option>22</option>
               <option>R</option>
             </select>
-          </td>
-          <td>
-            <select class="form-control" name="hbv" >
+        </div><br><br><br>
+
+
+        <label class="px-2 my-2 col-md-2">HBV<small>(1,2,22,R)</small></label>
+        <div class="col-md-10">
+        <select class="form-control" name="hbv" >
               <option><?=$donor->hbv;?></option>
               <option>1</option>
               <option>2</option>
               <option>22</option>
               <option>R</option>
             </select>
-          </td>
-          <td>
-            <select class="form-control" name="hcv">
+          </div><br><br><br>
+
+        <label class="px-2 my-2 col-md-2">HCV<small>(1,2,22,R)</small></label>
+        <div class="col-md-10">
+        <select class="form-control" name="hcv">
               <option><?=$donor->hcv;?></option>
               <option>1</option>
               <option>2</option>
               <option>22</option>
               <option>R</option>
             </select>
-          </td>
-          <td>
-            <select class="form-control" name="syphilis">
+          </div><br><br><br>
+
+        <label class="px-2 my-2 col-md-2">Syphilis<small>(1,2,22,R)</small></label>
+         <div class="col-md-10">
+         <select class="form-control" name="syphilis">
               <option><?=$donor->syphilis;?></option>
               <option>1</option>
               <option>2</option>
               <option>22</option>
               <option>R</option>
             </select>
-          </td>
-          <td>
-            <select class="form-control" name="group">
+          </div><br><br><br>
+
+        <label class="px-2 my-2 col-md-2">Blood_Group</label>
+         <div class="col-md-10">
+         <select class="form-control" name="group">
               <option><?=$donor->blood_group;?></option>
               <option>A</option>
               <option>B</option>
@@ -152,14 +159,19 @@
               <option>O+</option>
               <option>O-</option>
             </select>
-          </td>
-          <td><input type="text" class="form-control" placeholder="Comment" name="comment" value="<?=$donor->comment;?>"></td>
-        </tbody>
-        </table>
+          </div><br><br><br>
+
+        <label class="px-2 my-2 col-md-2">Status_Comment</label>
+        <div class="col-md-10">
+          <input type="text" class="form-control" placeholder="Comment" name="comment" value="<?=$donor->comment;?>">
+        </div><br><br><br>
+
         <div class="box-footer" >
         <input type="submit"  value="Save Changes" name="submit" class="btn btn-primary btn-rounded my-3">
         <!-- <a href="order.php" class="btn btn-warning">Kembali</a> -->
         </div>
+      </div>
+    </div>
         <?=form_close()?>
        
       </div>

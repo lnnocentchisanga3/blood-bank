@@ -8,15 +8,15 @@
                     <?php
                     if ($userdata['user_role'] == 'admin') {
                         ?>
-                   <a href=" " class="nav-link col-md-4">
-                        <div class="dash-widget">
+                   <a href="<?=base_url()?>/users/<?=$userdata['hospital_id']?>" class="nav-link col-md-4">
+                        <div class="dash-widget new-menu">
                            <div class="container-fluid py-3">
                                <div class="row">
                                     <div class="col-md-12">
-                                        <img src="<?=base_url()?>/public/assets/img/users1.png" height="80px" class="mx-auto d-block">
+                                        <img src="<?=base_url()?>/public/assets/img/users3.png" height="80px" class="mx-auto d-block">
                                     </div>
                                     <div class="col-md-12">
-                                        <h4 class="col-md-12 text-center py-2">Manage Users<h4>
+                                        <h4 class="col-md-12 text-center py-2">Manage Staff Members<h4>
                                     </div>
                                </div>
                            </div>
@@ -26,8 +26,8 @@
 
                     }?>
 
-                    <a href=" " class="nav-link col-md-4">
-                        <div class="dash-widget">
+                    <a href="<?=base_url()?>/addsites/<?=$userdata['hospital_id']?>" class="nav-link col-md-4">
+                        <div class="dash-widget new-menu">
                             <div class="container-fluid py-3">
                                <div class="row">
                                     <div class="col-md-12">
@@ -41,8 +41,24 @@
                         </div>
                     </a>
 
+
+                    <a href="<?=base_url()?>/listdonors/<?=$userdata['hospital_id']?>" class="nav-link col-md-4">
+                        <div class="dash-widget new-menu">
+                            <div class="container-fluid py-3">
+                               <div class="row">
+                                    <div class="col-md-12">
+                                        <img src="<?=base_url()?>/public/assets/img/users1.png" height="80px" class="mx-auto d-block">
+                                    </div>
+                                    <div class="col-md-12">
+                                        <h4 class="col-md-12 text-center py-2">Donors<h4>
+                                    </div>
+                               </div>
+                           </div>
+                        </div>
+                    </a>
+
                     <a href=" " data-toggle="modal" data-target="#LookForBlood" class="nav-link col-md-4">
-                        <div class="dash-widget">
+                        <div class="dash-widget new-menu">
                             <div class="container-fluid py-3">
                                <div class="row">
                                     <div class="col-md-12">
@@ -56,8 +72,8 @@
                         </div>
                     </a>
 
-                    <a href=" " class="nav-link col-md-4">
-                        <div class="dash-widget">
+                    <a href=" " data-toggle="modal" data-target="#LookForBloodDonorInAllDb" class="nav-link col-md-4">
+                        <div class="dash-widget new-menu">
                             <div class="contain py-3er-fluid">
                                 <div class="row">
                             <div class="col-md-12">
@@ -72,7 +88,7 @@
                     </a>
 
                     <a href="<?=base_url()?>/oneAdddonor/<?=$userdata['hospital_id']?>" class="nav-link col-md-4">
-                        <div class="dash-widget">
+                        <div class="dash-widget new-menu">
                             <div class="contain py-3er-fluid">
                                 <div class="row">
                             <div class="col-md-12">
@@ -89,8 +105,8 @@
                     <?php
                     if ($userdata['user_role'] == 'admin' || $userdata['user_role'] == 'donor_data_clerk') {
                         ?>
-                        <a href="<?=base_url()?>/oneAdddonor/<?=$userdata['hospital_id']?>" class="nav-link col-md-4">
-                        <div class="dash-widget">
+                        <a href="<?=base_url()?>/adddonors/<?=$userdata['hospital_id']?>" class="nav-link col-md-4">
+                        <div class="dash-widget new-menu">
                             <div class="contain py-3er-fluid">
                                 <div class="row">
                             <div class="col-md-12">
@@ -108,7 +124,7 @@
                     }?>
 
                     <a href=" " class="nav-link col-md-4">
-                        <div class="dash-widget">
+                        <div class="dash-widget new-menu">
                             <div class="contain py-3er-fluid">
                                 <div class="row">
                             <div class="col-md-12">
@@ -123,7 +139,7 @@
                     </a>
 
                     <a href=" " class="nav-link col-md-4">
-                        <div class="dash-widget">
+                        <div class="dash-widget new-menu">
                             <div class="contain py-3er-fluid">
                                 <div class="row">
                             <div class="col-md-12">
@@ -137,8 +153,8 @@
                         </div>
                     </a>
 
-                    <a href=" " class="nav-link col-md-4">
-                        <div class="dash-widget">
+                    <a href="<?=base_url()?>/statistics/<?=$userdata['hospital_id']?>" class="nav-link col-md-4">
+                        <div class="dash-widget new-menu">
                             <div class="contain py-3er-fluid">
                                 <div class="row">
                             <div class="col-md-12">
@@ -152,8 +168,8 @@
                         </div>
                     </a>
 
-                    <a href=" " class="nav-link col-md-4">
-                        <div class="dash-widget">
+                    <a href="<?=base_url()?>/upcoming/<?=$userdata['hospital_id']?>"  class="nav-link col-md-4">
+                        <div class="dash-widget new-menu">
                             <div class="contain py-3er-fluid">
                                 <div class="row">
                             <div class="col-md-12">
@@ -167,8 +183,8 @@
                         </div>
                     </a>
 
-                    <a href=" " class="nav-link col-md-4">
-                        <div class="dash-widget">
+                    <a href="<?=base_url()?>/reports/<?=$userdata['hospital_id']?>" class="nav-link col-md-4">
+                        <div class="dash-widget new-menu">
                             <div class="contain py-3er-fluid">
                                 <div class="row">
                             <div class="col-md-12">
@@ -194,60 +210,9 @@
                     
                     
             </div>
-                
-                
 
-               <?php
-                
-                if ($statistics == null || $statistics == 1 || $statistics == false || is_numeric($statistics)) {
-                       
-                   }else{
-                     echo "<script>
-                    $(document).ready(function(){
-                        var barChartData = {";
-                        echo "labels: [";
-                        foreach($statistics as $row) {
-                        echo "'".substr($row->donation_site_name, 0,10)."',";
-                            }
-                        echo " ],";
-                        echo "datasets: [{
-                            label: 'Donors 1',
-                            backgroundColor: 'rgba(0, 158, 251, 0.5)',
-                            borderColor: 'rgba(0, 158, 251, 1)',
-                            borderWidth: 1,";
-                           echo "data: ["; 
-                
-                  foreach($statistics as $row){
-                       /*print_r();*/
-                        echo $row->num.",";
-                        }
-                           echo ",]";
-                        echo "}
-                        ]
-                    };
-
-                    var ctx = document.getElementById('bargraph').getContext('2d');
-                    window.myBar = new Chart(ctx, {
-                        type: 'bar',
-                        data: barChartData,
-                        options: {
-                            responsive: true,
-                            legend: {
-                                display: false,
-                            }
-                        }
-                    });
-                    });
-                </script>";
-                   }
-                  
-                 ?>
-
-            </div>
-
-
-        <!-- The Modal -->
-                    <div class="modal fade" id="LookForBlood" >
+            <!-- The Modal -->
+                    <div class="modal fade " id="LookForBlood" role="dialog">
                       <div class="modal-dialog modal-dialog-scrollable modal-xl" style="width: 100%;">
                         <div class="modal-content" >
 
@@ -323,7 +288,7 @@
                                     <td class="noExport">
                                         <!-- <button value="<?=$row->serial_number?>" class="btn btn-danger py-1 px-2 my-1" onclick="getval(this.value)" data-toggle="modal" data-target="#delete_employee"><i class="fa fa-trash-o "></i></button> -->
 
-                                        <a href="<?=base_url()?>/edit_donor/<?=$row->serial_number?>/<?=$row->hospital_id?>" class="badge badge-success py-2 px-2 my-2"><i class="fa fa-edit"></i></a>
+                                        <button value="<?=$row->serial_number?>" onclick="getDonorDetails(this.value)" data-toggle="modal" data-target="#editDonorDetails" class="btn btn-success py-1 px-2 my-1"><i class="fa fa-edit"></i></button>
                                     </td>
                                 </tr>
                                     <?php endforeach ?>
@@ -346,5 +311,113 @@
                       </div>
                     </div>
                     <!-- End Dialog -->
+
+
+                    <!-- The Modal -->
+                    <div class="modal fade " id="LookForBloodDonorInAllDb" role="dialog">
+                      <div class="modal-dialog modal-dialog-scrollable modal-xl" style="width: 100%;">
+                        <div class="modal-content" >
+
+                          <!-- Modal Header -->
+                          <div class="modal-header">
+                           <div class="row">
+                                <h4 class="modal-title col-md-12">Do a quick search for a Donor in the Entire Blood Bank Database <i class="fa fa-search"></i></h4>
+                            <small class="col-md-12 text-danger">NB: Please note that You can not do an Action on the Information Just View the Information On any Of these Donors</small>
+                           </div>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          </div>
+
+                          <!-- Modal body -->
+                          <div class="modal-body">
+
+                        <div class="row">
+                        <div class="col-md-12">
+
+                            <div class="table-responsive">
+                            <table class="table table-stripped " id="dataTable3">
+                            <thead>
+                                <tr>
+                                    <th>NO#</th>
+                                    <th>Sampe_ID</th>
+                                    <th>Firstname</th>
+                                    <th>Middle_name</th>
+                                    <th>Lastname</th>
+                                    <th>Hospital</th>
+                                    <th>Donation_Site</th>
+                                    <th>Date_Of_Last_Donation</th>
+                                    <th>Number_Of_Donations</th>
+                                    <th>Comment</th>
+                                    <th>Blood_Group</th>
+                                    <th class="noExport">Action</th>
+                                </tr>
+                            </thead>
+
+                            <tfoot>
+                                <tr>
+                                    <th>NO#</th>
+                                    <th>Sampe ID</th>
+                                    <th>Firstname</th>
+                                    <th>Middle name</th>
+                                    <th>Lastname</th>
+                                    <th>Hospital</th>
+                                    <th>Donation_Site</th>
+                                    <th>Date_Of_Last_Donation</th>
+                                    <th>Number_Of_Donations</th>
+                                    <th>Comment</th>
+                                    <th>Blood Group</th>
+                                    <th>Action</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                               <?php if ($donorsAllDb == null): ?>
+                                <!-- <tr>
+                                    <td>No data is available here</td>
+                                </tr> -->
+                                <?php else: ?>
+                                    <?php foreach ($donorsAllDb as $row1): ?>
+                                <tr>
+                                    <td><?=$num2 = $num2 + 1?></td>
+                                    <td><?=$row1->sample_id?></td>
+                                    <td><?=$row1->donor_fname?></td>
+                                    <td><?=$row1->donor_mname?></td>
+                                    <td><?=$row1->donor_lname?></td>
+                                    <td><?=$row1->hospital_name?></td>
+                                    <td><?=$row1->donation_site_name?></td>
+                                    <td><?=$row1->doldon?></td>
+                                    <td><?=$row1->numofdonation?></td>
+                                    <td><?=$row1->comment?></td>
+                                    <td><?=$row1->blood_group?></td>
+                                    <td class="noExport">
+                                        <!-- <button value="<?=$row1->serial_number?>" class="btn btn-danger py-1 px-2 my-1" onclick="getval(this.value)" data-toggle="modal" data-target="#delete_employee"><i class="fa fa-trash-o "></i></button> -->
+
+                                        <button value="<?=$row1->serial_number?>" onclick="getDonorDetails(this.value)" data-toggle="modal" data-target="#editDonorDetails" class="btn btn-success py-1 px-2 my-1"><i class="fa fa-eye"></i></button>
+                                    </td>
+                                </tr>
+                                    <?php endforeach ?>
+                               <?php endif ?>
+                            </tbody>
+                        </table>
+                        </div>
+
+                        </div>
+                    </div>
+
+                          </div>
+
+                          <!-- Modal footer -->
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                    <!-- End Dialog -->
+            
+
+            </div>
+
+
+        
 
 <?=$this->endSection('content')?>

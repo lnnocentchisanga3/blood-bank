@@ -123,3 +123,136 @@
                             </div>
                         </div>
                     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <div class="table-responsive">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-10"></div>
+                        <?php if ($userdata['user_role'] == 'admin' || $userdata['user_role'] == 'donor_data_clerk'): ?>
+                            <div class="col-md-2"><a href="<?=base_url()?>/adddonors/<?=$userdata['hospital_id']?>" class="btn btn-primary my-3 btn-rounded"><i class="fa fa-plus"></i> Add Donors</a></div>
+                        <?php endif ?>
+                    </div>
+                </div>
+                <table class="table table-stripped " id="dataTable">
+                <thead>
+                    <tr>
+                        <th>NO#</th>
+                        <th>Sampe_ID</th>
+                        <th>Firstname</th>
+                        <th>Middle_name</th>
+                        <th>Lastname</th>
+                        <th>HIV</th>
+                        <th>HBV</th>
+                        <th>HCV</th>
+                        <th>Syphilis</th>
+                        <th>Comment</th>
+                        <th>Blood_Group</th>
+                        <th class="noExport">Action</th>
+                    </tr>
+                </thead>
+
+                <tfoot>
+                    <tr>
+                        <th>NO#</th>
+                        <th>Sampe ID</th>
+                        <th>Firstname</th>
+                        <th>Middle name</th>
+                        <th>Lastname</th>
+                        <th>HIV</th>
+                        <th>HBV</th>
+                        <th>HCV</th>
+                        <th>Syphilis</th>
+                        <th>Comment</th>
+                        <th>Blood Group</th>
+                        <th>Action</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                   <?php if ($donors == null): ?>
+                    <!-- <tr>
+                        <td>No data is available here</td>
+                    </tr> -->
+                    <?php else: ?>
+                        <?php foreach ($donors as $row): ?>
+                    <tr>
+                        <td><?=$num = $num + 1?></td>
+                        <td><?=$row->sample_id?></td>
+                        <td><?=$row->donor_fname?></td>
+                        <td><?=$row->donor_mname?></td>
+                        <td><?=$row->donor_lname?></td>
+                        <td><?=$row->hiv?></td>
+                        <td><?=$row->hbv?></td>
+                        <td><?=$row->hcv?></td>
+                        <td><?=$row->syphilis?></td>
+                        <td><?=$row->comment?></td>
+                        <td><?=$row->blood_group?></td>
+                        <td class="noExport">
+                            <button value="<?=$row->serial_number?>" class="btn btn-danger py-1 px-2 my-1" onclick="getval(this.value)" data-toggle="modal" data-target="#delete_employee"><i class="fa fa-trash-o "></i> delete</button>
+
+                            <a href="<?=base_url()?>/edit_donor/<?=$row->serial_number?>/<?=$row->hospital_id?>" class="btn btn-success py-1 px-2 my-1"><i class="fa fa-edit"></i> edit</a>
+                        </td>
+                    </tr>
+                        <?php endforeach ?>
+                   <?php endif ?>
+                </tbody>
+            </table>
+            </div>
+
+
+
+            <!-- <div class="sidebar" id="sidebar">
+            <div class="sidebar-inner slimscroll">
+                <div id="sidebar-menu" class="sidebar-menu">
+                    <ul>
+                        <li class="menu-title">Main</li>
+                        <li class="">
+                            <a href="<?=base_url()?>/dashboard/<?=$userdata['hospital_id']?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
+                        </li>
+                         
+                        <li class="submenu">
+                            <a href="#"><i class="fa fa-user"></i> <span> Donors </span> <span class="menu-arrow"></span></a>
+                            <ul style="display: none;">
+                                <li><a href="<?=base_url()?>/listdonors/<?=$userdata['hospital_id']?>"><i class="fa fa-copy"></i> Manage All Donors</a></li>
+                                <li><a href="<?=base_url()?>/adddonors/<?=$userdata['hospital_id']?>"><i class="fa fa-users"></i> Add Multiple Donors</a></li>
+                                <li><a href="<?=base_url()?>/oneAdddonor/<?=$userdata['hospital_id']?>"><i class="fa fa-user-plus"></i> Add a Single Donor</a></li>
+                            </ul>
+                        </li>
+                        <li class="submenu">
+                            <a href="#"><i class="fa fa-map-marker"></i> <span> Donation Sites</span> <span class="menu-arrow"></span></a>
+                            <ul style="display: none;">
+                                <li><a href="<?=base_url()?>/addsites/<?=$userdata['hospital_id']?>"><i class="fa fa-map-marker"></i>Manage Donation Sites</a></li>
+
+                                <?php if ($sites == null): ?>
+                                    <li><a href="#!"><i class="fa fa-map"></i> -No Donation Sites Found</a></li>
+                                <?php else: ?>
+                                    <?php foreach ($sites as $row): ?>
+                                       <li><a href="<?=base_url()?>/donorsectionsitedonors/<?=$row['site_id']?>/<?=$userdata['hospital_id']?>"><h6 style="border-left: 1px solid black; padding-top: initial;" class="text-end">--<i class="fa fa-folder-open"></i> <?=$row['donation_site_name']?></h6></a></li>
+                                    <?php endforeach ?>
+                               <?php endif ?>
+                            </ul>
+                        </li>
+                        
+                         <li>
+                            <a href="<?=base_url()?>/users/<?=$userdata['hospital_id']?>"><i class="fa fa-user-circle-o"></i> <span>Manage Users</span></a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+</div> -->

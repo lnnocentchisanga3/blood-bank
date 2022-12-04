@@ -75,6 +75,9 @@ $routes->group('',['filter'=>'isLogedin'],function($routes){
     $routes->get('editSitesData/(:any)/(:num)','Donationsites::editSitedata/$1/$2');
 
     $routes->get('printData/(:any)/(:num)','DonorSection::printdata/$1/$2');
+    $routes->get('upcoming/(:num)','Dashboard::upcoming/$1');
+    $routes->get('reports/(:num)','Dashboard::reports/$1');
+    $routes->get('statistics/(:num)','Dashboard::statisticsdata/$1');
 
 });
 

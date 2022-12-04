@@ -1,7 +1,7 @@
-<?= $this->extend('layouts/base2'); ?>
+<?= $this->extend('layouts/base3'); ?>
 <?=$this->section('content');?>
 
-<div class="page-wrapper">
+<div class="page-wrapper-base-3">
             <div class="content">
                 <div class="row">
 
@@ -20,11 +20,11 @@
                       <?php endif ?>
 
                     <div class="col-lg-8">
-                        <h4 class="page-title">Edit <?=$staff[0]['fname']." ".$staff[0]['lname']?></h4>
+                        <h4 class="page-title text-uppercase">EDITING <?=$staff[0]['fname']." ".$staff[0]['lname']?>'S DETAILS</h4>
                     </div>
 
                     <div class="col-lg-4 text-end">
-                        <a href="<?=base_url()?>/users/<?=$userdata['hospital_id']?>" class="btn btn-primary btn-rounded"><i class="fa fa-users"></i> <span>Manage Users</span></a>
+                        <a href="<?=base_url()?>/users/<?=$userdata['hospital_id']?>" class="btn btn-primary btn-rounded"><span>MANAGE STAFF MEMBERS</span></a>
                     </div>
                 </div>
                 <div class="row">
@@ -114,7 +114,7 @@
                                 </div>
                             </div> -->
                             <div class="m-t-20 text-center">
-                                <button class="btn btn-primary submit-btn">Save Changes <i class="fa fa-save"></i></button>
+                                <button class="btn btn-primary submit-btn">SAVE DETAILS </button>
                             </div>
                         </form>
                     </div>

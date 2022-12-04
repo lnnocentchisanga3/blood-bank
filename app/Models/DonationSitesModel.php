@@ -23,7 +23,7 @@ class DonationSitesModel extends Model
 
 		if ($result) {
 			if (count($result->getResultArray()) == null) {
-				return 0;
+				return $hospital_id;
 			}else{
 				return $result->getResultArray();
 			}
@@ -136,20 +136,23 @@ class DonationSitesModel extends Model
 
 	public function saveDonationsites($site,$hospital_id)
 	{
-		$length = count($site);
-		$i = 0;
-		$query = "";
-
-			while ($i < $length) {
-				$query = $this->db->query("INSERT INTO donation_sites(donation_site_name,hospital_id) VALUES('$site[$i]','$hospital_id')");
-				$i++;
-			}
-
-
+		$query = $this->db->query("INSERT INTO donation_sites(donation_site_name,hospital_id) VALUES('$site','$hospital_id')");
+				
 		if (!$query) {
 			return false;
 		}else{
 			return $query;
+		}
+	}
+
+	public function getareport($site,$fromdate,$todate,$hospital_id)
+	{
+		$query = $this->db->query("SELECT * FROM `donors` INNER JOIN donation_sites ON donors.site_id=donation_sites.site_id WHERE donors.site_id = '$site' AND date_of_donation BETWEEN '$fromdate' AND '$todate' ORDER BY date_of_donation ASC");
+				
+		if (!$query) {
+			return null;
+		}else{
+			return $query->getResultObject();
 		}
 	}
 

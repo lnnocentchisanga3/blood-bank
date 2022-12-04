@@ -35,23 +35,104 @@ class Dashboard extends BaseController
 		}
 		
 		$data = [];
-
-		$data['hiv'] = $this->adminModel->hivNum($hospital_id);
-		$data['hbv'] = $this->adminModel->hbvNum($hospital_id);
-		$data['hcv'] = $this->adminModel->hcvNum($hospital_id);
-		$data['syphilis'] = $this->adminModel->syphilisNum($hospital_id);
 		$data['hospital'] = $this->sites->getAHospital($hospital_id);
-		$data['alldonors'] = $this->adminModel->getDonors($hospital_id);
-		$data['statistics1'] = $this->statistics1->getStatistics1($hospital_id);
-		$data['statistics'] = $this->statistics1->getStatistics($hospital_id);
 		$data['donors'] = $this->alldonors->join('donation_sites','site_id')->where('donors.hospital_id',$hospital_id)->where('donation_sites.hospital_id',$hospital_id)->groupBy('serial_number','DESC')->findAll();
+
+		$data['donorsAllDb'] = $this->alldonors->join('hospital','hospital_id')->join('donation_sites','site_id')->groupBy('serial_number','DESC')->findAll();
+
 		$data['sites'] = $this->sites->getAllSites($hospital_id);
-		$data['userdata'] = session('logged_in', $user);
+		$data['userdata'] = session('logged_in');
 		
 
 
 		$data['title'] = "Dashboard | Admin";
 		return view('admin/dashboard',$data);
+	}
+
+
+	public function upcoming($hospital_id=null)
+	{
+		if (!session()->has('logged_in')) {
+			return redirect()->to(base_url());
+		}
+		
+		$data = [];
+		$data['userdata'] = session('logged_in');
+		$data['alldonors'] = $this->adminModel->getDonors($hospital_id);
+		return view('upcoming',$data);
+	}
+
+	public function searchreport($hospital_id=null)
+	{
+		if (!session()->has('logged_in')) {
+			return redirect()->to(base_url());
+		}
+		$data = [];
+
+		if ($this->request->getMethod() == "post") {
+
+			$site = $this->request->getVar('site');
+			$fromdate = str_replace("-","/",$this->request->getVar('fromdate'));
+			$todate = str_replace("-", "/", $this->request->getVar('todate'));
+
+			$getData = $this->sites->getareport($site,$fromdate,$todate,$hospital_id);
+
+			if ($getData != null) {
+				$data['dataSearched'] = $getData;
+				$data['tests'] = "Data Report from ".$getData[0]->donation_site_name." From ".$fromdate." To ".$todate;
+				$data['title'] = "Data Report from ".$getData[0]->donation_site_name." From ".$fromdate." To ".$todate;
+				
+				$data['userdata'] = session('logged_in');
+				$data['sites'] = $this->sites->getAllSites($hospital_id);
+
+				return view('reports',$data);
+			}else{
+				$data['dataSearched'] = null;
+				$data['tests'] = $site." ".$fromdate." ".$todate;
+				$data['userdata'] = session('logged_in');
+				$data['sites'] = $this->sites->getAllSites($hospital_id);
+
+				return view('reports',$data);
+			}
+
+
+		}
+	}
+
+	public function reports($hospital_id=null)
+	{
+		if (!session()->has('logged_in')) {
+			return redirect()->to(base_url());
+		}
+
+		
+		$data = [];
+		$data['userdata'] = session('logged_in');
+		$data['sites'] = $this->sites->getAllSites($hospital_id);
+		$data['alldonors'] = $this->adminModel->getDonors($hospital_id);
+		return view('reports',$data);
+	}
+
+	public function statisticsdata($hospital_id=null)
+	{
+		if (!session()->has('logged_in')) {
+			return redirect()->to(base_url());
+		}
+
+		
+		$data = [];
+		$data['statistics1'] = $this->statistics1->getStatistics1($hospital_id);
+		$data['statistics'] = $this->statistics1->getStatistics($hospital_id);
+		$data['donors'] = $this->alldonors->join('donation_sites','site_id')->where('donors.hospital_id',$hospital_id)->where('donation_sites.hospital_id',$hospital_id)->groupBy('serial_number','DESC')->findAll();
+		$data['hiv'] = $this->adminModel->hivNum($hospital_id);
+		$data['hbv'] = $this->adminModel->hbvNum($hospital_id);
+		$data['hcv'] = $this->adminModel->hcvNum($hospital_id);
+		$data['syphilis'] = $this->adminModel->syphilisNum($hospital_id);
+		
+		$data['userdata'] = session('logged_in');
+		$data['sites'] = $this->sites->getAllSites($hospital_id);
+		$data['alldonors'] = $this->adminModel->getDonors($hospital_id);
+		return view('statistics',$data);
 	}
 
 	
@@ -65,7 +146,12 @@ class Dashboard extends BaseController
 		$data = [];
 
 		$rules = [
-			'donationsite' => 'required',
+			'donationsite' => [
+				'rules' => 'required',
+				'errors'=> [
+					'required' => 'Donation Site Name input field cannot be empty',
+				],
+			],
 			  ];
 		
 
@@ -78,7 +164,7 @@ class Dashboard extends BaseController
 						
 
 			if ($this->sites->saveDonationsites($donation_site_name,$hospital_id) === true) {
-				session()->setTempdata('Success','Donation Sites are added successfully', 3);
+				session()->setTempdata('Success','Donation Site is added successfully', 3);
 					return redirect()->to(base_url().'/addsites/'.$hospital_id);
 			}
 			/*var_dump($status);*/
@@ -91,7 +177,7 @@ class Dashboard extends BaseController
 
 		$data['title']= 'Manage Donation Sites';
 		$data['sites'] = $this->sites->getAllSites($hospital_id);
-		$data['userdata'] = session('logged_in', $user);
+		$data['userdata'] = session('logged_in');
 
 		return view('adddonationsite',$data);
 	}
@@ -133,7 +219,7 @@ class Dashboard extends BaseController
 
 		$data['title']= 'Manage Donation Sites';
 		$data['sites'] = $this->sites->getAllSites($hospital_id);
-		$data['userdata'] = session('logged_in', $user);
+		$data['userdata'] = session('logged_in');
 
 		return view('donordataclerk/managedonationsites',$data);
 	}

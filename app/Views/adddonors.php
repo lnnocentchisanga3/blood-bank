@@ -1,7 +1,7 @@
-<?= $this->extend('layouts/base2'); ?>
+<?= $this->extend('layouts/base3'); ?>
 <?=$this->section('content');?>
 
-<div class="page-wrapper">
+<div class="page-wrapper-base-3">
 <div class="content">
 <div class="row">
 <div class="col-sm-12">
@@ -10,9 +10,20 @@
     <?php if (session()->getTempdata('Success')): ?>
     <div class="alert alert-success">
       <button type="button" class="close" data-dismiss="alert">&times;</button>
-     <strong>Success!</strong> <?=session()->getTempdata('Success');?>
+     <strong>Success! </strong> <?=session()->getTempdata('Success');?>
     </div>
   <?php endif ?>
+
+  <?php if (session()->getTempdata('error')): ?>
+    <div class="alert alert-danger">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+     <strong>Error ! </strong> <?=session()->getTempdata('error');?>
+    </div>
+  <?php endif ?>
+
+  <div class="col-md-12" id="inputAlert">
+    
+  </div>
 
 
 </div>
@@ -45,22 +56,22 @@
           <div class="row">
           <label class="px-2 my-2 col-md-2">Date of Donation</label>
         <div class="col-md-10">
-          <div class="cal-icon">
-          <input type="date" name="dod" class="form-control datetimepicker" value="<?=set_value('dod')?>">
-        </div>
+         <!--  <div class="cal-icon"> -->
+          <input type="date" name="dod" class="form-control" value="<?=set_value('dod')?>" required>
+        <!-- </div> -->
         </div><br><br><br>
         <label class="px-2 my-2 col-md-2">Date of Next Donation</label>
         <div class="col-md-10">
-          <div class="cal-icon">
-          <input type="date" name="donextd" class="form-control datetimepicker" value="<?=set_value('dod')?>">
-        </div>
+          <!-- <div class="cal-icon"> -->
+          <input type="date" name="donextd" class="form-control" value="<?=set_value('dod')?>" required>
+        <!-- </div> -->
         </div>
         <input type="text" name="province" value="<?=$userdata['province_id']?>" hidden>
         <input type="text" name="district" value="<?=$userdata['district_id']?>" hidden>
 
         <label class="px-2 my-2 col-md-2">Donation Site</label>
          <select name="site" class="form-control">
-          <?php if ($sites == null || $sites == ''): ?>
+          <?php if ($sites == null || $sites == '' || $sites == 0): ?>
             <option>0 Sites Found</option>
           <?php else: ?>
             <?php foreach ($sites as $row): ?>
@@ -117,7 +128,11 @@
         let num = document.getElementById('numberOfDonors').value;
 
         if (num == null || num == 0){
-          window.alert("Please enter a value");
+          document.getElementById('inputAlert').innerHTML = addAlert("Please enter a number greater than or equal to 1 and not greater than 10");
+        }else if (num > 10){
+          document.getElementById('inputAlert').innerHTML = addAlert("The number provided is greater than 10");
+        }else if (num < 0){
+          document.getElementById('inputAlert').innerHTML = addAlert("Nagative numbers are not allowed");
         }else{
           localStorage.setItem('numInputs', num);
 
@@ -125,6 +140,17 @@
 
         getInputFieldNumber();
         }
+    }
+
+    function addAlert(msg) {
+      var html = "";
+
+      html+='<div class="alert alert-danger ">';
+      html+='<button type="button" class="close" data-dismiss="alert">&times;</button>';
+      html+='<strong>warning ! </strong>'+msg;
+      html+='</div>';
+
+      return html;
     }
 
 
@@ -143,11 +169,11 @@
         html+='<tr>';
         /*html +='<td><input type="number" class="form-control" id="num" readonly></td>';*/
 
-        html+='<td><input type="text" class="form-control" placeholder="Sample ID" name="sampleid[]" <?=set_value('sampleid[]')?> ></td>';
+        html+='<td><input type="text" class="form-control" required placeholder="Sample ID" name="sampleid[]" <?=set_value('sampleid[]')?> ></td>';
 
-        html+='<td><input type="text" class="form-control" placeholder="Firstname" name="fnames[]" <?=set_value('')?>></td>';
-        html+='<td><input type="text" class="form-control" placeholder="Middle name" name="mnames[]" <?=set_value('')?>></td>';
-        html+='<td><input type="text" class="form-control" placeholder="Lastname" name="lnames[]" <?=set_value('')?>></td>';
+        html+='<td><input type="text" class="form-control" required placeholder="Firstname" name="fnames[]" <?=set_value('')?>></td>';
+        html+='<td><input type="text" class="form-control"  placeholder="Middle name (Optional)" name="mnames[]" <?=set_value('')?>></td>';
+        html+='<td><input type="text" class="form-control" required placeholder="Lastname" name="lnames[]" <?=set_value('')?>></td>';
 
         html+='<td><select class="form-control" name="hiv[]" <?=set_value('hiv[]')?>><option>0</option><option>1</option><option>2</option><option>22</option><option>R</option></select></td>';
         html+='<td><select class="form-control" name="hbv[]" <?=set_value('hbv[]')?>><option>0</option><option>1</option><option>2</option><option>22</option><option>R</option></select></td>';

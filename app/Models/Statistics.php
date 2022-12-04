@@ -39,8 +39,9 @@ class Statistics extends Model
 
 	public function getStatistics($hospital_id)
 	{
+		$years = date("Y");
 
-     $query = $this->db->query("SELECT COUNT(serial_number) AS num , donation_site_name FROM donors INNER JOIN donation_sites ON donors.site_id=donation_sites.site_id WHERE donors.hospital_id='$hospital_id' AND donation_sites.hospital_id='$hospital_id' GROUP BY donation_sites.donation_site_name");
+     $query = $this->db->query("SELECT COUNT(serial_number) AS num , donation_site_name FROM donors INNER JOIN donation_sites ON donors.site_id=donation_sites.site_id WHERE donors.hospital_id='$hospital_id' AND donation_sites.hospital_id='$hospital_id' AND date_of_donation LIKE '%$years%' GROUP BY donation_sites.donation_site_name");
      $result = $query->getResult();            
 
 	if (count($result) == null) {

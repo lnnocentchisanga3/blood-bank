@@ -1,7 +1,7 @@
-<?= $this->extend('layouts/base2'); ?>
+<?= $this->extend('layouts/base3'); ?>
 <?=$this->section('content');?>
 
-<div class="page-wrapper">
+<div class="page-wrapper-base-3">
 <div class="content">
 <div class="row">
 <div class="col-sm-12">
