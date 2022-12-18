@@ -36,7 +36,7 @@ class Dashboard extends BaseController
 		
 		$data = [];
 		$data['hospital'] = $this->sites->getAHospital($hospital_id);
-		$data['donors'] = $this->alldonors->join('donation_sites','site_id')->where('donors.hospital_id',$hospital_id)->where('donation_sites.hospital_id',$hospital_id)->groupBy('serial_number','DESC')->findAll();
+		$data['donors'] = $this->alldonors->where('hospital_id',$hospital_id)->groupBy('serial_number','DESC')->findAll();
 
 		$data['donorsAllDb'] = $this->alldonors->join('hospital','hospital_id')->join('donation_sites','site_id')->groupBy('serial_number','DESC')->findAll();
 
@@ -57,6 +57,7 @@ class Dashboard extends BaseController
 		}
 		
 		$data = [];
+		$data['title'] = "Upcoming Donation Dates";
 		$data['userdata'] = session('logged_in');
 		$data['alldonors'] = $this->adminModel->getDonors($hospital_id);
 		return view('upcoming',$data);
@@ -75,18 +76,21 @@ class Dashboard extends BaseController
 			$fromdate = str_replace("-","/",$this->request->getVar('fromdate'));
 			$todate = str_replace("-", "/", $this->request->getVar('todate'));
 
+			$site_name = $this->sites->getSite($site);
+
 			$getData = $this->sites->getareport($site,$fromdate,$todate,$hospital_id);
 
 			if ($getData != null) {
 				$data['dataSearched'] = $getData;
-				$data['tests'] = "Data Report from ".$getData[0]->donation_site_name." From ".$fromdate." To ".$todate;
-				$data['title'] = "Data Report from ".$getData[0]->donation_site_name." From ".$fromdate." To ".$todate;
+				$data['tests'] = "Data Report from ".$site_name[0]->donation_site_name." From ".$fromdate." To ".$todate;
+				$data['title'] = "Data Report from ".$site_name[0]->donation_site_name." From ".$fromdate." To ".$todate;
 				
 				$data['userdata'] = session('logged_in');
 				$data['sites'] = $this->sites->getAllSites($hospital_id);
 
 				return view('reports',$data);
 			}else{
+				$data['title'] = "Data Report from ".$site_name[0]->donation_site_name." From ".$fromdate." To ".$todate;
 				$data['dataSearched'] = null;
 				$data['tests'] = $site." ".$fromdate." ".$todate;
 				$data['userdata'] = session('logged_in');
@@ -107,13 +111,15 @@ class Dashboard extends BaseController
 
 		
 		$data = [];
+		$data['title'] = "Data Reports";
 		$data['userdata'] = session('logged_in');
+		$data['dataSearched'] = null;
 		$data['sites'] = $this->sites->getAllSites($hospital_id);
 		$data['alldonors'] = $this->adminModel->getDonors($hospital_id);
 		return view('reports',$data);
 	}
 
-	public function statisticsdata($hospital_id=null)
+	public function statisticsdata($hospital_id=null,$year=null)
 	{
 		if (!session()->has('logged_in')) {
 			return redirect()->to(base_url());
@@ -121,16 +127,26 @@ class Dashboard extends BaseController
 
 		
 		$data = [];
-		$data['statistics1'] = $this->statistics1->getStatistics1($hospital_id);
-		$data['statistics'] = $this->statistics1->getStatistics($hospital_id);
-		$data['donors'] = $this->alldonors->join('donation_sites','site_id')->where('donors.hospital_id',$hospital_id)->where('donation_sites.hospital_id',$hospital_id)->groupBy('serial_number','DESC')->findAll();
-		$data['hiv'] = $this->adminModel->hivNum($hospital_id);
-		$data['hbv'] = $this->adminModel->hbvNum($hospital_id);
-		$data['hcv'] = $this->adminModel->hcvNum($hospital_id);
-		$data['syphilis'] = $this->adminModel->syphilisNum($hospital_id);
+		$data['year_added'] = $year;
+		$data['statistics1'] = $this->statistics1->getStatistics1($hospital_id,$year);
+		$data['statistics'] = $this->statistics1->getStatistics($hospital_id,$year);
+		$data['donors'] = $this->alldonors
+				->join('donations','site_id')
+				->join('donation_sites','site_id')
+				->where('donors.hospital_id',$hospital_id)
+				->where('donation_sites.hospital_id',$hospital_id)
+				->like('date_of_donation',$year)
+				->groupBy('serial_number','DESC')->findAll();
+
+		$data['hiv'] = $this->adminModel->hivNum($hospital_id,$year);
+		$data['hbv'] = $this->adminModel->hbvNum($hospital_id,$year);
+		$data['hcv'] = $this->adminModel->hcvNum($hospital_id,$year);
+		$data['syphilis'] = $this->adminModel->syphilisNum($hospital_id,$year);
+		$data['Discards'] = $this->adminModel->Discards($hospital_id,$year);
 		
 		$data['userdata'] = session('logged_in');
 		$data['sites'] = $this->sites->getAllSites($hospital_id);
+		$data['title'] ="Statistics for the Year ".$year;
 		$data['alldonors'] = $this->adminModel->getDonors($hospital_id);
 		return view('statistics',$data);
 	}
@@ -201,7 +217,7 @@ class Dashboard extends BaseController
 
 				if ($this->validate($rules)) {
 
-					$donation_site_name = $this->request->getVar('donationsite');
+					$donation_site_name = $this->request->getVar('donationsite',FILTER_SANITIZE_STRING);
 					$hospital_id = $hospital_id;
 						
 

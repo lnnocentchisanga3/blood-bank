@@ -26,7 +26,7 @@ class Security extends BaseConfig
      *
      * @var bool
      */
-    public $tokenRandomize = false;
+    public $tokenRandomize = true;
 
     /**
      * --------------------------------------------------------------------------
@@ -37,7 +37,8 @@ class Security extends BaseConfig
      *
      * @var string
      */
-    public $tokenName = 'csrf_test_name';
+    public $tokenName = '$6$rounds5000$D8fEP.OYqv8jQRIzMalcu0FFbHrpFuUGAyAs0evFRXou8sL8hptxeYnBA86PuNMrJ8cS0OlU31ME1TcXGRPkt/
+';
 
     /**
      * --------------------------------------------------------------------------

@@ -15,12 +15,13 @@ class AdminModels extends Model
 	}
 
 
-	public function hivNum($hospital_id)
+	public function hivNum($hospital_id,$year)
 	{
-		$builder = $this->db->table('donors');
-
+		$builder = $this->db->table('donations');
+		$builder->join('donors','donor_id');
 		$builder->select("hiv");
 		$builder->where('hospital_id',$hospital_id);
+		$builder->where('year_added',$year);
 		$builder->where('hiv',22);
 
 		$result = $builder->get();
@@ -36,12 +37,13 @@ class AdminModels extends Model
 		}
 	}
 
-	public function hbvNum($hospital_id)
+	public function hbvNum($hospital_id,$year)
 	{
-		$builder = $this->db->table('donors');
-
+		$builder = $this->db->table('donations');
+		$builder->join('donors','donor_id');
 		$builder->select("hbv");
 		$builder->where('hospital_id',$hospital_id);
+		$builder->where('year_added',$year);
 		$builder->where('hbv',22);
 
 		$result = $builder->get();
@@ -57,12 +59,14 @@ class AdminModels extends Model
 		}
 	}
 
-	public function hcvNum($hospital_id)
-	{
-		$builder = $this->db->table('donors');
 
+	public function hcvNum($hospital_id,$year)
+	{
+		$builder = $this->db->table('donations');
+		$builder->join('donors','donor_id');
 		$builder->select("hcv");
 		$builder->where('hospital_id',$hospital_id);
+		$builder->where('year_added',$year);
 		$builder->where('hcv',22);
 
 		$result = $builder->get();
@@ -78,12 +82,13 @@ class AdminModels extends Model
 		}
 	}
 
-	public function syphilisNum($hospital_id)
+	public function syphilisNum($hospital_id,$year)
 	{
-		$builder = $this->db->table('donors');
-
+		$builder = $this->db->table('donations');
+		$builder->join('donors','donor_id');
 		$builder->select("syphilis");
 		$builder->where('hospital_id',$hospital_id);
+		$builder->where('year_added',$year);
 		$builder->where('syphilis',22);
 
 		$result = $builder->get();
@@ -99,10 +104,33 @@ class AdminModels extends Model
 		}
 	}
 
+	public function Discards($hospital_id,$year)
+	{
+		$builder = $this->db->table('donations');
+		$builder->join('donors','donor_id');
+		$builder->select("comment");
+		$builder->where('hospital_id',$hospital_id);
+		$builder->where('year_added',$year);
+		$builder->where('comment','Discard');
+
+		$result = $builder->get();
+
+		if ($result) {
+			if (count($result->getResultArray()) == null) {
+				return 0;
+			}else{
+				return count($result->getResultArray());
+			}
+		}else{
+			return false;
+		}
+	}
+
+
 	public function getDonors($hospital_id)
 	{
 	
-	$query = $this->db->query("SELECT * FROM `donors` INNER JOIN donation_sites ON donors.site_id=donation_sites.site_id WHERE donors.hospital_id='$hospital_id' GROUP BY donation_site_name ORDER BY date_of_next_donation ASC");
+	$query = $this->db->query("SELECT * FROM donation_sites INNER JOIN donations ON donations.site_id=donation_sites.site_id WHERE donation_sites.hospital_id='$hospital_id' GROUP BY donation_site_name ORDER BY date_of_donation ASC");
 
 	$result = $query->getResult();
 

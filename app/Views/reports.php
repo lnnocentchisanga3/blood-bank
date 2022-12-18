@@ -75,7 +75,7 @@
 <div class="row">
 <div class="col-md-12">
     <?php if ($dataSearched == null): ?>
-        <h5 class="col-md-12 text-center py-4">There are no reports here please search for one</h5>
+        <h5 class="col-md-12 text-center py-4">No Reports Found</h5>
     <?php else: ?>
         <h4 class="col-md-12 text-center py-4 text-uppercase border-bottom border-top" style="font-weight: bold;"><?=$tests?></h4>
         <div class="table-responsive">
@@ -98,7 +98,7 @@
             </tr>
         </thead>
 
-        <tfoot>
+        <!-- <tfoot>
             <tr>
                 <th>NO#</th>
                 <th>Sampe ID</th>
@@ -114,7 +114,7 @@
                 <th>Date_of_Donation</th>
                 <th>Action</th>
             </tr>
-        </tfoot>
+        </tfoot> -->
         <tbody>
            <?php if ($dataSearched == null): ?>
             <!-- <tr>
@@ -123,7 +123,7 @@
             <?php else: ?>
                 <?php foreach ($dataSearched as $row): ?>
             <tr>
-                <td><?=$num1 = $num1 + 1?></td>
+                <td><?php $num1=0; echo $num1 = $num1 + 1?></td>
                 <td><?=$row->sample_id?></td>
                 <td><?=$row->donor_fname?></td>
                 <td><?=$row->donor_mname?></td>
@@ -138,7 +138,7 @@
                 <td class="noExport">
                     <!-- <button value="<?=$row->serial_number?>" class="btn btn-danger py-1 px-2 my-1" onclick="getval(this.value)" data-toggle="modal" data-target="#delete_employee"><i class="fa fa-trash-o "></i></button> -->
 
-                    <button value="<?=$row->serial_number?>" onclick="getDonorDetails(this.value)" data-toggle="modal" data-target="#editDonorDetails" class="btn btn-success py-1 px-2 my-1"><i class="fa fa-edit"></i></button>
+                    <button value="<?=$row->serial_number?>" onclick="getDonorDetails(this.value)" data-toggle="modal" data-target="#editDonorDetails" class="btn btn-warning py-1 px-2 col-md-10 my-1"><i class="fa fa-paste"></i></button>
                 </td>
             </tr>
                 <?php endforeach ?>

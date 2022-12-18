@@ -1,3 +1,9 @@
+<script>
+    if (navigator.onLine == false){
+        document.getElementById('display12').innerHTML = "You are Working Offline";
+    }
+</script>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,9 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <link rel="shortcut icon" type="image/x-icon" href="<?= base_url();?>/public/assets/img/logo-dark1.jpg">
     <title>
-        <?php 
-        global $title;
-        ?>
+        
         <?php if ($title == null || $title == ""): ?>
             <?php else: ?>
                 <?=esc($title);?>
@@ -28,9 +32,27 @@
     <script src="<?= base_url();?>/public/assets/jquery/jquery.min.js"></script>
     <script type="text/javascript">
         function zoom() {
-            document.body.style.zoom = "80%" 
+            document.body.style.zoom = "100%"; 
         }
     </script>
+
+    <style>
+        #pagePrint{
+            background-image:linear-gradient(rgba(255, 255, 255, 0.9),rgba(255, 255, 255, 1)),url(<?= base_url();?>/public/assets/img/logo-dark.png);
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        .logout:hover{
+            background-color: palevioletred;
+            transition: ease-in;
+            transition-delay: 0.5s;
+        }
+        .internet-css{
+            transition: ease-in;
+            transition-delay: 5s;
+        }
+    </style>
 
     <!--[if lt IE 9]>
         <script src="<?= base_url();?>/public/assets/js/html5shiv.min.js"></script>
@@ -38,10 +60,10 @@
     <![endif]-->
 </head>
 
-<body >
+<body onload="zoom()">
     <div class="loader"></div>
     <div class="main-wrapper">
-        <div class="header">
+        <div class="header" id="header">
             <div class="header-left">
                 <a href="<?=base_url()?>/dashboard/<?=$userdata['hospital_id']?>" class="logo">
                     <img src="<?= base_url();?>/public/assets/img/logo-dark.png" width="35" height="35" alt=""> <span>ZNBTS</span>
@@ -57,52 +79,38 @@
                   <a class="py-2 new-menu dropdown-item" href="<?=base_url()?>/dashboard/<?=$userdata['hospital_id']?>"><i class="fa fa-home"></i> Back to home</a>
                   <a class="py-2 new-menu dropdown-item" href="<?=base_url()?>/addsites/<?=$userdata['hospital_id']?>"><i class="fa fa-map-marker"></i> Donation Sites</a>
                   <a class="py-2 new-menu dropdown-item" href="<?=base_url()?>/listdonors/<?=$userdata['hospital_id']?>"><i class="fa fa-users"></i> Donors</a>
-                  <a class="py-2 new-menu dropdown-item" href="#"><i class="fa fa-paste"></i> Local Blood Bank Inverntory</a>
-                  <a class="py-2 new-menu dropdown-item" href="#"><i class="fa fa-paste"></i> Blood bank Inverntory</a>
-                  <a class="py-2 new-menu dropdown-item" href="<?=base_url()?>/statistics/<?=$userdata['hospital_id']?>"><i class="fa fa-bar-chart"></i> Statistics</a>
+                  <!-- <a class="py-2 new-menu dropdown-item" href="#"><i class="fa fa-paste"></i> Local Blood Bank Inverntory</a>
+                  <a class="py-2 new-menu dropdown-item" href="#"><i class="fa fa-paste"></i> Blood bank Inverntory</a> -->
+                  <a class="py-2 new-menu dropdown-item" href="<?=base_url()?>/statistics/<?=$userdata['hospital_id']?>/<?=date("Y")?>"><i class="fa fa-bar-chart"></i> Statistics</a>
                   <a class="py-2 new-menu dropdown-item" href="<?=base_url()?>/upcoming/<?=$userdata['hospital_id']?>"><i class="fa fa-calendar"></i> Upcoming Dates</a>
                   <a class="py-2 new-menu dropdown-item" href="<?=base_url()?>/reports/<?=$userdata['hospital_id']?>"><i class="fa fa-copy"></i> Blood Collection Reports</a>
                   <a class="py-2 new-menu dropdown-item-text" href="<?=base_url()?>/oneAdddonor/<?=$userdata['hospital_id']?>"><i class="fa fa-user-plus"></i> Add a Donor</a>
 
-                  <?php if ($userdata['user_role'] == 'admin' || $userdata['user_role'] == 'donor_data_clerk'): ?>
+                  <!-- <?php if ($userdata['user_role'] == 'admin' || $userdata['user_role'] == 'donor_data_clerk'): ?>
                       <a class="py-2 new-menu dropdown-item-text" href="<?=base_url()?>/adddonors/<?=$userdata['hospital_id']?>"><i class="fa fa-user-plus"></i> Add Multiple Donors</a>
-                  <?php endif ?>
+                  <?php endif ?> -->
+
+                  <!-- <a class="py-2 new-menu dropdown-item-text bg-danger text-white" href="<?=base_url()?>/logout"><i class="fa fa-sign-out"></i> Logout</a> -->
                 </div>
               </div>
+
+              <div class="nav float-left internet-css">
+                     <small class="col-md-12 text-end" id="internetStatus"> </small>
+              </div>
+
+              <!-- <div id="display12" class="float-left"></div> -->
 
 
             <!-- <a id="toggle_btn" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
             <a id="mobile_btn" class="mobile_btn float-left" href="#sidebar"><i class="fa fa-bars"></i></a> -->
 
 
-            <ul class="nav user-menu float-right">
-                
-                <li class="nav-item dropdown has-arrow">
-                    <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
-                        <span class="user-img">
-                            <img class="rounded-circle" src="<?= base_url();?>/public/assets/img/user.jpg" width="24" alt="Admin">
-                            <span class="status online"></span>
-                        </span>
-                        <span>
-                            <?php
-                            echo strtoupper($userdata['fname']." ".$userdata['lname']);
-                            ?>
-                        </span>
-                    </a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="<?=base_url()?>/logout">Logout</a>
-                    </div>
+            <ul class="nav float-right">
+                <li class="nav-item ">
+                    <a class="logout btn text-white py-2 mx-2 mt-2 rounded-0" href="<?=base_url()?>/logout">Logout <i class="fa fa-sign-out"></i></a>
                 </li>
             </ul>
-            <div class="dropdown mobile-user-menu float-right">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
-                <div class="dropdown-menu dropdown-menu-right">
-                    <!-- <a class="dropdown-item" href="profile.html">My Profile</a>
-                    <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
-                    <a class="dropdown-item" href="settings.html">Settings</a> -->
-                    <a class="dropdown-item" href="login.html">Logout</a>
-                </div>
-            </div>
+            
         </div>
 
  <?= $this->renderSection('content'); ?>
@@ -124,6 +132,27 @@
         <script>
             function getval(uid) {
                 document.getElementById('addAttri').setAttribute("href", "<?=base_url()?>/deleteSite/"+uid+"/"+"<?=$userdata['hospital_id']?>");
+            }
+        </script>
+
+
+        <div id="delete_Donor" class="modal fade delete-modal" role="dialog">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body text-center">
+                        <img src="<?=base_url()?>/public/assets/img/sent.png">
+                        <h3>Are you sure want to delete this Donor Record?</h3>
+                        <div class="m-t-20"> <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
+                            <a id="addAttri2" class="btn btn-danger">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function getvalDonor(uid) {
+                document.getElementById('addAttri2').setAttribute("href", "<?=base_url()?>/delete_donor/"+uid+"/<?=$userdata['hospital_id']?>");
             }
         </script>
 
@@ -309,14 +338,25 @@ $(document).ready(function() {
     ]
     } );
     } );
-    </script>
 
+</script>
 
 <script>
 $(document).ready(function(){
   $('[data-toggle="tooltip"]').tooltip({animation: true, delay: 1000});
 });
 </script>
+
+<script>
+        setInterval(function(){
+            if (navigator.onLine == false){
+                //document.getElementById('internetStatusBg').style.backgroundColor = "palevioletred";
+                document.getElementById('internetStatus').innerHTML = "<div class='bg-white py-3 px-2 mx-2 text-danger'><i class='fa fa-globe'></i> No Internet Connection </div>";
+            }else{
+                document.getElementById('internetStatus').innerHTML = "<div class='bg-white py-3 px-2 mx-2 text-success'><i class='fa fa-globe'></i> You are Connected to the Internet </div>";
+            }
+        },2000);
+    </script>
 </script>
 
 

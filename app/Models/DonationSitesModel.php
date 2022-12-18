@@ -32,6 +32,43 @@ class DonationSitesModel extends Model
 		}
 	}
 
+	public function getDonationHistory($donor_id)
+	{
+		$builder = $this->db->table('donations');
+		$builder->select("*");
+		$builder->where('donor_id',$donor_id);
+		$result = $builder->get();
+
+		if ($result) {
+			if (count($result->getResultArray()) == null) {
+				return $hospital_id;
+			}else{
+				return $result->getResultObject();
+			}
+		}else{
+			return false;
+		}
+	}
+
+	public function checkDonation($sample_id)
+	{
+		$builder = $this->db->table('donations');
+		$builder->select("*");
+		$builder->where('sample_id',$sample_id);
+		$result = $builder->get();
+
+		if ($result) {
+			if (count($result->getResultArray()) == null) {
+				return false;
+			}else{
+				return true;
+			}
+		}else{
+			return false;
+		}
+	}
+
+
 	public function getAHospital($hospital_id)
 	{
 		$builder = $this->db->table('hospital');
@@ -61,16 +98,37 @@ class DonationSitesModel extends Model
 			if (count($result->getResultArray()) == null) {
 				return 0;
 			}else{
-				return $result->getResultArray();
+				return $result->getResultObject();
 			}
 		}else{
 			return false;
 		}
 	}
 
-	public function deleteDonorRecord($id)
+	public function deleteDonorRecord($id,$donor_id)
 	{
 		$sql = "DELETE FROM donors WHERE serial_number='$id'";
+		$query = $this->db->query($sql);
+
+		if ($query) {
+			$sql = "DELETE FROM `donations` WHERE donor_id='$donor_id'";
+			$query1 = $this->db->query($sql);
+
+			if ($query1) {
+				return true;
+			}else{
+				return false;
+			}
+		}else{
+			return false;
+		}
+	}
+
+	
+
+	public function deleteDonationRecord($id)
+	{
+		$sql = "DELETE FROM donations WHERE donation_id='$id'";
 		$query = $this->db->query($sql);
 
 		if ($query) {
@@ -120,9 +178,31 @@ class DonationSitesModel extends Model
 		}
 	}
 
-	public function update_donor($id,$sample_id,$donorfname,$donormname,$donorlname,$hiv,$hbv,$hcv,$syphilis,$comment,$dod,$donextd,$site,$hospital_id,$province_id,$district_id,$group)
+	public function update_donor($serial_number,$donor_fname,$donor_mname,$donor_lname,$dob,$nation,$gender,$address,$email,$phone,$site,$d_status,$group)
 	{
-		$sql = "UPDATE donors SET sample_id='$sample_id',donor_fname='$donorfname',donor_mname='$donormname',donor_lname='$donorlname',hiv='$hiv',hbv='$hbv',hcv='$hcv',syphilis='$syphilis',comment='$comment',date_of_donation='$dod',date_of_next_donation='$donextd',site_id='$site',hospital_id='$hospital_id',province_id='$province_id',district_id='$district_id',blood_group='$group' WHERE serial_number='$id'";
+		$sql = "UPDATE donors SET donor_fname='$donor_fname',donor_mname='$donor_mname',blood_group='$group',gender='$gender',residentialAddress='$address',site_id='$site',email='$email',phone='$phone',nationality='$nation',donation_status='$d_status' WHERE serial_number='$serial_number'";
+
+		$query = $this->db->query($sql);
+
+		if ($query) {
+			$query1 = $this->db->query("UPDATE donors SET `datebirth`='$dob',`donor_lname`='$donor_lname' WHERE serial_number='$serial_number' ");
+			if ($query1) {
+				return true;
+			}else{
+				return false;
+			}
+		}else{
+			return false;
+		}
+
+		
+	}
+
+
+	public function update_donation_details($donation_id,$hiv,$hbv,$hcv,$syphilis,$comment)
+	{
+		$sql = "UPDATE donations SET hiv='$hiv',hbv='$hbv',hcv='$hcv',syphilis='$syphilis',comment='$comment' WHERE donation_id='$donation_id'";
+
 		$query = $this->db->query($sql);
 
 		if ($query) {
@@ -130,6 +210,8 @@ class DonationSitesModel extends Model
 		}else{
 			return false;
 		}
+
+		
 	}
 
 
@@ -147,7 +229,20 @@ class DonationSitesModel extends Model
 
 	public function getareport($site,$fromdate,$todate,$hospital_id)
 	{
-		$query = $this->db->query("SELECT * FROM `donors` INNER JOIN donation_sites ON donors.site_id=donation_sites.site_id WHERE donors.site_id = '$site' AND date_of_donation BETWEEN '$fromdate' AND '$todate' ORDER BY date_of_donation ASC");
+		$query = $this->db->query("SELECT * FROM `donations` INNER JOIN donors ON donations.site_id=donors.site_id WHERE donations.site_id = '$site' AND date_of_donation BETWEEN '$fromdate' AND '$todate' GROUP BY sample_id");
+				
+		if (!$query) {
+			return null;
+		}else{
+			return $query->getResultObject();
+		}
+	}
+
+	public function getUpcomingDates($hospital_id)
+	{
+		$date = date("Y/m/d");
+
+		$query = $this->db->query("SELECT * FROM `donations` INNER JOIN `donation_sites` ON donations.site_id=donation_sites.site_id WHERE donations.hospital_id = '$hospital_id' AND ORDER BY date_of_next_donation ASC");
 				
 		if (!$query) {
 			return null;

@@ -5,7 +5,7 @@
 <div class="content">
 <div class="row">
 <div class="col-sm-12">
-    <h4 class="page-title"><a href="<?=base_url()?>/dashboard/<?=$userdata['hospital_id']?>">Home</a> / Upcoming Dates</h4>
+    <h4 class="page-title"><a href="<?=base_url()?>/dashboard/<?=$userdata['hospital_id']?>">Home</a> / Statistics</h4>
 </div>
 </div>
 <div class="card-box">
@@ -21,15 +21,17 @@
     <div class="row">
 <div class="container-fluid border-bottom py-2 mb-4">
     <div class="row">
-        <h4 class="col-md-6 text-uppercase ">Blood Collection Statistics for (<?=date("Y")?>)</h4>
+        <h4 class="col-md-6 text-uppercase ">Blood Collection Statistics for (<?=$year_added?>)</h4>
         <div class="col-md-6">
             <h4>Select a Year Your want to see the Statistics</h4>
-            <select class="select">
+            <select class="select" onchange="getYearAndPass(this.value)">
+                <option value="0">--- Select a Year ---</option>
                 <?php
                 $x = "2001";
-                while($x <= date('Y')) {
-                  echo "<option>$x</option>";
-                  $x++;
+                $y = date("Y");
+                while($y >= $x) {
+                  echo "<option value='$y'>$y</option>";
+                  $y--;
                 }
                 ?>
             </select>
@@ -37,58 +39,91 @@
     </div>
 </div>
 
-
-    <div class="col-md-4 col-sm-4  col-lg-3">
+    <div class="col-md-3 col-sm-3  col-lg-3">
         <div class="profile-widget bg-danger text-white">
-            <h4 class="doctor-name text-ellipsis">
+            <h4 class="doctor-name text-ellipsis"></h4>
             <div class="user-country">
                 <h5>HIV</h5>
-           <?php if ($hiv == null || $hiv == 0 || is_numeric($hiv)): ?>
-            <small>Waiting for data......</small>
+           <?php if ($hiv == null || $hiv == 0): ?>
+            <small>No Data Found</small>
                <?php else: ?>
-                <?=count($hiv)?>
+                <?php if ($hiv == 1): ?>
+                    <?=$hiv?> <small>Donor</small>
+                <?php else: ?>
+                    <?=$hiv?> <small>Donors</small>
+                <?php endif ?>
            <?php endif ?><br>  
             </div>
         </div>
     </div>
 
-    <div class="col-md-4 col-sm-4  col-lg-3">
+    <div class="col-md-3 col-sm-3  col-lg-3">
         <div class="profile-widget bg-warning text-white">
             <h4 class="doctor-name text-ellipsis"></h4>
             <div class="user-country">
                 <h5>HBV</h5>
-           <?php if ($hbv == null || $hbv == 0 || is_numeric($hbv)): ?>
-            <small>Waiting for data......</small>
+           <?php if ($hbv == null || $hbv == 0): ?>
+            <small>No Data Found</small>
                <?php else: ?>
-                <?=count($hbv)?>
+                <?php if ($hbv == 1): ?>
+                    <?=$hbv?> <small>Donor</small>
+                <?php else: ?>
+                    <?=$hbv?> <small>Donors</small>
+                <?php endif ?>
            <?php endif ?><br>  
             </div>
         </div>
     </div>
 
-    <div class="col-md-4 col-sm-4  col-lg-3">
+    <div class="col-md-3 col-sm-3  col-lg-3">
         <div class="profile-widget bg-success text-white">
             <h4 class="doctor-name text-ellipsis"></h4>
             <div class="user-country">
                 <h5>HCV</h5>
-           <?php if ($hcv == null || $hcv == 0 || is_numeric($hcv)): ?>
-            <small>Waiting for data......</small>
+           <?php if ($hcv == null || $hcv == 0): ?>
+            <small>No Data Found</small>
                <?php else: ?>
-                <?=count($hcv)?>
+                <?php if ($hcv == 1): ?>
+                    <?=$hcv?> <small>Donor</small>
+                <?php else: ?>
+                    <?=$hcv?> <small>Donors</small>
+                <?php endif ?>
            <?php endif ?><br>  
             </div>
         </div>
     </div>
 
-    <div class="col-md-4 col-sm-4  col-lg-3">
+    <div class="col-md-3 col-sm-3  col-lg-3">
         <div class="profile-widget bg-primary text-white">
             <h4 class="doctor-name text-ellipsis"></h4>
             <div class="user-country">
                 <h5>Syphilis</h5>
-           <?php if ($syphilis == null || $syphilis == 0 || is_numeric($syphilis)): ?>
-            <small>Waiting for data......</small>
+           <?php if ($syphilis == null || $syphilis == 0): ?>
+            <small>No Data Found</small>
                <?php else: ?>
-                <?=count($syphilis)?>
+                <?php if ($syphilis == 1): ?>
+                    <?=$syphilis?> <small>Donor</small>
+                <?php else: ?>
+                    <?=$syphilis?> <small>Donors</small>
+                <?php endif ?>
+           <?php endif ?><br>  
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 col-sm-3  col-lg-3">
+        <div class="profile-widget bg-dark text-white">
+            <h4 class="doctor-name text-ellipsis"></h4>
+            <div class="user-country">
+                <h5>Discards</h5>
+           <?php if ($Discards == null || $Discards == 0): ?>
+            <small>No Data Found</small>
+               <?php else: ?>
+                <?php if ($Discards == 1): ?>
+                    <?=$Discards?> <small>Donor</small>
+                <?php else: ?>
+                    <?=$Discards?> <small>Donors</small>
+                <?php endif ?>
            <?php endif ?><br>  
             </div>
         </div>
@@ -100,7 +135,7 @@
  <div class="card-box">
     <div class="card-body">
         <div class="chart-title">
-            <h4 class="col-md-12 py-4 text-uppercase border-bottom">Blood Collected This year (<?=date("Y")?>)</h4>
+            <h4 class="col-md-12 py-4 text-uppercase border-bottom">Blood Collected This year (<?=$year_added?>)</h4>
             <div class="float-right">
                 <ul class="chat-user-total">
                     <!-- <li><i class="fa fa-circle current-users" aria-hidden="true"></i>Okay</li>
@@ -109,7 +144,7 @@
             </div>
         </div>  
         <canvas id="bargraph" style="height: 30vh">
-            There is no data to show
+            
         </canvas>
     </div>
 </div>
@@ -142,7 +177,7 @@
         <?php if ($statistics == null || $statistics == 1 || $statistics == false || is_numeric($statistics)): ?>
         <h5>No Data Found</h5>
         <?php else: ?>
-            <h4 class="col-md-12 text-center text-uppercase border-bottom">Total Number Of All The Donors This Year (<?=date("Y")?>) <?php $num = count($donors); echo $num;?></h4>
+            <h4 class="col-md-12 text-center text-uppercase border-bottom">Total Number Of All The Donors This Year (<?=$year_added?>) <?php $num = count($donors); echo $num;?> Donors</h4>
 
             <?php foreach ($statistics as $row): ?>
                 <?php
@@ -159,7 +194,7 @@
                 <div class="item">
                     <div class="container">
                       <div class="progress bg-warning rounded-0" style="height:40px" data-toggle="tooltip" data-placement="left" title="<?=$row->donation_site_name?> [ <?=$row->num?> Donors ]">
-                        <div class="progress-bar progress-bar-striped bg-primary progress-bar-animated text-white" style="width:<?=$x?>%; height: 40px;"><span class="px-2"><?=$row->donation_site_name?> [ <?=$row->num?> Donors ]</span></div>
+                        <div class="progress-bar  bg-primary progress-bar-animated text-white" style="width:<?=$x?>%; height: 40px;"><span class="px-2"><?=$row->donation_site_name?> [ <?=$row->num?> Donors ]</span></div>
                       </div>
                     </div>
                 </div>
@@ -182,7 +217,15 @@
 <?php
                 
 if ($statistics == null || $statistics == 1 || $statistics == false || is_numeric($statistics)) {
-       
+       ?>
+       <script>
+           var c = document.getElementById("bargraph");
+           var ctx = c.getContext("2d");
+           ctx.font = "15px Arial";
+           ctx.textAlign = "left";
+           ctx.fillText("No Data Found", 10, 50);
+       </script>
+       <?php
    }else{
      echo "<script>
     $(document).ready(function(){
@@ -224,6 +267,14 @@ if ($statistics == null || $statistics == 1 || $statistics == false || is_numeri
    }
   
  ?>
+
+ <script>
+     function getYearAndPass(value) {
+        //window.location = '';
+        window.location.assign("<?=base_url()?>/statistics/<?=$userdata['hospital_id']?>/"+value);
+         //window.alert();
+     }
+ </script>
 
  
 

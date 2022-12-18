@@ -50,6 +50,7 @@
 <div class="page-wrapper" style="margin-top: -100px;">
             <div class="content">
                 <div class="row">
+
                     <div class="col-sm-12">
                         <h4 class="page-title text-uppercase">Donors form all the donation sites for all the Years</h4>
                     </div>
@@ -73,16 +74,12 @@
                                     <thead>
                                         <tr>
                                             <th>NO#</th>
-                                            <th>Sampe_ID</th>
+                                            <th>Donor_ID</th>
                                             <th>Firstname</th>
                                             <th>Middle_name</th>
                                             <th>Lastname</th>
-                                            <th>HIV</th>
-                                            <th>HBV</th>
-                                            <th>HCV</th>
-                                            <th>Syphilis</th>
-                                            <th>Comment</th>
-                                            <th>Blood_Group</th>
+                                            <th>Donation_Site</th>
+                                            <th>Donation_Status</th>
                                             <th class="noExport">Action</th>
                                         </tr>
                                     </thead>
@@ -90,16 +87,12 @@
                                     <tfoot>
                                         <tr>
                                             <th>NO#</th>
-                                            <th>Sampe ID</th>
+                                            <th>Donor ID</th>
                                             <th>Firstname</th>
                                             <th>Middle name</th>
                                             <th>Lastname</th>
-                                            <th>HIV</th>
-                                            <th>HBV</th>
-                                            <th>HCV</th>
-                                            <th>Syphilis</th>
-                                            <th>Comment</th>
-                                            <th>Blood Group</th>
+                                            <th>Donation_Site</th>
+                                            <th>Donation_Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </tfoot>
@@ -111,21 +104,32 @@
                                         <?php else: ?>
                                             <?php foreach ($donors as $row): ?>
                                         <tr>
-                                            <td><?=$num = $num + 1?></td>
-                                            <td><?=$row->sample_id?></td>
+                                            <td><?php $num=0; echo $num = $num + 1?></td>
+                                            <td><?=$row->donor_id?></td>
                                             <td><?=$row->donor_fname?></td>
                                             <td><?=$row->donor_mname?></td>
                                             <td><?=$row->donor_lname?></td>
-                                            <td><?=$row->hiv?></td>
-                                            <td><?=$row->hbv?></td>
-                                            <td><?=$row->hcv?></td>
-                                            <td><?=$row->syphilis?></td>
-                                            <td><?=$row->comment?></td>
-                                            <td><?=$row->blood_group?></td>
-                                            <td class="noExport row">
-                                            <button value="<?=$row->serial_number?>" class="btn btn-danger mx-1 py-1 px-2 my-1" onclick="getval(this.value)" data-toggle="modal" data-target="#delete_employee"><i class="fa fa-trash-o "></i></button>
+                                            <td><?=$row->donation_site_name?></td>
+                                            <td>
+                                            <?php if ($row->donation_status == "Can Donate"){ ?>
+                                                <span class="bg-success text-white py-1 px-1">Can Donate <i class="fa fa-map-marker"></i></span>
+                                           <?php }elseif($row->donation_status == ""){ ?>
+                                               <span>Under Review....</span>
+                                            <?php }else{ ?>
+                                                <span class="bg-danger text-white py-1 px-1">Can Not Donate <i class="fa fa-close"></i></span>
+                                           
+                                            <?php }?>
+                                        </td>
+                                        <td class="noExport row">
+                                            <a href="<?=base_url()?>/Listdonors/donor_print/<?=$row->donor_id?>#PrintedData" class="col-md-10 btn btn-primary mx-1 py-1 px-2 my-1" data-toggle="tooltip" data-placement="left" title="Donation History"><i class="fa fa-paste"></i>
+                                            </a>
 
-                                            <button value="<?=$row->serial_number?>" onclick="getDonorDetails(this.value)" data-toggle="modal" data-target="#editDonorDetails" class="btn btn-success py-1 px-2 my-1"><i class="fa fa-edit"></i></button>
+                                            <a href="<?=base_url()?>/Listdonors/donor_print/<?=$row->donor_id?>" target="_blank" class="col-md-10 btn btn-warning mx-1 py-1 px-2 my-1" data-toggle="tooltip" data-placement="left" title="Print Donor's Details"><i class="fa fa-print"></i>
+                                            </a>
+
+                                            <button value="<?=$row->serial_number?>" class="col-md-10 btn btn-danger mx-1 py-1 px-2 my-1" onclick="getvalDonor(this.value)" data-toggle="modal" data-target="#delete_Donor"><i class="fa fa-trash-o " data-toggle="tooltip" data-placement="left" title="Delete a Donor"></i></button>
+
+                                            <button value="<?=$row->serial_number?>" onclick="getDonorDetails(this.value)" data-toggle="modal" data-target="#editDonorDetails" class="col-md-10 btn btn-success py-1 px-2 my-1"><i class="fa fa-edit" data-toggle="tooltip" data-placement="left" title="View Or Edit Donor Details"></i> / <i class="fa fa-eye" data-toggle="tooltip" data-placement="left" title="View Or Edit Donor Details"></i></button>
                                         </td>
                                         </tr>
                                             <?php endforeach ?>
@@ -145,7 +149,7 @@
 </div>
 </div>
 
-<div id="delete_employee" class="modal fade delete-modal" role="dialog">
+<!-- <div id="delete_employee" class="modal fade delete-modal" role="dialog">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-body text-center">
@@ -160,10 +164,10 @@
         </div>
 
         <script>
-            function getval(uid) {
+            function getvalDonor(uid) {
                 document.getElementById('addAttri').setAttribute("href", "<?=base_url()?>/delete_donor/"+uid+"/<?=$userdata['hospital_id']?>");
             }
-        </script>
+        </script> -->
 
 
 <?=$this->endSection('content')?>

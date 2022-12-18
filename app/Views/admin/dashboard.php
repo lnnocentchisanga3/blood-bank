@@ -3,7 +3,7 @@
 <div class="page-wrapper-base-3">
             <div class="content container">
                 <div class="row">
-                    <h3 class="col-md-11 my-4 mx-4 text-uppercase text-dark"> Welcome to <?=$hospital[0]['hospital_name']?> Blood bank Database </h3>
+                    <h3 class="col-md-11 my-4 mx-4 text-uppercase text-dark"><strong><?=$hospital[0]['hospital_name']?></strong></h3>
 
                     <?php
                     if ($userdata['user_role'] == 'admin') {
@@ -72,7 +72,7 @@
                         </div>
                     </a>
 
-                    <a href=" " data-toggle="modal" data-target="#LookForBloodDonorInAllDb" class="nav-link col-md-4">
+                    <!-- <a href=" " data-toggle="modal" data-target="#LookForBloodDonorInAllDb" class="nav-link col-md-4">
                         <div class="dash-widget new-menu">
                             <div class="contain py-3er-fluid">
                                 <div class="row">
@@ -85,7 +85,7 @@
                         </div>
                     </div>
                         </div>
-                    </a>
+                    </a> -->
 
                     <a href="<?=base_url()?>/oneAdddonor/<?=$userdata['hospital_id']?>" class="nav-link col-md-4">
                         <div class="dash-widget new-menu">
@@ -102,7 +102,7 @@
                         </div>
                     </a>
 
-                    <?php
+                    <!-- <?php
                     if ($userdata['user_role'] == 'admin' || $userdata['user_role'] == 'donor_data_clerk') {
                         ?>
                         <a href="<?=base_url()?>/adddonors/<?=$userdata['hospital_id']?>" class="nav-link col-md-4">
@@ -151,9 +151,9 @@
                         </div>
                     </div>
                         </div>
-                    </a>
+                    </a> -->
 
-                    <a href="<?=base_url()?>/statistics/<?=$userdata['hospital_id']?>" class="nav-link col-md-4">
+                    <a href="<?=base_url()?>/statistics/<?=$userdata['hospital_id']?>/<?=date("Y")?>" class="nav-link col-md-4">
                         <div class="dash-widget new-menu">
                             <div class="contain py-3er-fluid">
                                 <div class="row">
@@ -220,7 +220,7 @@
                           <div class="modal-header">
                            <div class="row">
                                 <h4 class="modal-title col-md-12">Do a quick search for a Donor <i class="fa fa-search"></i></h4>
-                            <small class="col-md-12 text-danger">NB: Please note that if you want to delete the donor go to <strong>Donors</strong> the select <strong>Manage Donors</strong></small>
+                            <!-- <small class="col-md-12 text-danger">NB: Please note that if you want to delete the donor go to <strong>Donors</strong> the select <strong>Manage Donors</strong></small> -->
                            </div>
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                           </div>
@@ -240,12 +240,7 @@
                                     <th>Firstname</th>
                                     <th>Middle_name</th>
                                     <th>Lastname</th>
-                                    <th>HIV</th>
-                                    <th>HBV</th>
-                                    <th>HCV</th>
-                                    <th>Syphilis</th>
-                                    <th>Comment</th>
-                                    <th>Blood_Group</th>
+                                    <th>Donation_Status</th>
                                     <th class="noExport">Action</th>
                                 </tr>
                             </thead>
@@ -257,13 +252,8 @@
                                     <th>Firstname</th>
                                     <th>Middle name</th>
                                     <th>Lastname</th>
-                                    <th>HIV</th>
-                                    <th>HBV</th>
-                                    <th>HCV</th>
-                                    <th>Syphilis</th>
-                                    <th>Comment</th>
-                                    <th>Blood Group</th>
-                                    <th>Action</th>
+                                    <th>Donation_Status</th>
+                                    <th class="noExport">Action</th>
                                 </tr>
                             </tfoot>
                             <tbody>
@@ -274,21 +264,32 @@
                                 <?php else: ?>
                                     <?php foreach ($donors as $row): ?>
                                 <tr>
-                                    <td><?=$num1 = $num1 + 1?></td>
-                                    <td><?=$row->sample_id?></td>
+                                    <td><?php $num1=0;  echo $num1 = $num1 + 1?></td>
+                                    <td><?=$row->donor_id?></td>
                                     <td><?=$row->donor_fname?></td>
                                     <td><?=$row->donor_mname?></td>
                                     <td><?=$row->donor_lname?></td>
-                                    <td><?=$row->hiv?></td>
-                                    <td><?=$row->hbv?></td>
-                                    <td><?=$row->hcv?></td>
-                                    <td><?=$row->syphilis?></td>
-                                    <td><?=$row->comment?></td>
-                                    <td><?=$row->blood_group?></td>
+                                    <td>
+                                       <?php if ($row->donation_status == "Can Donate"){ ?>
+                                                <span class="bg-success text-white py-1 px-1">Can Donate <i class="fa fa-map-marker"></i></span>
+                                       <?php }elseif($row->donation_status == ""){ ?>
+                                           <span>Under Review....</span>
+                                        <?php }else{ ?>
+                                            <span class="bg-danger text-white py-1 px-1">Can Not Donate <i class="fa fa-close"></i></span>
+                                       
+                                        <?php }?>
+                                    </td>
                                     <td class="noExport">
-                                        <!-- <button value="<?=$row->serial_number?>" class="btn btn-danger py-1 px-2 my-1" onclick="getval(this.value)" data-toggle="modal" data-target="#delete_employee"><i class="fa fa-trash-o "></i></button> -->
+                                    <a href="<?=base_url()?>/Listdonors/donor_print/<?=$row->donor_id?>#PrintedData" class="col-md-10 btn btn-primary mx-1 py-1 px-2 my-1" data-toggle="tooltip" data-placement="left" title="Donation History"><i class="fa fa-paste"></i>
+                                    </a>
 
-                                        <button value="<?=$row->serial_number?>" onclick="getDonorDetails(this.value)" data-toggle="modal" data-target="#editDonorDetails" class="btn btn-success py-1 px-2 my-1"><i class="fa fa-edit"></i></button>
+                                    <a href="<?=base_url()?>/Listdonors/donor_print/<?=$row->donor_id?>" target="_blank" class="col-md-10 btn btn-warning mx-1 py-1 px-2 my-1" data-toggle="tooltip" data-placement="left" title="Print Donor's Details"><i class="fa fa-print"></i>
+                                    </a>
+
+                                    <button value="<?=$row->serial_number?>" class="col-md-10 btn btn-danger mx-1 py-1 px-2 my-1" onclick="getval(this.value)" data-toggle="modal" data-target="#delete_employee"><i class="fa fa-trash-o " data-toggle="tooltip" data-placement="left" title="Delete a Donor"></i></button>
+
+                                    <button value="<?=$row->serial_number?>" onclick="getDonorDetails(this.value)" data-toggle="modal" data-target="#editDonorDetails" class="col-md-10 btn btn-success py-1 px-2 my-1"><i class="fa fa-edit" data-toggle="tooltip" data-placement="left" title="View Or Edit Donor Details"></i> / <i class="fa fa-eye" data-toggle="tooltip" data-placement="left" title="View Or Edit Donor Details"></i></button>
+
                                     </td>
                                 </tr>
                                     <?php endforeach ?>
@@ -342,12 +343,7 @@
                                     <th>Firstname</th>
                                     <th>Middle_name</th>
                                     <th>Lastname</th>
-                                    <th>Hospital</th>
-                                    <th>Donation_Site</th>
-                                    <th>Date_Of_Last_Donation</th>
-                                    <th>Number_Of_Donations</th>
-                                    <th>Comment</th>
-                                    <th>Blood_Group</th>
+                                    <th>Donation Status</th>
                                     <th class="noExport">Action</th>
                                 </tr>
                             </thead>
@@ -359,13 +355,8 @@
                                     <th>Firstname</th>
                                     <th>Middle name</th>
                                     <th>Lastname</th>
-                                    <th>Hospital</th>
-                                    <th>Donation_Site</th>
-                                    <th>Date_Of_Last_Donation</th>
-                                    <th>Number_Of_Donations</th>
-                                    <th>Comment</th>
-                                    <th>Blood Group</th>
-                                    <th>Action</th>
+                                    <th>Donation Status</th>
+                                    <th class="noExport">Action</th>
                                 </tr>
                             </tfoot>
                             <tbody>
@@ -376,21 +367,32 @@
                                 <?php else: ?>
                                     <?php foreach ($donorsAllDb as $row1): ?>
                                 <tr>
-                                    <td><?=$num2 = $num2 + 1?></td>
-                                    <td><?=$row1->sample_id?></td>
+                                    <td><?php$num2=0; $num2 = $num2 + 1?></td>
+                                    <td><?=$row1->donor_id?></td>
                                     <td><?=$row1->donor_fname?></td>
                                     <td><?=$row1->donor_mname?></td>
                                     <td><?=$row1->donor_lname?></td>
-                                    <td><?=$row1->hospital_name?></td>
-                                    <td><?=$row1->donation_site_name?></td>
-                                    <td><?=$row1->doldon?></td>
-                                    <td><?=$row1->numofdonation?></td>
-                                    <td><?=$row1->comment?></td>
-                                    <td><?=$row1->blood_group?></td>
+                                    <td>
+                                       <?php if ($row->donation_status == "Can Donate"){ ?>
+                                                <span class="bg-success text-white py-1 px-1">Can Donate <i class="fa fa-map-marker"></i></span>
+                                       <?php }elseif($row->donation_status == ""){ ?>
+                                           <span>Under Review....</span>
+                                        <?php }else{ ?>
+                                            <span class="bg-danger text-white py-1 px-1">Can Not Donate <i class="fa fa-close"></i></span>
+                                       
+                                        <?php }?>
+                                    </td>
                                     <td class="noExport">
-                                        <!-- <button value="<?=$row1->serial_number?>" class="btn btn-danger py-1 px-2 my-1" onclick="getval(this.value)" data-toggle="modal" data-target="#delete_employee"><i class="fa fa-trash-o "></i></button> -->
+                                       <button value="<?=$row->donor_id?>" class="col-md-10 btn btn-primary mx-1 py-1 px-2 my-1" data-toggle="tooltip" data-placement="left" title="Donation History"><i class="fa fa-paste"></i>
+                                        </button>
 
-                                        <button value="<?=$row1->serial_number?>" onclick="getDonorDetails(this.value)" data-toggle="modal" data-target="#editDonorDetails" class="btn btn-success py-1 px-2 my-1"><i class="fa fa-eye"></i></button>
+                                    <a href="<?=base_url()?>/Listdonors/donor_print/<?=$row->donor_id?>" target="_blank" class="col-md-10 btn btn-warning mx-1 py-1 px-2 my-1" data-toggle="tooltip" data-placement="left" title="Print Donor's Details"><i class="fa fa-print"></i>
+                                    </a>
+
+                                    <!-- <button value="<?=$row->serial_number?>" class="col-md-10 btn btn-danger mx-1 py-1 px-2 my-1" onclick="getval(this.value)" data-toggle="modal" data-target="#delete_employee"><i class="fa fa-trash-o " data-toggle="tooltip" data-placement="left" title="Delete a Donor"></i></button>
+
+                                    <button value="<?=$row->serial_number?>" onclick="getDonorDetails(this.value)" data-toggle="modal" data-target="#editDonorDetails" class="col-md-10 btn btn-success py-1 px-2 my-1"><i class="fa fa-edit" data-toggle="tooltip" data-placement="left" title="View Or Edit Donor Details"></i> / <i class="fa fa-eye" data-toggle="tooltip" data-placement="left" title="View Or Edit Donor Details"></i></button> -->
+
                                     </td>
                                 </tr>
                                     <?php endforeach ?>

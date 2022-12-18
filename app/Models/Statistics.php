@@ -15,14 +15,13 @@ class Statistics extends Model
 	}
 
 
-	public function getStatistics1($hospital_id)
+	public function getStatistics1($hospital_id,$year)
 	{
 
-     $builder = $this->db->table('donors');
-     $builder->join('donation_sites','hospital_id');
-		$builder->where('donors.hospital_id',$hospital_id);
+     $builder = $this->db->table('donations');
+     $builder->join('donation_sites','site_id');
+		$builder->where('donations.site_id',$hospital_id);
 		$builder->where('donation_sites.hospital_id',$hospital_id);
-		//$builder->groupBy('serial_number','ASC');
 		$builder->select("*");
 		$result = $builder->get();
 
@@ -37,15 +36,15 @@ class Statistics extends Model
 	}
 
 
-	public function getStatistics($hospital_id)
+	public function getStatistics($hospital_id,$year)
 	{
 		$years = date("Y");
 
-     $query = $this->db->query("SELECT COUNT(serial_number) AS num , donation_site_name FROM donors INNER JOIN donation_sites ON donors.site_id=donation_sites.site_id WHERE donors.hospital_id='$hospital_id' AND donation_sites.hospital_id='$hospital_id' AND date_of_donation LIKE '%$years%' GROUP BY donation_sites.donation_site_name");
+     $query = $this->db->query("SELECT COUNT(donation_id) AS num , donation_site_name FROM donations INNER JOIN donation_sites ON donations.site_id=donation_sites.site_id WHERE donation_sites.hospital_id='$hospital_id' AND donations.year_added = '$year' GROUP BY donation_sites.donation_site_name");
      $result = $query->getResult();            
 
 	if (count($result) == null) {
-		return $hospital_id;
+		return $year;
 	}else{
 		return $result;
 	}

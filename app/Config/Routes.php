@@ -17,7 +17,7 @@ if (file_exists(SYSTEMPATH . 'Config/Routes.php')) {
  * --------------------------------------------------------------------
  */
 $routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('Home');
+$routes->setDefaultController('Login');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
@@ -77,14 +77,14 @@ $routes->group('',['filter'=>'isLogedin'],function($routes){
     $routes->get('printData/(:any)/(:num)','DonorSection::printdata/$1/$2');
     $routes->get('upcoming/(:num)','Dashboard::upcoming/$1');
     $routes->get('reports/(:num)','Dashboard::reports/$1');
-    $routes->get('statistics/(:num)','Dashboard::statisticsdata/$1');
+    $routes->get('statistics/(:any)/(:num)','Dashboard::statisticsdata/$1/$2');
 
 });
 
 $routes->group('',['filter'=>'notIsLoggedIn'],function($routes){
-    $routes->get('','Login::index');
-    $routes->get('login','Login::index');
-    $routes->get('/', 'Home::index');
+    $routes->get('/','Login::index');
+    // $routes->get('login','Login::index');
+    $routes->get('/', 'Login::index');
 });
 
 /*$routes->get('auth/login','Login::index');*/

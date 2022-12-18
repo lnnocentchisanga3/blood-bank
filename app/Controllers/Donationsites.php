@@ -31,7 +31,7 @@ class Donationsites extends Controller
 
 		$data = [];
 		$data['sites'] = $this->alldonors->where('hospital_id',$hospital_id)->groupBy('site_id','ASC')->findAll();
-		$data['userdata'] = session('logged_in', $user);
+		$data['userdata'] = session('logged_in');
 		$data['sites'] = $this->sites->getAllSites($hospital_id);
 
 		return view('donationsites',$data);
@@ -45,11 +45,15 @@ class Donationsites extends Controller
 		$data['title']= "Blood Donation Report on Donation Site _____________________________";
 		$data['sitedata'] = $this->alldonors->join('donation_sites','site_id')
 											  ->where('donors.site_id',$site)->findAll();
-		$data['siteview'] = $this->alldonors->join('donation_sites','site_id')
-											  ->where('donors.site_id',$site)->groupBy('date_of_donation','DESC')->findAll();
+		$data['siteview'] = $this->alldonors
+							->join('donation_sites','site_id')
+							->join('donations','site_id')
+							->where('donors.site_id',$site)
+							->groupBy('date_of_donation','DESC')->findAll();
 
-		$data['userdata'] = session('logged_in', $user);
+		$data['userdata'] = session('logged_in');
 		$data['sites'] = $this->sites->getAllSites($hospital_id);
+		$data['site_id'] = $site;
 
 		return view('viewsite',$data);
 	}
@@ -61,18 +65,31 @@ class Donationsites extends Controller
 		}
 		$dateod = $date1."/".$date2."/".$date3;
 		$dat = $date1."-".$date2."-".$date3;
-		$dateod1 = str_replace("--","",$dat);
+		$dateod1 = str_replace("//","",$dat);
 
-		$user = session('logged_in', $user);
+		$user = session('logged_in');
 		$data['title']= "Blood Donation Report On ".str_replace("//", "",$dateod)." Donation Site _____________________________";
-		$data['sitedata'] = $this->alldonors->where('site_id',$site)
-											  ->where('date_of_donation',$dateod)->findAll();
-		$data['siteview'] = $this->alldonors->join('donation_sites','site_id')
-											  ->where('donors.site_id',$site)->groupBy('date_of_donation','DESC')->findAll();
-		$data['sitedata1'] = $this->alldonors->where('site_id',$site)
-											  ->where('date_of_donation',$dateod1)->findAll();
+		$data['sitedata'] = $this->alldonors
+							->join('donation_sites','site_id')
+							->join('donations','site_id')
+							->where('donors.site_id',$site)
+							->where('donations.date_of_donation',str_replace("//","",$dateod))
+							->groupBy('date_of_donation','DESC')->findAll();
 
-		$data['userdata'] = session('logged_in', $user);
+		$data['siteview'] = $this->alldonors
+							->join('donation_sites','site_id')
+							->join('donations','site_id')
+							->where('donors.site_id',$site)
+							->groupBy('date_of_donation','DESC')->findAll();
+
+		$data['sitedata1'] = $this->alldonors
+							->join('donation_sites','site_id')
+							->join('donations','site_id')
+							->where('donors.site_id',$site)
+							->where('date_of_donation',str_replace("--","",$dateod1))
+							->groupBy('donors.donor_id','DESC')->findAll();
+
+		$data['userdata'] = session('logged_in');
 		$data['para'] = $dateod;
 		$data['para1'] = $dateod1;
 		$data['sites'] = $this->sites->getAllSites($user['hospital_id']);
@@ -90,7 +107,7 @@ class Donationsites extends Controller
 											  ->where('donors.site_id',$site)->findAll();
 		$data['sites'] = $this->sites->getAllSites($hospital_id);
 
-		$data['userdata'] = session('logged_in', $user);
+		$data['userdata'] = session('logged_in');
 		return view('donordataclerk/viewsite',$data);
 	}
 
@@ -130,7 +147,7 @@ class Donationsites extends Controller
 		if ($this->request->getMethod() == "post") {
 
 					
-					$sitedata = $this->request->getVar('site');
+					$sitedata = $this->request->getVar('site',FILTER_SANITIZE_STRING);
 						
 
 			if ($this->sites->editsite($site,$sitedata)) {
@@ -149,7 +166,7 @@ class Donationsites extends Controller
 		$data['sites'] = $this->sites->getAllSites($hospital_id);
 
 
-		$data['userdata'] = session('logged_in', $user);
+		$data['userdata'] = session('logged_in');
 		return view('editsitedetails',$data);
 	}
 
@@ -161,7 +178,7 @@ class Donationsites extends Controller
 		if ($this->request->getMethod() == "post") {
 
 					
-					$sitedata = $this->request->getVar('site');
+					$sitedata = $this->request->getVar('site',FILTER_SANITIZE_STRING);
 						
 
 			if ($this->sites->editsite($site,$sitedata)) {
@@ -178,7 +195,7 @@ class Donationsites extends Controller
 		$data['title']= "ZNBTS DONOR'S DATA";
 		$data['site'] = $this->sites->getSite($site);
 
-		$data['userdata'] = session('logged_in', $user);
+		$data['userdata'] = session('logged_in');
 		$data['sites'] = $this->sites->getAllSites($hospital_id);
 
 		return view('donordataclerk/editsitedetails',$data);
@@ -193,7 +210,7 @@ class Donationsites extends Controller
 		$data['title']= "Blood Donation Report on Donation Site _____________________________";
 		$data['sitedata'] = $this->alldonors->join('donation_sites','site_id')
 											  ->where('donors.site_id',$site)->findAll();
-		$data['userdata'] = session('logged_in', $user);
+		$data['userdata'] = session('logged_in');
 		$data['sites'] = $this->sites->getAllSites($hospital_id);
 
 		return view('viewprint',$data);
@@ -212,7 +229,26 @@ class Donationsites extends Controller
 		
 		$data['sitedata'] = $this->alldonors->join('donation_sites','site_id')
 											  ->where('donors.site_id',$site)->findAll();
-		$data['userdata'] = session('logged_in', $user);
+		$data['userdata'] = session('logged_in');
+		return view('donordataclerk/viewprint',$data);
+
+			// echo view(var_dump($data['sitedata']));
+	}
+
+
+	public function oneSiteViewList($hospital_id=null,$site=null)
+	{
+		if (!session()->has('logged_in')) {
+			return redirect()->to(base_url());
+		}
+
+		$data['title']= "Blood Donation Report on Donation Site _____________________________";
+		$data['sites'] = $this->sites->getAllSites($hospital_id);
+		$data['site_id'] = $site_id;
+		
+		$data['donors'] = $this->alldonors->join('donation_sites','site_id')
+											  ->where('donors.site_id',$site)->findAll();
+		$data['userdata'] = session('logged_in');
 		return view('donordataclerk/viewprint',$data);
 
 			// echo view(var_dump($data['sitedata']));

@@ -5,7 +5,7 @@
 <div class="content">
 <div class="row">
 <div class="col-sm-12">
-    <h4 class="page-title"><a href="<?=base_url()?>/dashboard/<?=$userdata['hospital_id']?>">Home</a> / Donors / Add a Donor</h4>
+    <h4 class="page-title"><a href="<?=base_url()?>/dashboard/<?=$userdata['hospital_id']?>">Home</a> / Donors / Add a Donation</h4>
 
     <?php if (session()->getTempdata('Success')): ?>
     <div class="alert alert-success">
@@ -29,90 +29,86 @@
 </div>
 </div>
 <div class="row">
-<div class="col-sm-12">
+
+  <div class="row">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+        <!-- <a class="nav-link btn btn-success mx-2 mb-2" href="<?=base_url()?>/adddonors/<?=$userdata['hospital_id']?>/<?=$site_id?>"><i class="fa fa-plus"></i> Add a Donation</a> -->
+          <a class="nav-link btn btn-primary mx-2 mb-2" href="<?=base_url()?>/oneAdddonor/<?=$userdata['hospital_id']?>/<?=$site_id?>"><i class="fa fa-user-plus"></i> Add new Donor</a>
+           <!-- <a class="nav-link btn btn-dark mx-2 mb-2" href="dashboard.php?addCoursePage"><i class="fa fa-plus"></i> Add new Course</a>
+           <a class="nav-link btn btn-danger mx-1 mb-2" href="dashboard.php?showCourse"><i class="fa fa-folder"></i> view course</a> -->
+        </nav>
+    </div>
+
+<div class="col-md-12">
     <div class="card-box">
         <div class="card-block">
-            <!-- <h6 class="card-title text-bold">Default Datatable</h6>
-            <p class="content-group">
-                This is the most basic example of the datatables with zero configuration. Use the <code>.datatable</code> class to initialize datatables.
-            </p> -->
-
-      <div class="table-responsive">
-        <div class="container-fluid">
           <div class="row">
-            <div class="col-md-10"></div>
-            <div class="col-md-2"><a href="<?=base_url()?>/listdonors/<?=$userdata['hospital_id']?>" class="btn btn-primary my-3 btn-rounded"><i class="fa fa-folder-open"></i> View Donors</a></div>
-          </div>
-        </div>
+            <div class="col-md-12">
+              <div class="table-responsive">
+                <table class="table table-stripped " id="dataTable2">
+                  <thead>
+                      <tr>
+                          <th>NO#</th>
+                          <th>Donor_ID</th>
+                          <th>Firstname</th>
+                          <th>Middle_name</th>
+                          <th>Lastname</th>
+                          <th>Donation_Status</th>
+                          <th class="noExport">Action</th>
+                      </tr>
+                  </thead>
 
-        <div class="input-group">
-          <label class="text-center col-md-12">Enter the number of Donors you want to add</label><br>
-        <input type="number" name="num" id="numberOfDonors" class="form-control col-md-6 offset-md-3 ">
-        <button class="btn btn-primary" onclick="createInputs()">Add Input</button>
-       </div>
+                  <!-- <tfoot>
+                      <tr>
+                          <th>NO#</th>
+                          <th>Sampe ID</th>
+                          <th>Firstname</th>
+                          <th>Middle name</th>
+                          <th>Lastname</th>
+                          <th>Donation Status</th>
+                          <th class="noExport">Action</th>
+                      </tr>
+                  </tfoot> -->
+                  <tbody>
+                     <?php if ($donors == null): ?>
+                      <!-- <tr>
+                          <td>No data is available here</td>
+                      </tr> -->
+                      <?php else: ?>
+                          <?php foreach ($donors as $row): ?>
+                      <tr>
+                          <td><?=$num1 = $num1 + 1?></td>
+                          <td><?=$row->donor_id?></td>
+                          <td><?=$row->donor_fname?></td>
+                          <td><?=$row->donor_mname?></td>
+                          <td><?=$row->donor_lname?></td>
+                          <td>
+                              <?php if ($row->donation_status == "Can Donate"){ ?>
+                                  <span class="bg-success text-white py-1 px-1">Can Donate <i class="fa fa-map-marker"></i></span>
+                             <?php }elseif($row->donation_status == ""){ ?>
+                                 <span>Under Review....</span>
+                              <?php }else{ ?>
+                                  <span class="bg-danger text-white py-1 px-1">Can Not Donate <i class="fa fa-close"></i></span>
+                             
+                              <?php }?>
+                          </td>
+                          <td class="noExport">
+                              <button value="<?=$row->donor_id?>" class="col-md-12 btn btn-primary mx-1 py-1 px-2 my-1" onclick="getDonorId(this.value)" data-toggle="modal" data-target="#addaDonation"><i class="fa fa-plus" data-toggle="tooltip" data-placement="left" title="Donate Blood"></i></button>
 
-       <form action="<?=base_url()?>/adddonors/index/<?=$userdata['hospital_id']?>" method="POST">
-       <div class="input-group col-md-12 my-4 container">
-          <div class="row">
-          <label class="px-2 my-2 col-md-2">Date of Donation</label>
-        <div class="col-md-10">
-         <!--  <div class="cal-icon"> -->
-          <input type="date" name="dod" class="form-control" value="<?=set_value('dod')?>" required>
-        <!-- </div> -->
-        </div><br><br><br>
-        <label class="px-2 my-2 col-md-2">Date of Next Donation</label>
-        <div class="col-md-10">
-          <!-- <div class="cal-icon"> -->
-          <input type="date" name="donextd" class="form-control" value="<?=set_value('dod')?>" required>
-        <!-- </div> -->
-        </div>
-        <input type="text" name="province" value="<?=$userdata['province_id']?>" hidden>
-        <input type="text" name="district" value="<?=$userdata['district_id']?>" hidden>
+                              <button value="<?=$row->serial_number?>" onclick="getDonorDetails(this.value)" data-toggle="modal" data-target="#editDonorDetails" class="col-md-12 btn btn-success py-1 px-2 my-1"><i class="fa fa-edit" data-toggle="tooltip" data-placement="left" title="View Or Edit Donor Details"></i></button>
 
-        <label class="px-2 my-2 col-md-2">Donation Site</label>
-         <select name="site" class="form-control">
-          <?php if ($sites == null || $sites == '' || $sites == 0): ?>
-            <option>0 Sites Found</option>
-          <?php else: ?>
-            <?php foreach ($sites as $row): ?>
-              <option value="<?=$row['site_id']?>"><?=$row['donation_site_name']?></option>
-            <?php endforeach ?>
-          <?php endif ?>
-        </select>
-        </div>
-       </div>
+                              <a href="<?=base_url()?>/Listdonors/donor_print/<?=$row->donor_id?>" target="_blank" class="col-md-12 btn btn-warning mx-1 py-1 px-2 my-1" data-toggle="tooltip" data-placement="left" title="Print Donor's Details"><i class="fa fa-print"></i>
+                              </a>
 
-        <table class="table table-stripped" style="width: 100%;">
-        <thead>
-        <tr>
-          <!-- <th>No#</th> -->
-        <th>Donor_SampleID</th>
-        <th>Donor_Firstname</th>
-        <th>Donor_Middlename</th>
-        <th>Donor_Lastname</th>
-        <th>HIV(1,2,22,R)</th>
-        <th>HBV(1,2,22,R)</th>
-        <th>HCV(1,2,22,R)</th>
-        <th>Syphilis(1,2,22,R)</th>
-        <th>Status_Comment</th>
-        <th>Blood_Group</th>
-        <th>Remove</th>
-        </tr>
-
-        </thead>
-        <tbody id="myOrder">
-        <!-- <tr>
-          <td><img src="<?=base_url()?>/public/assets/img/load-indicator.gif"></td>
-        </tr> -->
-        </tbody>
-        </table>
-
-        <div class="box-footer" >
-        <input type="submit"  value="Submit" name="submit" class="btn btn-primary btn-rounded my-3">
-        <!-- <a href="order.php" class="btn btn-warning">Kembali</a> -->
-        </div>
-        <?=form_close()?>
-      </div>
+                          </td>
+                      </tr>
+                          <?php endforeach ?>
+                     <?php endif ?>
+                  </tbody>
+              </table>
+              </div>
+            </div>
+          </div> 
         </div>
     </div>
 </div>
@@ -120,110 +116,40 @@
 </div>
 </div>
 
+<div id="addaDonation" class="modal fade delete-modal" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+              <h4 style="font-weight: bold;" class="col-md-12 text-uppercase py-2 border-bottom">Adding Donation Details</h4>
+                <form action="<?=base_url()?>/adddonors/index/<?=$userdata['hospital_id']?>/<?=$site_id?>" method="POST">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <label>Date Of Donation</label>
+                      <input type="date" name="dod" class="form-control" value="<?=date('Y-m-d')?>">
+                    </div>
+                    <div class="col-md-6">
+                      <label>Date Of Next Donation</label>
+                      <input type="date" name="donextd" class="form-control" placeholder="Date of Next Donation" required>
+                    </div>
+                  </div>
+                  <label>Sample ID</label>
+                  <input type="text" name="sampleid" class="form-control" placeholder="Sample ID" required>
+                  <label>Donor ID</label>
+                  <input type="text" name="donor_id" class="form-control" id="donorId" readonly>
+
+                  <div class="m-t-20 text-center">
+                      <button class="btn btn-primary submit-btn text-white">Save Details</button>
+                  </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
-    /*script to take input number*/
-
-    function createInputs() {
-        let num = document.getElementById('numberOfDonors').value;
-
-        if (num == null || num == 0){
-          document.getElementById('inputAlert').innerHTML = addAlert("Please enter a number greater than or equal to 1 and not greater than 10");
-        }else if (num > 10){
-          document.getElementById('inputAlert').innerHTML = addAlert("The number provided is greater than 10");
-        }else if (num < 0){
-          document.getElementById('inputAlert').innerHTML = addAlert("Nagative numbers are not allowed");
-        }else{
-          localStorage.setItem('numInputs', num);
-
-         location.reload();
-
-        getInputFieldNumber();
-        }
+    function getDonorId(uid) {
+        document.getElementById('donorId').setAttribute('value',uid);
     }
-
-    function addAlert(msg) {
-      var html = "";
-
-      html+='<div class="alert alert-danger ">';
-      html+='<button type="button" class="close" data-dismiss="alert">&times;</button>';
-      html+='<strong>warning ! </strong>'+msg;
-      html+='</div>';
-
-      return html;
-    }
-
-
-    /*Ends here*/
-
-
-    /*Script to load input fields*/
-    function getInputFieldNumber(){
-
-    let i = "";
-    let html = "";
-
-
-
-
-        html+='<tr>';
-        /*html +='<td><input type="number" class="form-control" id="num" readonly></td>';*/
-
-        html+='<td><input type="text" class="form-control" required placeholder="Sample ID" name="sampleid[]" <?=set_value('sampleid[]')?> ></td>';
-
-        html+='<td><input type="text" class="form-control" required placeholder="Firstname" name="fnames[]" <?=set_value('')?>></td>';
-        html+='<td><input type="text" class="form-control"  placeholder="Middle name (Optional)" name="mnames[]" <?=set_value('')?>></td>';
-        html+='<td><input type="text" class="form-control" required placeholder="Lastname" name="lnames[]" <?=set_value('')?>></td>';
-
-        html+='<td><select class="form-control" name="hiv[]" <?=set_value('hiv[]')?>><option>0</option><option>1</option><option>2</option><option>22</option><option>R</option></select></td>';
-        html+='<td><select class="form-control" name="hbv[]" <?=set_value('hbv[]')?>><option>0</option><option>1</option><option>2</option><option>22</option><option>R</option></select></td>';
-        html+='<td><select class="form-control" name="hcv[]" <?=set_value('hcv[]')?>><option>0</option><option>1</option><option>2</option><option>22</option><option>R</option></select></td>';
-        html+='<td><select class="form-control" name="syphilis[]" <?=set_value('syphilis[]')?>><option>0</option><option>1</option><option>2</option><option>22</option><option>R</option></select></td>';
-        html+='<td><input type="text" class="form-control" placeholder="Comment" name="comment[]"<?=set_value('comment[]')?>></td>';
-        html+='<td><select class="form-control" name="group"><option>0</option><option>A</option><option>B</option><option>O</option><option>A+</option><option>A-</option><option>O+</option><option>O-</option></select></td>';
-        html+='<td><button type="button" name="remove" class="btn btn-danger btn-sm btn-remove"><i class="fa fa-remove"></i></button></td>'
-        html+='</tr>'
-
-        let number = localStorage.getItem("numInputs");
-
-        if (number == null || number == 0){
-
-        }else{
-          while(i < number){
-          $('#myOrder').append(html);
-          /*document.getElementById('num').value = i+1;*/
-
-          i++;
-        }
-        }
-
-     
-
-      $(document).on('click','.btn-remove', function(){
-        $(this).closest('tr').remove();
-        let num = localStorage.getItem("numInputs");
-        let total = num-1;
-        localStorage.setItem('numInputs', total);
-        calculate(0,0);
-        $("#paid").val(0);
-      });
-  }
-
-  $(document).ready(function(){
-    getInputFieldNumber();
-  });
-/*Ends here*/
-
-
-    $(document).ready(function(){
-
-      $(document).on('click','.btn-remove', function(){
-        $(this).closest('tr').remove();
-        calculate(0,0);
-        $("#paid").val(0);
-      })
-
-    });
 </script>
 
 

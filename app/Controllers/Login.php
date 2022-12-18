@@ -20,66 +20,56 @@ class Login extends BaseController
 		$data = [];
 		
 		if (session()->has('logged_in')) {
-			$data['info'] = "You are still logged in Please go back and then Logout";
+			$user = session('logged_in');
+			return redirect()->to(base_url()."/dashboard/".$user['hospital_id']);
 		}
 		
-
 		
 		$rules = [
 			'email' => 'required',
 			'password' => 'required'
 			  ];
 		$data['title'] = "ZNBTS | Login";
-
+        $data['brand'] = "Blood Bank Database";
 
 		if ($this->request->getMethod() == 'post') {
 			if ($this->validate($rules)) {
 				
-					$email = $this->request->getVar('email');
-					$password = $this->request->getVar('password');
+					$email = $this->request->getVar('email',FILTER_SANITIZE_STRING);
+					$password = $this->request->getVar('password',FILTER_SANITIZE_STRING);
 
-					$userdata = $this->loginModel->verifyEmail($email,$password);
+					$userdata = $this->loginModel->verifyEmail($email);
 
 					$throttler = \Config\Services::throttler();
 					$allowed = $throttler->check('auth',3,MINUTE);
 
 					if ($allowed) {
-						if ($userdata) {
+					if ($userdata) {
 
+						$hash_password = md5($password);
+
+						if ($hash_password == $userdata['password']) {
 							$this->session->set('logged_in',$userdata);
-							return redirect()->to(base_url()."/dashboard/".$userdata['hospital_id']);
+						return redirect()->to(base_url()."/dashboard/".$userdata['hospital_id']);
+						}else{
+
+							$this->session->setTempdata('error','Sorry the Password You Entered is Invalid',3);
+							return redirect()->to(current_url());
+						}
 							
-						// switch ($userdata['user_role']) {
-						// 	case 'admin':
-						// 		$this->session->set('logged_in',$userdata);
-						// 		return redirect()->to(base_url()."/dashboard/".$userdata['hospital_id']);
-						// 		break;
-						// 	case 'donor_section':
-						// 		$this->session->set('logged_in',$userdata);
-						// 		return redirect()->to(base_url()."/donorsection/".$userdata['hospital_id']);
-						// 		break;
-						// 	case 'donor_data_clerk':
-						// 		$this->session->set('logged_in',$userdata);
-						// 		return redirect()->to(base_url()."/donordataclerk/".$userdata['hospital_id']);
-						// 		break;
-							
-						// 	default:
-						// 		$this->session->setTempdata('error','Sorry You have not been assigned any Role on a system Contact the administrator to assign you',3);
-						// 		return redirect()->to(current_url());
-						// 		break;
-						// }
 					}else{
 
-						$this->session->setTempdata('error','Sorry your credentials are Invalid',3);
+						$this->session->setTempdata('error','Sorry Your User ID is Invalid',3);
 						return redirect()->to(current_url());
 					}
 					}else{
-						$data['loginerrors'] = "You have exceded your login attempts, please try again later";
+						$this->session->setTempdata('error','You have exceded your login attempts, please try again later',3);
+						return redirect()->to(current_url());
 					}
 					}else{
 						$data['validation'] = $this->validator;
 					}
-		}
+						}
 
 		// var_dump($userdata);
 		return view('auth/login',$data);
@@ -94,7 +84,7 @@ class Login extends BaseController
 		$data = [];
 
 		$data['staffs'] = $this->loginModel->getStaffs($hospital_id);
-		$data['userdata'] = session('logged_in', $user);
+		$data['userdata'] = session('logged_in');
 
 
 		$data['title'] = "System Users";
@@ -110,7 +100,7 @@ class Login extends BaseController
 		$data = [];
 
 		$data['staff'] = $this->loginModel->getStaffOne($user_id);
-		$data['userdata'] = session('logged_in', $user);
+		$data['userdata'] = session('logged_in');
 		$data['title'] = "System Users";
 
 		if ($this->request->getMethod() == "post") {
@@ -148,7 +138,7 @@ class Login extends BaseController
 		}
 
 		$data = [];
-		$data['userdata'] = session('logged_in', $user);
+		$data['userdata'] = session('logged_in');
 		$data['title'] = "Adding Staff Members";
 
 		$rules = [

@@ -12,9 +12,10 @@
 	<![endif]-->
         <style>
     .bg-login{
-            background-image:linear-gradient(rgba(0, 0, 0, 0.4),rgba(0, 0, 0, 0.9)),url(<?= base_url();?>/public/assets/img/donor.jpg);
+            background-image:linear-gradient(rgba(0, 0, 0, 0.4),rgba(0, 0, 0, 0.9)),url(<?= base_url();?>/public/assets/img/bg.webp);
             background-size: cover;
             background-attachment: fixed;
+
         }
         </style>
 </head>

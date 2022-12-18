@@ -6,14 +6,6 @@
 
     <div class="row">
 <div class="col-sm-12">
-    
-
-    <?php if (session()->getTempdata('Success')): ?>
-    <div class="alert alert-success">
-      <button type="button" class="close" data-dismiss="alert">&times;</button>
-     <strong>Success!</strong> <?=session()->getTempdata('Success');?>
-    </div>
-  <?php endif ?>
 
 </div>
 </div>
@@ -54,17 +46,50 @@
 
 <?php if ($siteview == null || $siteview == ''): ?>
 <h4 class="col-md-12 text-center my-5">
+
     <img src="<?=base_url()?>/public/assets/img/sent.png"><br><br>
-There are no Donation dates found from this Donation Site </h4>
+There are no Donation dates found from this Donation Site <br><br>
+
+<a href="<?=base_url()?>/adddonors/<?=$userdata['hospital_id']?>/<?=$site_id?>" class="btn btn-success mx-2"><i class="fa fa-plus"></i> Add a donation</a>
+
+<a href="<?=base_url()?>/oneAdddonor/<?=$userdata['hospital_id']?>/<?=$site_id?>" class="btn btn-primary mx-2"><i class="fa fa-user-plus"></i> Add a Donor</a>
+
+<a class="btn btn-danger mx-2" href="<?=base_url()?>/Donationsites/oneSiteViewList/<?=$userdata['hospital_id']?>/<?=$site_id?>"><i class="fa fa-users"></i> List Donors</a>
+
+</h4>
 <?php else: ?>
 
 <div class="page-wrapper" style="margin-top: -100px;">
 <div class="content">
     <div class="row">
+
         <div class="col-sm-12">
-            <h4 class="page-title text-uppercase">List of all the donation Dates from <?=$siteview[0]->donation_site_name;?></h4>
+            <h4 class="page-title text-uppercase">List of all the donation Dates from <strong><?=$siteview[0]->donation_site_name;?></strong></h4>
         </div>
+
+
+    <div class="row">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+
+          <a class="nav-link btn btn-success mx-2 mb-2" href="<?=base_url()?>/adddonors/<?=$userdata['hospital_id']?>/<?=$site_id?>"><i class="fa fa-plus"></i> Add a Donation</a>
+
+          <a class="nav-link btn btn-primary mx-2 mb-2" href="<?=base_url()?>/oneAdddonor/<?=$userdata['hospital_id']?>/<?=$site_id?>"><i class="fa fa-user-plus"></i> Add new Donor</a>
+
+           <a class="nav-link btn btn-danger mx-2 mb-2" href="<?=base_url()?>/Donationsites/oneSiteViewList/<?=$userdata['hospital_id']?>/<?=$site_id?>"><i class="fa fa-users"></i> List Donors</a>
+
+           <!-- <a class="nav-link btn btn-danger mx-1 mb-2" href="dashboard.php?showCourse"><i class="fa fa-folder"></i> view course</a> -->
+        </nav>
     </div>
+
+    </div>
+
+    <?php if (session()->getTempdata('Success')): ?>
+    <div class="alert alert-success">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+     <strong>Success!</strong> <?=session()->getTempdata('Success');?>
+    </div>
+  <?php endif ?>
+
     <div class="row">
     <?php foreach ($siteview as $row): ?>
         <div class="col-md-4 col-sm-4  col-lg-3">

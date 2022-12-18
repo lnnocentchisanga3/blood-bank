@@ -5,7 +5,7 @@
 <div class="content">
 <div class="row">
 <div class="col-sm-12">
-    <h4 class="page-title"><a href="<?=base_url()?>/dashboard/<?=$userdata['hospital_id']?>">Home</a> / <a href="<?=base_url()?>/addsites/<?=$userdata['hospital_id']?>">Donation Sites</a> / Editing <strong><?=$site[0]['donation_site_name']?></strong></h4>
+    <h4 class="page-title"><a href="<?=base_url()?>/dashboard/<?=$userdata['hospital_id']?>">Home</a> / <a href="<?=base_url()?>/addsites/<?=$userdata['hospital_id']?>">Donation Sites</a> / Editing <strong><?=$site[0]->donation_site_name?></strong></h4>
 
     <?php if (session()->getTempdata('Success')): ?>
     <div class="alert alert-success">
@@ -40,9 +40,9 @@
         <button class="btn btn-primary" onclick="createInputs()">Add Input</button>
        </div> -->
 
-       <form action="<?=base_url()?>/donationsites/editSite/<?=$site[0]['site_id']?>/<?=$userdata['hospital_id']?>" method="POST">
+       <form action="<?=base_url()?>/donationsites/editSite/<?=$site[0]->site_id;?>/<?=$userdata['hospital_id']?>" method="POST">
         <label>Donation Site Name</label>
-        <input type="text" class="form-control" name="site" value="<?=$site[0]['donation_site_name']?>" >
+        <input type="text" class="form-control" name="site" value="<?=$site[0]->donation_site_name?>" >
         <div class="box-footer" >
         <input type="submit"  value="Save Changes" name="submit" class="btn btn-primary my-3">
         </div>

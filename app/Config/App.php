@@ -108,7 +108,7 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public $appTimezone = 'America/Chicago';
+    public $appTimezone = 'Africa/Lusaka';
 
     /**
      * --------------------------------------------------------------------------
@@ -162,7 +162,7 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public $sessionCookieName = 'ci_session';
+    public $sessionCookieName = 'NBTS_bloodbank';
 
     /**
      * --------------------------------------------------------------------------
@@ -174,7 +174,7 @@ class App extends BaseConfig
      *
      * @var int
      */
-    public $sessionExpiration = 7200;
+    public $sessionExpiration = 600;
 
     /**
      * --------------------------------------------------------------------------
@@ -231,7 +231,7 @@ class App extends BaseConfig
      *
      * @var bool
      */
-    public $sessionRegenerateDestroy = false;
+    public $sessionRegenerateDestroy = true;
 
     /**
      * --------------------------------------------------------------------------
@@ -283,7 +283,7 @@ class App extends BaseConfig
      *
      * @deprecated use Config\Cookie::$secure property instead.
      */
-    public $cookieSecure = false;
+    public $cookieSecure = true;
 
     /**
      * --------------------------------------------------------------------------
@@ -394,7 +394,7 @@ class App extends BaseConfig
      *
      * @var int
      */
-    public $CSRFExpire = 7200;
+    public $CSRFExpire = 600;
 
     /**
      * --------------------------------------------------------------------------

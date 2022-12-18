@@ -8,13 +8,6 @@
 <div class="col-sm-12">
     
 
-    <?php if (session()->getTempdata('Success')): ?>
-    <div class="alert alert-success">
-      <button type="button" class="close" data-dismiss="alert">&times;</button>
-     <strong>Success!</strong> <?=session()->getTempdata('Success');?>
-    </div>
-  <?php endif ?>
-
 </div>
 </div>
 <!-- <div class="row">
@@ -51,7 +44,6 @@
     </div>
 </div>
 
-
 <?php if ($siteview == null || $siteview == ''): ?>
 <h4 class="col-md-12 text-center my-5">
     <img src="<?=base_url()?>/public/assets/img/sent.png"><br><br>
@@ -62,14 +54,26 @@ There are no Donation dates found from this Donation Site </h4>
 <div class="content">
     <div class="row">
         <div class="col-sm-12">
-            <h4 class="page-title text-uppercase">List of all the donors from <?=$siteview[0]->donation_site_name;?> On 
-                <?php if ($para == null): ?>
+            <h4 class="page-title text-uppercase">List of all the donors from <strong><?=$siteview[0]->donation_site_name;?></strong> On 
+                <strong>
+                    <?php if ($para == null): ?>
                     <?=str_replace("//","",$para1)?>
                 <?php else: ?>
                     <?=str_replace("//","",$para)?>
-                <?php endif ?></h4>
+                <?php endif ?>
+                </strong></h4>
         </div>
     </div>
+
+    <?=""?>
+
+     <?php if (session()->getTempdata('Success')): ?>
+    <div class="alert alert-success">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+     <strong>Success!</strong> <?=session()->getTempdata('Success');?>
+    </div>
+  <?php endif ?>
+  
     <div class="row">
         <div class="card col-md-12">
             <div class="card-body">
@@ -78,7 +82,7 @@ There are no Donation dates found from this Donation Site </h4>
                     <div class="row">
                         <div class="col-md-9"></div>
                         <?php if ($userdata['user_role'] == 'admin' || $userdata['user_role'] == 'donor_data_clerk'): ?>
-                            <div class="col-md-3"><a href="<?=base_url()?>/adddonors/<?=$userdata['hospital_id']?>" class="btn btn-primary my-3 btn-rounded"><i class="fa fa-plus"></i> Add Donors</a></div>
+                            <!-- <div class="col-md-3"><a href="<?=base_url()?>/adddonors/<?=$userdata['hospital_id']?>" class="btn btn-primary my-3 btn-rounded"><i class="fa fa-plus"></i> Add Donors</a></div> -->
                         <?php endif ?>
                     </div>
                 </div>
@@ -86,6 +90,7 @@ There are no Donation dates found from this Donation Site </h4>
                 <thead>
                     <tr>
                         <th>NO#</th>
+                        <th>Donor_ID</th>
                         <th>Sampe_ID</th>
                         <th>Firstname</th>
                         <th>Middle_name</th>
@@ -100,9 +105,10 @@ There are no Donation dates found from this Donation Site </h4>
                     </tr>
                 </thead>
 
-                <tfoot>
+               <!--  <tfoot>
                     <tr>
                         <th>NO#</th>
+                        <th>Donor_ID</th>
                         <th>Sampe ID</th>
                         <th>Firstname</th>
                         <th>Middle name</th>
@@ -115,7 +121,7 @@ There are no Donation dates found from this Donation Site </h4>
                         <th>Blood Group</th>
                         <th>Action</th>
                     </tr>
-                </tfoot>
+                </tfoot> -->
                 <tbody>
                    <?php if ($sitedata == null ): ?>
 
@@ -127,7 +133,8 @@ There are no Donation dates found from this Donation Site </h4>
                         <?php else: ?>
                             <?php foreach ($sitedata1 as $row): ?>
                         <tr>
-                            <td><?=$num = $num + 1?></td>
+                            <td><?php $num=0; echo $num = $num + 1?></td>
+                            <td><?=$row->donor_id?></td>
                             <td><?=$row->sample_id?></td>
                             <td><?=$row->donor_fname?></td>
                             <td><?=$row->donor_mname?></td>
@@ -139,9 +146,9 @@ There are no Donation dates found from this Donation Site </h4>
                             <td><?=$row->comment?></td>
                             <td><?=$row->blood_group?></td>
                             <td class="noExport row">
-                                <button value="<?=$row->serial_number?>" class="btn btn-danger mx-2 py-1 px-2 my-1" onclick="getval(this.value)" data-toggle="modal" data-target="#delete_employee"><i class="fa fa-trash-o "></i></button>
+                                <button value="<?=$row->donation_id?>" class="btn btn-danger mx-2 py-1 px-2 my-1" onclick="getvalDonorDonation(this.value)" data-toggle="modal" data-target="#getvalDonorDonation"><i class="fa fa-trash-o "></i></button>
 
-                                <button value="<?=$row->serial_number?>" onclick="getDonorDetails(this.value)" data-toggle="modal" data-target="#editDonorDetails" class="btn btn-success py-1 px-2 my-1"><i class="fa fa-edit"></i></button>
+                                <button value="<?=$row->donation_id?>" onclick="getDonorDetails(this.value)" data-toggle="modal" data-target="#editDonorDetails" class="btn btn-success py-1 px-2 my-1"><i class="fa fa-edit"></i></button>
                             </td>
                         </tr>
                             <?php endforeach ?>
@@ -151,7 +158,8 @@ There are no Donation dates found from this Donation Site </h4>
                     <?php else: ?>
                         <?php foreach ($sitedata as $row): ?>
                     <tr>
-                        <td><?=$num = $num + 1?></td>
+                        <td><?php $num=0; echo $num = $num + 1?></td>
+                        <td><?=$row->donor_id?></td>
                         <td><?=$row->sample_id?></td>
                         <td><?=$row->donor_fname?></td>
                         <td><?=$row->donor_mname?></td>
@@ -163,9 +171,9 @@ There are no Donation dates found from this Donation Site </h4>
                         <td><?=$row->comment?></td>
                         <td><?=$row->blood_group?></td>
                         <td class="noExport row">
-                            <button value="<?=$row->serial_number?>" class="btn btn-danger mx-2 py-1 px-2 my-1" onclick="getval(this.value)" data-toggle="modal" data-target="#delete_employee"><i class="fa fa-trash-o "></i></button>
+                            <button value="<?=$row->donation_id?>" class="btn btn-danger mx-2 py-1 px-2 my-1" onclick="getvalDonorDonation(this.value)" data-toggle="modal" data-target="#getvalDonorDonation"><i class="fa fa-trash-o "></i></button>
 
-                            <button value="<?=$row->serial_number?>" onclick="getDonorDetails(this.value)" data-toggle="modal" data-target="#editDonorDetails" class="btn btn-success py-1 px-2 my-1"><i class="fa fa-edit"></i></button>
+                            <a href="<?=base_url()?>/edit_donor/<?=$row->donation_id?>/<?=$userdata['hospital_id']?>" class="btn btn-success py-1 px-2 my-1"><i class="fa fa-edit"></i></a>
                         </td>
                     </tr>
                         <?php endforeach ?>
@@ -180,12 +188,12 @@ There are no Donation dates found from this Donation Site </h4>
 </div>
 <?php endif ?>
 
-<div id="delete_employee" class="modal fade delete-modal" role="dialog">
+<div id="getvalDonorDonation" class="modal fade delete-modal" role="dialog">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-body text-center">
                         <i class="fa fa-trash-o fa-5x text-danger"></i>
-                        <h3>Are you sure want to delete this Donor Record?</h3>
+                        <h3>Are you sure want to delete this Donation Record?</h3>
                         <div class="m-t-20"> <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
                             <a id="addAttri" class="btn btn-danger">Delete</a>
                         </div>
@@ -195,8 +203,12 @@ There are no Donation dates found from this Donation Site </h4>
         </div>
 
         <script>
-            function getval(uid) {
-                document.getElementById('addAttri').setAttribute("href", "<?=base_url()?>/delete_donor/"+uid+"/<?=$userdata['hospital_id']?>");
+            function getvalDonorDonation(uid) {
+
+                // var url = "<?=base_url()?>/"+window.location.pathname;
+                document.getElementById('addAttri').setAttribute("href", "<?=base_url()?>/Listdonors/delete_donation_record/"+uid+"/<?=$sitedata[0]->site_id?>/<?=$userdata['hospital_id']?>");
+
+
             }
         </script>
 
