@@ -59,9 +59,10 @@
                   <td>No data is available here</td>
                 </tr>
                 <?php else: ?>
+                  <?php$num=0;?>
                   <?php foreach ($sites as $row): ?>
                 <tr>
-                  <td><?php $num=0; echo $num = $num + 1?></td>
+                  <td><?php echo $num = $num + 1?></td>
                     <td><?=$row['donation_site_name']?></td>
                     <td class="noExport">
                         <a href="<?=base_url()?>/viewdonationsite/<?=$row['site_id']?>/<?=$row['hospital_id']?>" class="badge badge-warning py-2 px-3 my-2"><i class="fa fa-eye"></i> view</a>

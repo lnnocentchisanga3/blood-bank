@@ -7,12 +7,14 @@ class Login extends BaseController
 {
     public $loginModel;
 	public $session;
+	public $email;
 
 	function __construct()
 	{
 		helper('form');
 		$this->loginModel = new UserLoginModel();
 		$this->session = session();
+		$this->email = \Config\Services::email();
 	}
 
 	public function index()
@@ -105,16 +107,16 @@ class Login extends BaseController
 
 		if ($this->request->getMethod() == "post") {
 
-					$fname = $this->request->getVar('firstname');
-					$lname = $this->request->getVar('lastname');
-					$username = $this->request->getVar('username');
-					$email = $this->request->getVar('email');
-					$password = $this->request->getVar('password;');
-					$phone = $this->request->getVar('phone');
-					$role = $this->request->getVar('role');
-					$hospital = $this->request->getVar('hospital_id');
-					$district_id = $this->request->getVar('district_id');
-					$province_id = $this->request->getVar('province_id');
+					$fname = $this->request->getVar('firstname',FILTER_SANITIZE_STRING);
+					$lname = $this->request->getVar('lastname',FILTER_SANITIZE_STRING);
+					$username = $this->request->getVar('username',FILTER_SANITIZE_STRING);
+					$email = $this->request->getVar('email',FILTER_SANITIZE_STRING);
+					$password = $this->request->getVar('password;',FILTER_SANITIZE_STRING);
+					$phone = $this->request->getVar('phone',FILTER_SANITIZE_STRING);
+					$role = $this->request->getVar('role',FILTER_SANITIZE_STRING);
+					$hospital = $this->request->getVar('hospital_id',FILTER_SANITIZE_STRING);
+					$district_id = $this->request->getVar('district_id',FILTER_SANITIZE_STRING);
+					$province_id = $this->request->getVar('province_id',FILTER_SANITIZE_STRING);
 						
 				
 
@@ -154,16 +156,16 @@ class Login extends BaseController
 
 				// if ($this->validate($rules)) {
 
-					$fname = $this->request->getVar('firstname');
-					$lname = $this->request->getVar('lastname');
-					$username = $this->request->getVar('username');
-					$email = $this->request->getVar('email');
+					$fname = $this->request->getVar('firstname',FILTER_SANITIZE_STRING);
+					$lname = $this->request->getVar('lastname',FILTER_SANITIZE_STRING);
+					$username = $this->request->getVar('username',FILTER_SANITIZE_STRING);
+					$email = $this->request->getVar('email',FILTER_SANITIZE_STRING);
 					$password = md5(123);
-					$phone = $this->request->getVar('phone');
-					$role = $this->request->getVar('role');
-					$hospital = $this->request->getVar('hospital_id');
-					$district_id = $this->request->getVar('district_id');
-					$province_id = $this->request->getVar('province_id');
+					$phone = $this->request->getVar('phone',FILTER_SANITIZE_STRING);
+					$role = $this->request->getVar('role',FILTER_SANITIZE_STRING);
+					$hospital = $this->request->getVar('hospital_id',FILTER_SANITIZE_STRING);
+					$district_id = $this->request->getVar('district_id',FILTER_SANITIZE_STRING);
+					$province_id = $this->request->getVar('province_id',FILTER_SANITIZE_STRING);
 						
 				
 
@@ -198,5 +200,36 @@ class Login extends BaseController
 			session()->setTempdata('error','Opps Something went wrong try again', 3);
 				return redirect()->to(base_url().'/users/'.$hospital_id);
 		}
+	}
+
+	public function about_developer()
+	{
+		$data=[];
+		$data['userdata'] = session('logged_in');
+		if ($this->request->getMethod() == "post") {
+			
+			$name = $this->request->getVar('name',FILTER_SANITIZE_STRING);
+			$email = $this->request->getVar('email',FILTER_SANITIZE_STRING);
+			$subject = $this->request->getVar('subject',FILTER_SANITIZE_STRING);
+			$message = $this->request->getVar('message',FILTER_SANITIZE_STRING);
+
+			$this->email->setTo($email);
+			$this->email->setFrom($name);
+			$this->email->setSubject($subject);
+			$this->email->setMessage($message);
+
+			if ($this->email->send()) {
+				session()->setTempdata('Success','Your message has been sent. Thank you!', 3);
+				return redirect()->to(base_url().'/Login/about_developer#contact');
+			}else{
+
+				$debuger = $this->email->printDebugger(['headers']);
+				session()->setTempdata('error','Opps Something went wrong, Please try again', 3);
+				return redirect()->to(base_url().'/Login/about_developer#contact');
+			}
+
+		}
+		$data['title'] = 'About a Developer';
+		return view('about_a_developer',$data);
 	}
 }

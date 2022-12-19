@@ -1228,7 +1228,7 @@ textarea.form-control {
 
 .dash-widget {
 	background-color: #fff;
-	height: 210px;
+	height: 250px;
 	border-radius: 4px;
 	margin-bottom: 30px;
 	padding: 40px;
@@ -4724,6 +4724,14 @@ blockquote p {
 		-moz-transition: all 0.4s ease;
 		transition: all 0.4s ease;
 	}
+
+	.dropdownToggleBtn{
+		display: none;
+	}
+	.internet-css{
+		display: none;
+	}
+
 }
 @media only screen and (max-width: 767.98px) {
 	.profile-info-left {
@@ -4894,6 +4902,8 @@ blockquote p {
 	.btn-white {
 		margin: 0px;
 	}
+
+
 }
 @media only screen and (max-width: 575.98px) {
 	.contact-cat {

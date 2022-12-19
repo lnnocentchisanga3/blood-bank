@@ -69,7 +69,7 @@ class Adddonors extends Controller
 		}
 		$data['title'] = 'Adding a Donors';
 		$data['sites'] = $this->sites->getSite($site_id);
-		$data['donors'] = $this->alldonors->where('site_id',$site_id)->findAll();
+		$data['donors'] = $this->alldonors->where('hospital_id',$hospital_id)->findAll();
 		$data['userdata'] = session('logged_in');
 		$data['site_id'] = $site_id;
 		return view('adddonors',$data);

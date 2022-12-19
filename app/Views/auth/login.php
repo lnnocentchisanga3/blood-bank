@@ -40,9 +40,9 @@
                         <div class="form-group text-center">
                             <button type="submit" class="btn btn-primary account-btn">Login</button>
                         </div>
-<!--                        <div class="text-center register-link">
-                            Don’t have an account? <a href="register.html">Register Now</a>
-                        </div>-->
+                        <div class="text-center register-link">
+                            Designed and Developed By <a href="<?=base_url()?>/Login/about_developer" class="text-primary">Chisanga Innocent</a>
+                        </div>
                     <?=form_close();?>
                 </div>
 			</div>

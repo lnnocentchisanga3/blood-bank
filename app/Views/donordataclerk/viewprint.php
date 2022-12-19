@@ -84,9 +84,10 @@
                                     <td>No data is available here</td>
                                 </tr> -->
                                 <?php else: ?>
+                                    <?php$num=0;?>
                                     <?php foreach ($donors as $row): ?>
                                 <tr>
-                                    <td><?=$num = $num + 1?></td>
+                                     <td><?php echo $num = $num + 1?></td>
                                     <td><?=$row->donor_id?></td>
                                     <td><?=$row->donor_fname?></td>
                                     <td><?=$row->donor_mname?></td>

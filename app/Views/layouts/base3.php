@@ -63,15 +63,29 @@
 <body onload="zoom()">
     <div class="loader"></div>
     <div class="main-wrapper">
+        
+        <!-- <div class="">
+                <div class="dropdown">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                  Dropdown button
+                </button>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" href="#">Link 1</a>
+                  <a class="dropdown-item" href="#">Link 2</a>
+                  <a class="dropdown-item" href="#">Link 3</a>
+                </div>
+              </div>
+            </div> -->
+
         <div class="header" id="header">
             <div class="header-left">
-                <a href="<?=base_url()?>/dashboard/<?=$userdata['hospital_id']?>" class="logo">
+                <a href="javascript:void(0);" class="logo">
                     <img src="<?= base_url();?>/public/assets/img/logo-dark.png" width="35" height="35" alt=""> <span>ZNBTS</span>
                 </a>
             </div>
 
-            <div class="dropdown float-left mt-2">
-                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+            <div class="dropdown float-left mt-2" id="dropdownToggle">
+                <button type="button" class="btn btn-primary dropdown-toggle dropdownToggleBtn" data-toggle="dropdown">
                   <i class="fa fa-bars"></i> Menu
                 </button>
                 <div class="dropdown-menu">
@@ -101,8 +115,25 @@
               <!-- <div id="display12" class="float-left"></div> -->
 
 
-            <!-- <a id="toggle_btn" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
-            <a id="mobile_btn" class="mobile_btn float-left" href="#sidebar"><i class="fa fa-bars"></i></a> -->
+            <!-- <div class="nav float-left">
+                <a id="toggle_btn" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
+            <a id="mobile_btn" href="javascript:void(0);" class="mobile_btn float-left dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars"></i></a>
+            </div> -->
+
+            <!-- <div class="nav float-left">
+                <div class="dropdown">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                  Dropdown button
+                </button>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" href="#">Link 1</a>
+                  <a class="dropdown-item" href="#">Link 2</a>
+                  <a class="dropdown-item" href="#">Link 3</a>
+                </div>
+              </div>
+            </div> -->
+
+            
 
 
             <ul class="nav float-right">
@@ -201,6 +232,10 @@
     <!-- End Dialog -->  
 
 </div>
+
+<footer class="col-md-12 text-center py-2">
+    Designed and Developed By <a href="<?=base_url()?>/Login/about_developer">Chisanga Innocent</a>
+</footer>
 
   <div class="sidebar-overlay" data-reff=""></div>
     <script src="<?= base_url();?>/public/assets/js/jquery-3.2.1.min.js"></script>
@@ -348,15 +383,23 @@ $(document).ready(function(){
 </script>
 
 <script>
-        setInterval(function(){
-            if (navigator.onLine == false){
-                //document.getElementById('internetStatusBg').style.backgroundColor = "palevioletred";
-                document.getElementById('internetStatus').innerHTML = "<div class='bg-white py-3 px-2 mx-2 text-danger'><i class='fa fa-globe'></i> No Internet Connection </div>";
-            }else{
-                document.getElementById('internetStatus').innerHTML = "<div class='bg-white py-3 px-2 mx-2 text-success'><i class='fa fa-globe'></i> You are Connected to the Internet </div>";
-            }
-        },2000);
-    </script>
+setInterval(function(){
+    if (navigator.onLine == false){
+        //document.getElementById('internetStatusBg').style.backgroundColor = "palevioletred";
+        document.getElementById('internetStatus').innerHTML = "<div class='bg-white py-3 px-2 mx-2 text-danger'><i class='fa fa-globe'></i> No Internet Connection </div>";
+    }else{
+        document.getElementById('internetStatus').innerHTML = "<div class='bg-white py-3 px-2 mx-2 text-success'><i class='fa fa-globe'></i> You are Connected to the Internet </div>";
+    }
+},2000);
+</script>
+
+<script>
+$(document).ready(function(){
+  $(".dropdown").on("show.bs.dropdown", function(event){
+    var x = $(event.relatedTarget).text(); // Get the button text
+    // alert("You clicked on: " + x);
+  });
+});
 </script>
 
 

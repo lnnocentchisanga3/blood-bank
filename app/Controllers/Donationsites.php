@@ -244,7 +244,7 @@ class Donationsites extends Controller
 
 		$data['title']= "Blood Donation Report on Donation Site _____________________________";
 		$data['sites'] = $this->sites->getAllSites($hospital_id);
-		$data['site_id'] = $site_id;
+		$data['site_id'] = $site;
 		
 		$data['donors'] = $this->alldonors->join('donation_sites','site_id')
 											  ->where('donors.site_id',$site)->findAll();

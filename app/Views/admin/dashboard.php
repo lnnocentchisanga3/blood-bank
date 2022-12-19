@@ -262,9 +262,10 @@
                                     <td>No data is available here</td>
                                 </tr> -->
                                 <?php else: ?>
+                                    <?php$num1=0;?>
                                     <?php foreach ($donors as $row): ?>
                                 <tr>
-                                    <td><?php $num1=0;  echo $num1 = $num1 + 1?></td>
+                                    <td><?php echo $num1 = $num1 +1?></td>
                                     <td><?=$row->donor_id?></td>
                                     <td><?=$row->donor_fname?></td>
                                     <td><?=$row->donor_mname?></td>
